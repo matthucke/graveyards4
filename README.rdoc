@@ -11,6 +11,11 @@ Things you may want to cover:
 
 * Configuration
 
+Secrets are kept out of the source by means of symlinks.
+
+config/secrets.yml => /srv/config/graveyards4/secrets.yml
+config/database.yml => /srv/config/graveyards4/database.yml
+
 * Database creation
 
 * Database initialization
