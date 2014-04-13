@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20140413154006) do
 
   create_table "states", force: true do |t|
-    t.string   "state_code"
-    t.string   "country_code"
+    t.string   "state_code",   limit: 20
+    t.string   "country_code", limit: 2
     t.string   "name"
     t.string   "path"
     t.datetime "created_at"
