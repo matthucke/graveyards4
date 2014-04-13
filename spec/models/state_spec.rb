@@ -24,6 +24,12 @@ describe State do
       expect(state.path).to be == 'West-Forgottonia'
     end
 
+    it "should have full_path" do
+      state.valid?
+      expect(state.path).to_not be_blank
+      expect(state.full_path).to be == state.path
+    end
+
   end
 
   context "cleaning names" do
@@ -53,4 +59,13 @@ describe State do
 
   end
 
+  context "having counties" do
+    subject {
+      create(:illinois)
+    }
+    it "has counties" do
+      expect(subject).to respond_to(:counties)
+      expect(subject.counties).to_not be_nil
+    end
+  end
 end

@@ -11,9 +11,17 @@
 class State < ActiveRecord::Base
   include BuildsPath
 
+  has_many :counties
+
   validates :name, :presence=>true
   validates :country_code, :presence=>true
   validates :path, :presence=>true, :uniqueness => true
 
   before_validation :set_default_path
+
+  # As the top level of the URL structure, full_path is the
+  # same as path.
+  def full_path
+    path
+  end
 end

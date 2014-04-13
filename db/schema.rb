@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413200123) do
+ActiveRecord::Schema.define(version: 20140413202014) do
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140413200123) do
     t.string   "full_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "boundary"
   end
 
   add_index "counties", ["state_id"], name: "index_counties_on_state_id", using: :btree
