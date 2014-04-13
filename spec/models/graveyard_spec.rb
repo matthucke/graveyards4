@@ -1,8 +1,54 @@
 require 'spec_helper'
 
 describe Graveyard do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "a new graveyard" do
+    subject(:g) { Graveyard.new }
+
+    it "wants name" do
+      expect(g.errors_on(:name)).to_not be_empty
+    end
+    it "wants county" do
+      expect(g.errors_on(:county)).to_not be_empty
+    end
+    it "wants path" do
+      expect(g.errors_on(:path)).to_not be_empty
+    end
+  end
+
+  context "with name and county" do
+    before {
+      @county = create(:klendathu, :state=>create(:illinois))
+    }
+    subject(:g) { Graveyard.new(:county=>@county, :name=>"St. John's Cemetery")}
+
+    it "constructs path" do
+      expect(g.default_path).to be == "St-Johns"
+    end
+  end
+
+  context "there can be only one" do
+    before {
+      @county = create(:klendathu, :state=>create(:illinois))
+      @adversary = Graveyard.create!(:name=>"St. John's Cemetery", :county=>@county)
+      @county.graveyards << @adversary
+    }
+
+    subject(:g) {
+      Graveyard.new(:name=>"St. John's Cemetery", :county=>@county)
+    }
+
+    it "complains about path collision" do
+      expect(g.county).to_not be_nil
+      expect(g).to_not be_valid
+      expect(g.errors_on(:path)).to_not be_empty
+
+      expect(g.errors_on(:path).to_s).to match("already been taken")
+    end
+  end
+
+
 end
+
 
 =begin
 migrating old data:
@@ -27,5 +73,14 @@ update graveyards set usgs_id=null where usgs_id=0;
 update graveyards set usgs_map=null where usgs_map rlike '^!';
 
 # fix paths
-Graveyard.all.map { |p| p.path = p.path.gsub(%r#.*/#, ''); puts p.path }
+Graveyard.find_each do |g|
+  next if g.path.blank?
+
+  g.path = g.path.to_s.gsub(%r#.*/#, '')
+  g.path = g.path.gsub('_', '-')
+  g.save if g.changed? && !g.path.blank?
+  puts g.path
+end
+
+
 =end

@@ -69,6 +69,6 @@ class CountiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def county_params
-      params.require(:county).permit(:state_id, :name, :county_type, :path, :full_path)
+      params.require(:county).permit(:state_id, :name, :type_name, :path, :full_path)
     end
 end

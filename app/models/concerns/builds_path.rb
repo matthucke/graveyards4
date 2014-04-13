@@ -5,7 +5,10 @@ module BuildsPath
     # Produce a clean name suitable for URLs
     # "New   York" => "New-York"
     def name_to_path_element name
-      name.to_s.gsub(/[^A-Z0-9]+/i, ' ').strip.gsub(' ', '-')
+      name.to_s
+        .gsub("'", '')  # John's => Johns
+        .gsub(/[^A-Z0-9]+/i, ' ') # all other special chars become a space
+        .strip.gsub(' ', '-')
     end
   end
 

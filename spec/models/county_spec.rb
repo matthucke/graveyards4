@@ -29,8 +29,35 @@ describe County do
       c.valid?
       expect(c.full_path).to be == 'Illinois/De-Witt'
     end
+  end
+
+  context "having a name" do
+    before {
+      @missouri = create(:missouri)
+    }
+
+    context "county of st louis" do
+      subject(:c) { County.new(:state=>@missouri, :name=>'St. Louis', :type_name=>'County' )}
+
+      it "should have fancy name" do
+        expect(c.fancy_name).to be == 'St. Louis County'
+      end
+    end
+    context "city of st louis" do
+      subject(:c) { County.new(:state=>@missouri, :name=>'St. Louis', :type_name=>'City')}
+
+      it "should have fancy name" do
+        expect(c.fancy_name).to be == 'City of St. Louis'
+      end
+
+      it "should have state name" do
+        expect(c.fancy_name_with_state).to be == "City of St. Louis, Missouri"
+      end
+    end
 
   end
 
 
 end
+
+

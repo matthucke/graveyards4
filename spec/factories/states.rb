@@ -10,4 +10,15 @@ FactoryGirl.define do
       State.where(:name=>name, :country_code=>country_code).first_or_initialize
     }
   end
+
+  factory :missouri, :class=>'State' do
+    state_code "MO"
+    country_code "US"
+    name "Missouri"
+
+    initialize_with {
+      State.where(:name=>name, :country_code=>country_code).first_or_initialize
+    }
+  end
+
 end

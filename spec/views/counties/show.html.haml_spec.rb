@@ -5,7 +5,7 @@ describe "counties/show" do
     @county = assign(:county, stub_model(County,
       :state => nil,
       :name => "Name",
-      :county_type => 1,
+      :type_name => 'County',
       :path => "Path",
       :full_path => "Full Path"
     ))
