@@ -1,0 +1,43 @@
+= form_for @graveyard do |f|
+  - if @graveyard.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@graveyard.errors.count, "error")} prohibited this graveyard from being saved:"
+      %ul
+        - @graveyard.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :feature_type
+    = f.number_field :feature_type
+  .field
+    = f.label :county
+    = f.text_field :county
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :path
+    = f.text_field :path
+  .field
+    = f.label :lat
+    = f.text_field :lat
+  .field
+    = f.label :lng
+    = f.text_field :lng
+  .field
+    = f.label :year_started
+    = f.number_field :year_started
+  .field
+    = f.label :usgs_id
+    = f.number_field :usgs_id
+  .field
+    = f.label :usgs_map
+    = f.text_field :usgs_map
+  .field
+    = f.label :homepage
+    = f.text_field :homepage
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,39 @@
+%h1 Listing graveyards
+
+%table
+  %tr
+    %th Feature type
+    %th County
+    %th Status
+    %th Name
+    %th Path
+    %th Lat
+    %th Lng
+    %th Year started
+    %th Usgs
+    %th Usgs map
+    %th Homepage
+    %th
+    %th
+    %th
+
+  - @graveyards.each do |graveyard|
+    %tr
+      %td= graveyard.feature_type
+      %td= graveyard.county
+      %td= graveyard.status
+      %td= graveyard.name
+      %td= graveyard.path
+      %td= graveyard.lat
+      %td= graveyard.lng
+      %td= graveyard.year_started
+      %td= graveyard.usgs_id
+      %td= graveyard.usgs_map
+      %td= graveyard.homepage
+      %td= link_to 'Show', graveyard
+      %td= link_to 'Edit', edit_graveyard_path(graveyard)
+      %td= link_to 'Destroy', graveyard, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Graveyard', new_graveyard_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413202014) do
+ActiveRecord::Schema.define(version: 20140413212334) do
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 20140413202014) do
   end
 
   add_index "counties", ["state_id"], name: "index_counties_on_state_id", using: :btree
+
+  create_table "graveyards", force: true do |t|
+    t.integer  "feature_type"
+    t.integer  "county_id"
+    t.integer  "status"
+    t.string   "name"
+    t.string   "path"
+    t.decimal  "lat",          precision: 10, scale: 6
+    t.decimal  "lng",          precision: 10, scale: 6
+    t.integer  "year_started"
+    t.integer  "usgs_id"
+    t.string   "usgs_map"
+    t.string   "homepage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "graveyards", ["county_id"], name: "index_graveyards_on_county_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "state_code",   limit: 20
