@@ -44,3 +44,14 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'spork-rails'
 end
+
+gem 'haversine' # for distance between coordinates
+# gem 'geo_location'
+gem 'geokit-rails'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-pinterest'
+gem 'omniauth-twitter'
+
+

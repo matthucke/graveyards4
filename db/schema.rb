@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413223837) do
+ActiveRecord::Schema.define(version: 20140417020135) do
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"
@@ -44,11 +44,31 @@ ActiveRecord::Schema.define(version: 20140413223837) do
 
   add_index "graveyards", ["county_id"], name: "index_graveyards_on_county_id", using: :btree
 
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "uid"
+    t.string   "provider"
+    t.text     "provider_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
   create_table "states", force: true do |t|
     t.string   "state_code",   limit: 20
     t.string   "country_code", limit: 2
     t.string   "name"
     t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "security_level"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
