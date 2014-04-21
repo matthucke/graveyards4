@@ -10,18 +10,15 @@ module GraveyardPath
     end
   end
 
-  # Validator
+  # Validation - uniqueness of path, constrained by county.
   def path_must_be_unique_in_county
     return nil if path.blank? || !county
 
     my_path = self.path.to_s.downcase
-    others = county.graveyards.select do |g|
-      (g.path.to_s.downcase == my_path) && (g.id != self.id)
-    end
-
-    others.each do |o|
-      next if o.id==self.id
-      errors.add(:path, "#{self.path} has already been taken")
+    county.graveyards.each do |g|
+      if (g.path.to_s.downcase == my_path) && (g.id != self.id)
+        errors.add(:path, "#{self.path} has already been taken")
+      end
     end
   end
 
