@@ -1,0 +1,62 @@
+@import "partials/base";
+
+
+
+/* utility */
+.clear { clear: both; }
+.nobr { white-space: nowrap }
+
+/* page layout */
+body  {
+  height: 100%;
+}
+
+
+#wrap {
+  min-height: 100%;
+  // height: auto !important;
+  margin: 0 auto -40px;
+
+  a { font-weight: bold; }
+}
+
+#top-padding { height: $navbar-height + 2px; }
+
+/* NAV BAR */
+.navbar-brand {
+  #logo { height: 50px; }
+  padding-top: 4px;
+}
+
+
+.navbar, .navbar-inverse, .navbar-nav, .navbar-form, .navbar .navbar-collapse {
+  background: url(/images/backgrounds/dkmarble.jpg);
+}
+
+
+#top-search-form {
+  #top-search-field { max-width: 250px; }
+  input, button { float: left; margin-right: 0.5em;}
+
+}
+
+/* FOOTER */
+
+footer {
+  height: 40px;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  font-size: 15px;
+  background: url(/images/backgrounds/dkmarble.jpg);
+  color: #999;
+}
+
+/* MOBILE OVERRIDES */
+@media screen and (max-width: 767px) {
+  #wrap { margin-bottom: 0 }
+
+  .navbar { height: 22px; }
+  #logo { height: 35px; }
+
+  footer { position: static; }
+}

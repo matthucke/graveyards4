@@ -1,0 +1,26 @@
+!!! 5
+%html{:lang=>:en}
+    :ruby
+        @page_title ||= "graveyards.com"
+
+    %head
+        %meta{:charset => 'utf-8'}
+        %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+        %link{:rel=>'shortcut icon', :href=>'/images/icon/favicon.png'}
+
+        %title=@page_title
+
+        = stylesheet_link_tag 'application', media: 'all'
+
+        = csrf_meta_tags
+
+    %body{'data-spy'=>"scroll", "data-offset"=>"0", "data-target"=> "#navbar-main"}
+        #wrap
+            #top-padding
+            = render :partial => 'navbar_main'
+            %main#main-content
+                = yield
+
+        = render :partial => 'footer'
+        = javascript_include_tag 'application'
+        // BOTTOM

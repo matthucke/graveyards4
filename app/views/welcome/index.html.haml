@@ -1,3 +1,18 @@
-%h1 hello world
+.container
+    .row
+        .col-md-8
+            %img#main-title{:src=>"/images/title/title.jpg", :alt=>"Graveyards.com"}
+        .col-md-4
+            %h1.text-center graveyards.com
+            %p
+                Welcome to
+                = succeed '.' do
+                    %strong graveyards.com version 4.0
 
-%p graveyards.com 4.0 - 2014
+            %p
+                Though it may look a bit different, the content is still here.
+                Go to
+                %a{href: url_for(:controller=>:graveyards)} Cemetery List
+                to browse listings of cemeteries by state and county.
+
+    .row

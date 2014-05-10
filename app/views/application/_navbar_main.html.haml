@@ -1,0 +1,27 @@
+%nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+        .navbar-header
+            %button.navbar-toggle{type: "button", data: { target: ".navbar-responsive-collapse", toggle: "collapse"}}
+                /%span.icon.icon-shield{style: "font-size:30px; color:#3498db;"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+            %a.navbar-brand.logo{href: "/"}
+                %img#logo.img-responsive{alt: "graveyards.com", src: "/images/logo/logo.png"}/
+        / <a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span></a>
+        .navbar-collapse.collapse.navbar-responsive-collapse
+            %ul.nav.navbar-nav
+                %li
+                    %a{href: '/graveyards' } Cemetery List
+                %li
+                    %a{href: "/featured"} Featured Sites
+                %li
+                    %a{href: "#"} Log In
+            %form#top-search-form.navbar-form.navbar-right{role: 'search', action: 'http://www.google.com/search'}
+                .form-group
+                    %input{type: 'hidden', name: 'sitesearch', value: 'graveyards.com'}
+                    %input#top-search-field.form-control{type: 'search', placeholder: 'Search', name: 'q'}
+                    %button.btn.btn-primary
+                        %span.glyphicon.glyphicon-search
+                    .clear
+

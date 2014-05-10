@@ -4,7 +4,7 @@ class CountiesController < ApplicationController
   # GET /counties
   # GET /counties.json
   def index
-    @counties = County.all
+    redirect_to :controller=>:graveyards
   end
 
   # GET /counties/1

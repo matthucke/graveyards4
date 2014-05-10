@@ -4,7 +4,7 @@ class GraveyardsController < ApplicationController
   # GET /graveyards
   # GET /graveyards.json
   def index
-    @graveyards = Graveyard.all
+    @counties = County.all
   end
 
   # GET /graveyards/1
@@ -14,6 +14,7 @@ class GraveyardsController < ApplicationController
 
   # GET /graveyards/new
   def new
+    raise "not yet"
     @graveyard = Graveyard.new
   end
 
@@ -24,6 +25,7 @@ class GraveyardsController < ApplicationController
   # POST /graveyards
   # POST /graveyards.json
   def create
+    raise "not yet"
     @graveyard = Graveyard.new(graveyard_params)
 
     respond_to do |format|
@@ -40,6 +42,7 @@ class GraveyardsController < ApplicationController
   # PATCH/PUT /graveyards/1
   # PATCH/PUT /graveyards/1.json
   def update
+    raise "not yet"
     respond_to do |format|
       if @graveyard.update(graveyard_params)
         format.html { redirect_to @graveyard, notice: 'Graveyard was successfully updated.' }
@@ -54,6 +57,7 @@ class GraveyardsController < ApplicationController
   # DELETE /graveyards/1
   # DELETE /graveyards/1.json
   def destroy
+    raise "not yet"
     @graveyard.destroy
     respond_to do |format|
       format.html { redirect_to graveyards_url }
