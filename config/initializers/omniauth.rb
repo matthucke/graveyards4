@@ -7,4 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   if c = Rails.application.secrets.facebook
   	provider :facebook, c['app_id'], c['secret']
   end
+  if c = Rails.application.secrets.twitter
+  	provider :twitter, c['api_key'], c['secret']
+  end
 end
