@@ -1,3 +1,9 @@
+=begin
+
+A specialization of BuildsPath for the Graveyard class
+
+=end
+
 module GraveyardPath
   include ActiveSupport::Concern
   include BuildsPath
@@ -22,7 +28,4 @@ module GraveyardPath
     end
   end
 
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
 end

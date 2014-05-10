@@ -24,4 +24,5 @@ class State < ActiveRecord::Base
   def full_path
     path
   end
+
 end

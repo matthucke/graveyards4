@@ -1,0 +1,19 @@
+:ruby
+    raise "not allowed" unless Rails.env.development?
+
+    @chapters=BookChapter.includes(:graveyard)
+
+%table
+    - @chapters.each do |c|
+        - g=c.graveyard
+        %tr
+            %td=c.id
+            %td
+                %a{:href=>url_for(:action=>:show, :id=>c.qr_code)}=c.qr_code
+            %td=c.title
+            %td=c.graveyard_id
+            - if g
+                %td=g.name
+                %td=g.path
+            - else
+                %td NONE

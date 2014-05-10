@@ -1,18 +1,11 @@
-%p#notice= notice
 
-%p
-  %b State code:
-  = @state.state_code
-%p
-  %b Country code:
-  = @state.country_code
-%p
-  %b Name:
-  = @state.name
-%p
-  %b Path:
-  = @state.path
+.container
+    %h1=@state.name
 
-= link_to 'Edit', edit_state_path(@state)
-\|
-= link_to 'Back', states_path
+.container
+    %ul
+        - @state.counties.sort_by(&:name).each do |c|
+            %li
+                %a{href: '/'+c.full_path, :title=>"#{c.fancy_name_with_state} Cemeteries"}
+                    = c.fancy_name_with_state
+                Cemetery List

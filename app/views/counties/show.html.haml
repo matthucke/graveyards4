@@ -1,21 +1,14 @@
-%p#notice= notice
+:ruby
+    graveyards = @county.graveyards.sort_by(&:name)
 
-%p
-  %b State:
-  = @county.state
-%p
-  %b Name:
-  = @county.name
-%p
-  %b County type:
-  = @county.type_name
-%p
-  %b Path:
-  = @county.path
-%p
-  %b Full path:
-  = @county.full_path
+.container
+    %h1="Cemeteries and Graveyards in #{@county.fancy_name_with_state}"
 
-= link_to 'Edit', edit_county_path(@county)
-\|
-= link_to 'Back', counties_path
+    - graveyards.each do |g|
+        %div
+            %a{:href=>g.to_url}=g.name
+
+
+
+
+

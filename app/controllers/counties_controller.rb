@@ -1,5 +1,5 @@
 class CountiesController < ApplicationController
-  before_action :set_county, only: [:show, :edit, :update, :destroy]
+  before_action :set_county, only: [:edit, :update, :destroy]
 
   # GET /counties
   # GET /counties.json
@@ -10,10 +10,19 @@ class CountiesController < ApplicationController
   # GET /counties/1
   # GET /counties/1.json
   def show
+    @county = County.find_by_path_elements(params[:state], params[:county]) or return not_found
+    @state=@county.state
+
+    @breadcrumbs.add(url: '/graveyards', title: 'Graveyards')
+    @breadcrumbs.add(url: @state.to_url, title: "#{@state.name} Cemetery Lists")
+
+    self.page_title=@county.fancy_name_with_state.to_s + " Cemetery List"
+    @breadcrumbs.here.title = @county.fancy_name_with_state.to_s + " Cemeteries"
   end
 
   # GET /counties/new
   def new
+    require_admin
     @county = County.new
   end
 
@@ -24,6 +33,7 @@ class CountiesController < ApplicationController
   # POST /counties
   # POST /counties.json
   def create
+    require_admin
     @county = County.new(county_params)
 
     respond_to do |format|
@@ -40,6 +50,7 @@ class CountiesController < ApplicationController
   # PATCH/PUT /counties/1
   # PATCH/PUT /counties/1.json
   def update
+    require_admin
     respond_to do |format|
       if @county.update(county_params)
         format.html { redirect_to @county, notice: 'County was successfully updated.' }
@@ -54,6 +65,7 @@ class CountiesController < ApplicationController
   # DELETE /counties/1
   # DELETE /counties/1.json
   def destroy
+    require_admin
     @county.destroy
     respond_to do |format|
       format.html { redirect_to counties_url }

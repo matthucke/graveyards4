@@ -5,6 +5,7 @@ class CreateStates < ActiveRecord::Migration
       t.string :country_code, :limit=>2
       t.string :name
       t.string :path
+      t.integer :priority
 
       t.timestamps
     end

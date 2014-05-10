@@ -32,4 +32,12 @@ class County < ActiveRecord::Base
     s=self.state
     s ? ("#{fancy_name}, #{s.name}") : fancy_name
   end
+
+  def self.find_by_path_elements state_path, county_path
+    return nil if state_path.blank? || county_path.blank?
+
+    joined = "#{state_path}/#{county_path}"
+    return County.where(:full_path => joined).first
+  end
+
 end

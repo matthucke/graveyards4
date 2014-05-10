@@ -1,6 +1,11 @@
 module BuildsPath
   extend ActiveSupport::Concern
 
+  def to_url
+    fp=self.full_path
+    fp.nil? ? nil : '/' + fp
+  end
+
   module ClassMethods
     # Produce a clean name suitable for URLs
     # "New   York" => "New-York"
@@ -9,6 +14,13 @@ module BuildsPath
         .gsub("'", '')  # John's => Johns
         .gsub(/[^A-Z0-9]+/i, ' ') # all other special chars become a space
         .strip.gsub(' ', '-')
+    end
+
+    def find_by_path_elements(*list)
+      return nil if list.any?(&:blank?)
+
+      full = list.map(&:to_s).join('/')
+      return where(:full_path => full).first
     end
   end
 
@@ -40,7 +52,4 @@ module BuildsPath
     nil
   end
 
-  def included(base)
-    base.extend(ClassMethods)
-  end
 end

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417020135) do
+ActiveRecord::Schema.define(version: 20140510222402) do
+
+  create_table "book_chapters", force: true do |t|
+    t.string   "qr_code",      limit: 40
+    t.integer  "section_id"
+    t.integer  "sort_order"
+    t.integer  "graveyard_id"
+    t.string   "title"
+    t.text     "main_content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_chapters", ["graveyard_id"], name: "index_book_chapters_on_graveyard_id", using: :btree
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"
@@ -60,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140417020135) do
     t.string   "country_code", limit: 2
     t.string   "name"
     t.string   "path"
+    t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +85,8 @@ ActiveRecord::Schema.define(version: 20140417020135) do
     t.integer  "security_level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
+    t.string   "username"
   end
 
 end

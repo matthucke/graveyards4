@@ -1,15 +1,33 @@
 class GraveyardsController < ApplicationController
-  before_action :set_graveyard, only: [:show, :edit, :update, :destroy]
+  before_action :set_graveyard, only: [:edit, :update, :destroy]
 
   # GET /graveyards
   # GET /graveyards.json
+
+  # This action would more properly be on StatesController - it's a list of states,
+  # after all.  But historically it has been at the /graveyards URL.
   def index
-    @counties = County.all
+    @states = State.includes(:counties).order(:name)
+    self.page_title="Cemetery Lists"
   end
 
   # GET /graveyards/1
   # GET /graveyards/1.json
   def show
+    @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
+    return not_found unless @graveyard
+
+    if county = @graveyard.county
+      if s=county.state
+        @breadcrumbs.add(url: s.to_url, title: s.name)
+      end
+      cn = county.fancy_name_with_state
+      self.page_title="#{@graveyard.name} - #{cn}"
+
+      @breadcrumbs.add(url: county.to_url, title: cn)
+      @breadcrumbs.here.title=@graveyard.name
+    end
+
   end
 
   # GET /graveyards/new

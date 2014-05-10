@@ -1,5 +1,7 @@
 class StatesController < ApplicationController
-  before_action :set_state, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [  :edit, :update, :destroy]
+
+  before_action :set_state, only: [:edit, :update, :destroy]
 
   # GET /states
   # GET /states.json
@@ -10,6 +12,14 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
+    path = params[:state]
+    unless path.blank?
+      @state = State.where(:path => path.strip).first
+    end
+    return not_found unless @state
+
+    @breadcrumbs.add(url: '/graveyards', title: 'Graveyards')
+    self.page_title = "#{@state.name} Cemetery Lists"
   end
 
   # GET /states/new

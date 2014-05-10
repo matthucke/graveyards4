@@ -1,39 +1,40 @@
-%h1 Listing graveyards
+:ruby
+    main_state = @states.select { |st| st.priority == 1 }.first
+    other_states = @states.reject { |st| st.priority == 1 }
+    columns = [ [main_state], other_states ].reject(&:empty?)
 
-%table
-  %tr
-    %th Feature type
-    %th County
-    %th Status
-    %th Name
-    %th Path
-    %th Lat
-    %th Lng
-    %th Year started
-    %th Usgs
-    %th Usgs map
-    %th Homepage
-    %th
-    %th
-    %th
+- if main_state
+    .container
+        .row
+            .col-md-6
+                %p
+                    This site focuses on the Graveyards of
+                    %strong="#{main_state.name},"
+                    and we strive for complete listings of
+                    cemeteries in
+                    %strong="#{main_state.name}."
 
-  - @graveyards.each do |graveyard|
-    %tr
-      %td= graveyard.feature_type
-      %td= graveyard.county
-      %td= graveyard.status
-      %td= graveyard.name
-      %td= graveyard.path
-      %td= graveyard.lat
-      %td= graveyard.lng
-      %td= graveyard.year_started
-      %td= graveyard.usgs_id
-      %td= graveyard.usgs_map
-      %td= graveyard.homepage
-      %td= link_to 'Show', graveyard
-      %td= link_to 'Edit', edit_graveyard_path(graveyard)
-      %td= link_to 'Destroy', graveyard, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            .col-md-6
+                %p
+                    Other states and countries are listed below,
+                    only to show the graveyards that the site owner
+                    has personally visited.  Listings outside of
+                    %strong="#{main_state.name}"
+                    are
+                    %i not
+                    intended to be complete.
 
-%br
 
-= link_to 'New Graveyard', new_graveyard_path
+.container
+    .row
+        - columns.each do |state_list|
+            .col-md-6
+                - state_list.each do |state|
+                    %h1=state.name
+
+                    %ul
+                        - state.counties.sort_by(&:name).each do |c|
+                            %li
+                                %a{href: '/'+c.full_path, :title=>"#{c.fancy_name_with_state} Cemeteries"}
+                                    = c.fancy_name_with_state
+                                Cemetery List

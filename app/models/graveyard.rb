@@ -12,7 +12,7 @@ class Graveyard < ActiveRecord::Base
 
   before_validation :set_default_path
 
-
+  alias_attribute :parent, :county
 
 
 end

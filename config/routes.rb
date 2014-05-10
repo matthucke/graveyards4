@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  get 'book/:id' => 'book#show'
+  get 'book' => 'book#index'
+
   resources :graveyards
 
   resources :counties
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,6 +14,18 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   match '/auth/:provider/callback', to: 'sessions#create', :via => [ :get, :post ]
+
+  # FALLBACK ROUTES - anything not covered above will go to these.
+  get ':state', to: 'states#show'
+
+  # /Illinois/Cook => Counties / show / Cook
+  get ':state/:county/map', to: 'maps#index'
+  get ':state/:county', to: 'counties#show'
+
+  # /Illinois/Cook => Counties / show / Cook
+  get ':state/:county/:graveyard/map', to: 'maps#show'
+  get ':state/:county/:graveyard', to: 'graveyards#show'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

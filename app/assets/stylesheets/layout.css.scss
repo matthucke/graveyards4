@@ -18,9 +18,10 @@ body  {
   margin: 0 auto -40px;
 
   a { font-weight: bold; }
+  a.external { border-bottom: 1px dotted #060; }
 }
 
-#top-padding { height: $navbar-height + 2px; }
+#top-padding { height: $navbar-height + 12px; }
 
 /* NAV BAR */
 .navbar-brand {
@@ -49,6 +50,7 @@ footer {
   font-size: 15px;
   background: url(/images/backgrounds/dkmarble.jpg);
   color: #999;
+  a:link, a:hover, a:visited { color: white; text-decoration: underline;}
 }
 
 /* MOBILE OVERRIDES */
