@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :breadcrumb_init
+  before_action :breadcrumb_init, :current_user
+
+  attr_accessor :breadcrumbs
 
 protected
 
@@ -23,4 +25,23 @@ protected
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
+
+  def current_user
+    unless @current_user
+      if ident=identity
+        @current_user = ident.user
+      end
+    end
+    @current_user
+  end
+
+  def identity
+    unless @identity
+      if iid = session[:identity_id]
+        @identity = Identity.find(iid) rescue nil
+      end
+    end
+    @identity
+  end
+
 end

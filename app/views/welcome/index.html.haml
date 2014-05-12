@@ -15,4 +15,36 @@
                 %a{href: url_for(:controller=>:graveyards)} Cemetery List
                 to browse listings of cemeteries by state and county.
 
+            %p.text-muted.text-right
+                buttons - facebook twitter etc
     .row
+
+.container
+    %br
+
+.container
+
+    .row
+        .col-md-4
+        .col-md-4.text-center#book-box
+            %h3.text-muted
+                the book:
+            %h2#book-title
+                Graveyards of Chicago:
+            %h3#book-sub-title
+                The People, History, Art, and Lore of Cook County Cemeteries
+                %br
+            %p
+                by Matt Hucke & Ursula Bielski
+
+            %p Second Edition - October 2013
+
+            %a{href: '/book'}
+                Learn More...
+        .col-md-4.text-center
+            %a{href: '/book'}
+                %img#book-cover{:src=>"/images/book/front-cover-400.jpg", :alt=>"Graveyards.com"}
+
+    .row
+
+.clear

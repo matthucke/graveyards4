@@ -1,0 +1,13 @@
+
+default: &default
+  document_root: /www/graveyards4/htdocs
+
+development: &development
+  <<: *default
+
+test:
+  <<: *development
+
+production:
+  <<: *default
+

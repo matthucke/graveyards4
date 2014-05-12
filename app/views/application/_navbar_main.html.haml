@@ -14,9 +14,18 @@
                 %li
                     %a{href: '/graveyards' } Cemetery Lists
                 %li
+                    %a{href: '/features' } Features
+                %li
                     %a{href: "/book"} The Book
-            //%li
-            //    %a{href: "#"} Log In
+                %li
+                    %a{href: "/links"} Links
+                - if @current_user3
+                    %li
+                        %a= @current_user.full_name
+                - else
+                    %li
+                        %a{href: "/auth/facebook"} Log In
+
             %form#top-search-form.navbar-form.navbar-right{role: 'search', action: 'http://www.google.com/search'}
                 .form-group
                     %input{type: 'hidden', name: 'sitesearch', value: 'graveyards.com'}

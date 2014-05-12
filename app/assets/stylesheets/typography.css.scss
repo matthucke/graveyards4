@@ -1,0 +1,13 @@
+@import 'partials/base';
+
+@import 'bootstrap/variables';
+
+.large { font-size: $font-size-large; }
+h1 .overhead { font-size: $font-size-h1 / 2; }
+/*
+p:first-letter {
+  float: left;
+  font-size: 2em;
+  margin-top: -0.5em;
+}
+*/

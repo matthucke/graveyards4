@@ -5,17 +5,17 @@
 /* utility */
 .clear { clear: both; }
 .nobr { white-space: nowrap }
+.yellowback { background: yellow; }
 
 /* page layout */
 body  {
-  height: 100%;
 }
 
 
 #wrap {
   min-height: 100%;
   // height: auto !important;
-  margin: 0 auto -40px;
+  margin: 0 auto 50px;
 
   a { font-weight: bold; }
   a.external { border-bottom: 1px dotted #060; }
@@ -25,8 +25,8 @@ body  {
 
 /* NAV BAR */
 .navbar-brand {
-  #logo { height: 50px; }
-  padding-top: 4px;
+  #logo { height: 48px; }
+  padding-top: 6px;
 }
 
 
@@ -44,18 +44,19 @@ body  {
 /* FOOTER */
 
 footer {
-  height: 40px;
+  min-height: 40px;
   position: fixed;
   bottom: 0; left: 0; right: 0;
   font-size: 15px;
   background: url(/images/backgrounds/dkmarble.jpg);
   color: #999;
   a:link, a:hover, a:visited { color: white; text-decoration: underline;}
+  line-height: 1;
 }
 
 /* MOBILE OVERRIDES */
 @media screen and (max-width: 767px) {
-  #wrap { margin-bottom: 0 }
+  #wrapd { margin-bottom: 0 }
 
   .navbar { height: 22px; }
   #logo { height: 35px; }

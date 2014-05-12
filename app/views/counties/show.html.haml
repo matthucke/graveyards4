@@ -1,14 +1,57 @@
+//
+// COUNTIES / SHOW - show graveyards in a county
+//
+//      @county County
+//      @graveyards Array
+//
+// view: /counties/show.html.haml 
+// urls:
+//      /Illinois/Cook
+//      /Missouri/St_Louis_City etc
+//
 :ruby
-    graveyards = @county.graveyards.sort_by(&:name)
+    county_name = @county.fancy_name_with_state
 
 .container
-    %h1="Cemeteries and Graveyards in #{@county.fancy_name_with_state}"
+    .row
+        .col-md-6
+            %h1
+                .overhead Cemeteries and Graveyards in
+                =@county.fancy_name_with_state
+        .col-md-2
+            MAP
+        .col-md-2
+            KML
+        .col-md-2
+            SHARES
 
-    - graveyards.each do |g|
-        %div
-            %a{:href=>g.to_url}=g.name
+.column-container
+    .column-set
+        .cell
+            .cell-top
+            .cell-bottom
+                TOOLS 
+                %br
+                map link
+                %br
+                KML link
+                %br
+                %fb:like{:href=>@county.to_url, :send=>"false", :layout=>"button_count", :show_faces=>'true'}
 
-
-
-
+        - @graveyards.each do |g|
+            - pic = g.main_photo 
+            - klasses = [ 'cell', pic ? 'with-pix' : 'no-pix' ] 
+            %div{:class=>klasses.join(' ')}
+                - if pic
+                    .cell-top
+                        .thumbnail-box
+                            %a{:href=>g.to_url }
+                                %img{:src=> pic.thumbnail_path, :alt=>"#{g.name} in #{county_name}" }
+                .cell-main
+                    %a{:href=>g.to_url }=g.name
+                - if !pic
+                    .no-pix-msg 
+                        photos not available
+        .clear
+    .clear
 

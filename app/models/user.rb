@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   end
 
 
+  def full_name
+    [first_name, last_name ].reject(&:blank?).join(' ')
+  end
+
   def self.parse_name full_name
     words = full_name.to_s.split(/\s+/)
     [ words[0,words.length - 1 ].join(" "), words.last ]

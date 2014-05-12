@@ -1,39 +1,5 @@
-%p#notice= notice
 
-%p
-  %b Feature type:
-  = @graveyard.feature_type
-%p
-  %b County:
-  = @graveyard.county
-%p
-  %b Status:
-  = @graveyard.status
-%p
-  %b Name:
-  = @graveyard.name
-%p
-  %b Path:
-  = @graveyard.path
-%p
-  %b Lat:
-  = @graveyard.lat
-%p
-  %b Lng:
-  = @graveyard.lng
-%p
-  %b Year started:
-  = @graveyard.year_started
-%p
-  %b Usgs:
-  = @graveyard.usgs_id
-%p
-  %b Usgs map:
-  = @graveyard.usgs_map
-%p
-  %b Homepage:
-  = @graveyard.homepage
-
-= link_to 'Edit', edit_graveyard_path(@graveyard)
-\|
-= link_to 'Back', graveyards_path
+- @graveyard.photos.each do |photo|
+    %img{src: photo.thumbnail_path }
+    %br
+    %img{src: photo.path }

@@ -1,6 +1,7 @@
 class BookController < ApplicationController
+  before_action { @breadcrumbs.hidden=true } 
   def index
-
+    
   end
 
   def show

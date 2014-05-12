@@ -1,0 +1,126 @@
+
+.column-container {
+    margin: 0 auto;
+}
+
+$thumb_width: 200px;
+$cell_pad_width: 4px;
+$cell_border_width: 1px;
+
+$gutter_width: 8px; 
+
+.column-set {
+
+    -moz-column-gap: $gutter_width;
+    -moz-column-fill: balance;
+
+    -webkit-column-gap: $gutter_width;
+    -webkit-column-fill: balance;
+
+    column-gap: $gutter_width;
+    column-fill: balance;
+
+    .cell {
+        display: inline-block;
+        position: relative;
+
+        // was originally same as $thumb_width, but bootstrap wants border-box sizing model,
+        // so add padding & spacing back in
+        width: $thumb_width + (2 * $cell_pad_width) + (2 * $cell_border_width);
+
+        min-height: $thumb_width / 2;
+        padding: $cell_pad_width; 
+
+        margin: 10px $gutter_width 10px 0;
+
+        border: $cell_border_width solid #666;
+        border-radius: 4px;
+
+        text-align: center;
+
+        .thumbnail-box {
+            width: $thumb_width;
+            height: $thumb_width * 2 / 3;
+            position: relative;
+            overflow: hidden;
+
+            img {
+                position: absolute;
+                bottom: 0px; left: 0px;
+
+                width: $thumb_width;
+                height: $thumb_width * 2 / 3;
+
+                // transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+                transition: all 0.7s;
+                transition-timing-function: ease;
+
+            }
+        }
+        
+        &:hover .thumbnail-box img {
+            position: absolute;
+            // normal: 0, 240, 133
+            // -10, 220, 146
+            // -20, 240, 160
+            left: -10px; 
+            width: 220px;
+            height: 146px;
+        } 
+        
+        -moz-column-break-inside: avoid; 
+        -webkit-column-break-inside: avoid; 
+        column-break-inside: avoid; 
+
+        box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); 
+        background: #eee;
+        background-image: linear-gradient(135deg, #fff, #eee);
+        &:hover { 
+            a:link { text-decoration: underline; } 
+            background-image: linear-gradient(135deg, #eee, #fff);
+        }
+
+        .no-pix-msg {
+            visibility: hidden;
+            padding: 12px 0;
+            color: #000;
+            text-shadow: -0.5px -1px 1px #ccc;
+            font-size:80%;
+            font-weight: normal !important;
+            text-decoration: none !important;
+        }
+
+        &:hover  { 
+            .no-pix-msg { 
+                visibility: visible;
+                display: block; 
+            } 
+        }
+        img:hover {
+            //max-width:240px;
+            //max-height:240px;
+            //top: 0px;
+        }
+    } 
+    .no-pix .cell-main { padding-top: 1em; } 
+}
+
+$column_width: $thumb_width + $cell_pad_width * 2 + 4px;
+
+@for $cols from 1 through 10 { 
+
+    $all_columns:  $cols * $column_width;
+    $all_gutters: $cols * $gutter_width - $gutter_width;
+    $column_set_width: $all_columns + $all_gutters;
+
+    @media all and (min-width: $column_set_width) {
+        .column-container {
+            width: $column_set_width;
+        }
+        .column-set {
+            column-count: $cols; 
+            -webkit-column-count: $cols; 
+            -moz-column-count: $cols; 
+        }
+    }
+}

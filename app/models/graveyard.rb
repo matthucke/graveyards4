@@ -3,16 +3,18 @@ class Graveyard < ActiveRecord::Base
   include GraveyardPath
 
   belongs_to :county
+  belongs_to :main_photo, class_name: 'Photo'
 
-  validates :county, :presence=>true
-  validates :name, :presence=>true
-  validates :path, :presence=>true
+  has_many :photos
+
+  validates :county, presence: true
+  validates :name, presence: true
+  validates :path, presence: true
 
   validate :path_must_be_unique_in_county
 
   before_validation :set_default_path
 
   alias_attribute :parent, :county
-
 
 end

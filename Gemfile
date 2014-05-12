@@ -57,4 +57,6 @@ gem 'omniauth-twitter'
 
 gem 'bootstrap-sass'
 
+gem 'settingslogic'
+
 

@@ -2,6 +2,7 @@
 %html{:lang=>:en}
     :ruby
         @page_title ||= "graveyards.com"
+        @body_id ||= controller.controller_name + "-" + controller.action_name
 
     %head
         %meta{:charset => 'utf-8'}
@@ -21,7 +22,7 @@
 
             ga('create', '#{Rails.application.secrets.google_analytics_id}', 'auto');
             ga('send', 'pageview');
-    %body{'data-spy'=>"scroll", "data-offset"=>"0", "data-target"=> "#navbar-main"}
+    %body{id: @body_id, data: { spy: "scroll", offset: 0, target: "#navbar-main"} }
         #wrap
             #top-padding
             = render :partial => 'navbar_main'
