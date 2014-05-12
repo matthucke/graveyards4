@@ -17,4 +17,19 @@ class Graveyard < ActiveRecord::Base
 
   alias_attribute :parent, :county
 
+  def located?
+    (lat && lat.abs > 0.001) || (lng && lng.abs > 0.001)
+  end
+
+  def map_data
+    out = {
+      :id=>self.id,
+      :name=>self.name,
+      :url => self.to_url,
+      :lat => self.lat.to_f,     # 0.0 for unknowns.
+      :lng => self.lng.to_f    # 0.0 for unknowns.
+      # :photo_count => self.photos_count
+    }
+  end
+
 end

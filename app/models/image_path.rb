@@ -17,6 +17,10 @@ class ImagePath
     "/pix/#{dir}/#{filename}"
   end
 
+  def exists?
+    File.exist? physical
+  end
+
   def physical
     DOCUMENT_ROOT + virtual
   end

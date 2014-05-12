@@ -1,3 +1,61 @@
-// Place all the styles related to the maps controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'partials/base';
+
+h1 { padding: 0; margin: 4px 0; } 
+
+ul.location-selector {
+    height: 100%;
+    overflow-y: scroll;
+    margin: 0 4px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    //background: #111;
+
+    max-height: 400px; // FIXME
+
+    .not-located a:link, .not-located a:visited {
+        color: #888;
+    } 
+    li { 
+        list-style-type: none; 
+        margin: 4px 0; 
+        line-height: 1.0;
+        white-space: nowrap;
+    } 
+}
+
+#map {
+    height: 400px;
+    background: #ffc;
+}
+
+#map-wrapper { 
+    //float: left;
+    //width: 80%;
+    // background: #333;
+}
+
+
+#selector-wrapper {
+    position: absolute;
+    z-index: 999;
+    right: 4px;
+    top: 80px;
+    width: 240px;
+    background: #eee;
+
+    border: 4px ridge #aaa;
+    // background: #eee; color: black;
+    cursor: move;
+    .titlebar {
+        padding: 2px; margin: 0;
+        font-size: 10pt;
+        // color: white;
+        //background: $darkslategray;
+        //background-image: linear-gradient(180deg, $darkslategray * 1.5, $darkslategray * 0.75);
+        font-weight: bold; 
+        .below { font-size: 13pt; } 
+    }
+    .instructions { padding: 2px 4px; font-size: 10pt; } 
+}

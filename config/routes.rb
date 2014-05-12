@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get ':state/:county/map', to: 'maps#index'
   get ':state/:county', to: 'counties#show'
 
-  # /Illinois/Cook => Counties / show / Cook
+  # /Illinois/Cook/Graceland => Graveyards / show /
   get ':state/:county/:graveyard/map', to: 'maps#show'
   get ':state/:county/:graveyard', to: 'graveyards#show'
 
