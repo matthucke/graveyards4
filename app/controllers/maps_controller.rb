@@ -12,6 +12,16 @@ class MapsController < ApplicationController
     self.page_title = "#{@county.fancy_name_with_state} Cemetery Map"
 
     @graveyards = @county.graveyards.includes(:main_photo).includes(:county)
+
+    respond_to do |fmt|
+      fmt.json do
+        render :json => {
+          :status=>:success,
+          :locations => @graveyards.sort_by(&:name).map(&:map_data)
+        }
+      end
+      fmt.html { render :action=>:index }
+    end
   end
   
   # Show one county's main page.

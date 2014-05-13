@@ -23,13 +23,19 @@ class Graveyard < ActiveRecord::Base
 
   def map_data
     out = {
-      :id=>self.id,
-      :name=>self.name,
-      :url => self.to_url,
-      :lat => self.lat.to_f,     # 0.0 for unknowns.
-      :lng => self.lng.to_f    # 0.0 for unknowns.
-      # :photo_count => self.photos_count
+      id: self.id,
+      name: self.name,
+      url: self.to_url,
+      # photo_count: self.photos_count
     }
+
+    if located?
+      out.merge!(
+        lat: self.lat.to_f,     # 0.0 for unknowns.
+        lng: self.lng.to_f    # 0.0 for unknowns.
+      )
+    end
+    out
   end
 
 end

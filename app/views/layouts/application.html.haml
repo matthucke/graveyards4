@@ -1,5 +1,5 @@
 !!! 5
-%html{:lang=>:en}
+%html{lang: :en, 'xmlns:og'=>"http://ogp.me/ns#", 'xmlns:fb'=>"http://www.facebook.com/2008/fbml"}
     :ruby
         @page_title ||= "graveyards.com"
         @body_id ||= controller.controller_name + "-" + controller.action_name
@@ -7,6 +7,8 @@
     %head
         %meta{:charset => 'utf-8'}
         %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+        %meta{:property=>"fb:app_id", :content=>Rails.application.secrets.facebook['app_id']}
+
         %link{:rel=>'shortcut icon', :href=>'/images/icon/favicon.png'}
 
         %title=@page_title
@@ -30,6 +32,7 @@
     %body{id: @body_id, data: { spy: "scroll", offset: 0, target: "#navbar-main"} }
         #wrap
             #top-padding
+            #fb-root
             = render :partial => 'navbar_main'
             - if @breadcrumbs && !@breadcrumbs.hidden?
                 %nav.breadcrumbs

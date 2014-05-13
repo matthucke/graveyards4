@@ -21,22 +21,12 @@
         .col-md-2
             %a.map-link{href: map_url_for(@county)} Map
         .col-md-2
-            KML
+            %a{href: @county.to_url + ".kml"} Google Earth
         .col-md-2
-            SHARES
+            %fb:like{:href=>full_url(@county.to_url), :send=>"false", :layout=>"button_count", :show_faces=>'true'}
 
 .column-container
     .column-set
-        .cell
-            .cell-top
-            .cell-bottom
-                TOOLS 
-                %br
-                map link
-                %br
-                KML link
-                %br
-                %fb:like{:href=>@county.to_url, :send=>"false", :layout=>"button_count", :show_faces=>'true'}
 
         - @graveyards.each do |g|
             - pic = g.main_photo 

@@ -1,5 +1,5 @@
 :ruby
-    @state ||= @county.state
+    @map_url = map_url_for(@county) + ".json"
 
 #map-wrapper
     #map
@@ -7,11 +7,12 @@
 #selector-wrapper
     %h1.titlebar
         .above Map of Cemeteries in
-        .below="#{@county.fancy_name}, #{@state.name}"
+        .below="#{@county.fancy_name_with_state}"
     .instructions
         Click to jump to loation.
-    %ul.location-selector
-        - @graveyards.each do |g|
+    %ul.location-selector#location-selector
+        //- @graveyards.each do |g|
+        - [].each do |g|
             - located = g.located?
             - klasses = [ located ? 'located' : 'not-located' ] 
             - url = g.to_url.to_s + ( located ? '.kml' : '' )
@@ -21,12 +22,15 @@
 
 :coffeescript
     jQuery ->
-        window.mapLocations = #{@graveyards.map { |g| g.map_data }.to_json.html_safe}
-        m = window.graveyardMap = new GraveyardMap
+        #locations = window.locations = new GraveLocationsCollection()
+
+
+        map = window.mapPage = new GraveyardMapPage
             mapId: 'map'
+            url: "#{@map_url}"
             boundary: #{@county.encoded_boundary.to_json rescue 'null' }
 
-        m.importLocations(window.mapLocations)
-        m.finishSetup()
+        #m.importLocations(window.mapLocations)
+        #m.finishSetup()
 
 
