@@ -40,4 +40,8 @@ class County < ActiveRecord::Base
     return County.where(:full_path => joined).first
   end
 
+  def encoded_boundary
+    return nil if self.boundary.blank?
+    return BoundaryEncoder.new.string_to_polyline(self.boundary)
+  end
 end

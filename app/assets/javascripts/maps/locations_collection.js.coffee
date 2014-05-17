@@ -1,4 +1,8 @@
 
+#
+# A list of graveyards, typically in a single county,
+# and the logic for fetching it from the server.
+#
 root = (exports ? this)
 
 root.GraveLocationsCollection = class GraveLocationsCollection

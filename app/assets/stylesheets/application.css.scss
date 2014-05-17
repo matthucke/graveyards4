@@ -11,5 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require jquery.ui.resizable
+ *= require jquery.ui.selectable
  *= require_self
  */

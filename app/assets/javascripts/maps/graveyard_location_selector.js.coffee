@@ -3,6 +3,7 @@ root = (exports ? this)
 root.GraveyardLocationSelector = class GraveyardLocationSelector
   constructor: (@parent) ->
     @list = $('#location-selector')
+    $('#selector-wrapper').draggable()
 
   addLocations: (@collection) ->
     this.addItem(loc) for loc in @collection.locations
@@ -27,8 +28,18 @@ root.GraveyardLocationSelector = class GraveyardLocationSelector
 
   bindItem: ($li, loc) ->
     self=this
-    $li.find('a').click (evt) -> self.handleClick($(this), evt)
+    $link = $li.find('a')
+    if $link[0]
+      $link[0].grave_location = loc;
+      $link.click (evt) -> self.handleClick($link, evt, loc)
 
-  handleClick: ($link, evt) ->
+  handleClick: ($link, evt, loc) ->
     evt.preventDefault()
     alert("you click'd upon " + $link.attr('id'))
+    if !loc
+      if a=$link[0]
+        loc=a.grave_location
+    if !loc
+      alert("cannot ascertain grave location from link")
+    if @parent.map
+      @parent.map.panTo(loc)

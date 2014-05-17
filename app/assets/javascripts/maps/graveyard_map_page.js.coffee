@@ -12,6 +12,9 @@ root.GraveyardMapPage = class GraveyardMapPage
   onDataLoaded: ->
     this.createSelector()
     this.createMap()
+    if this.options.boundary
+      @boundary = new BoundaryLine(this, this.options.boundary)
+      @boundary.draw(@map)
 
   createMap: ->
     @map = new GraveyardMap(this, @options)

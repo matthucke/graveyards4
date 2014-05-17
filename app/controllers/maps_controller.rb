@@ -54,7 +54,7 @@ protected
     # v2 api
     # @extra_scripts.push "http://maps.google.com/maps?file=api&v=2&key=#{key}"
     # v3 api
-    @extra_scripts.push "https://maps.googleapis.com/maps/api/js?key=#{key}&sensor=false"
+    @extra_scripts.push "https://maps.googleapis.com/maps/api/js?key=#{key}&libraries=geometry&sensor=false"
   end
   
   def load_county url=nil, opts={}
