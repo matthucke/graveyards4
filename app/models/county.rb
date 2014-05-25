@@ -15,6 +15,9 @@ class County < ActiveRecord::Base
     state(*args)
   end
 
+  def short_name
+    self.name.gsub(/Greater /, '').gsub(/Saint/, 'St')
+  end
   # XXX County or City of XXX, as appropriate.
   # Note that a blank type_name will cause it to just return the name.
   def fancy_name

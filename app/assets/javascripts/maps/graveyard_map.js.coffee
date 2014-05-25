@@ -20,6 +20,14 @@ root.GraveyardMap = class GraveyardMap
 
     @the_map
 
+  panToLocation: (loc) ->
+    this.panToPoint(loc.toLatLng())
+  panToMarker: (marker) ->
+    this.panToPoint(marker.position)
+
+  panToPoint: (latlng) ->
+    this.googleMap().setCenter(latlng)
+
   draw: ->
     map=this.googleMap()
     this.plotLocation(loc) for loc in this.locations.locations

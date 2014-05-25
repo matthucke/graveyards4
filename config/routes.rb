@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :graveyards
 
+  resources :coordinates
+
   resources :counties
 
 
