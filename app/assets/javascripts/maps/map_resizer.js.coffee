@@ -13,6 +13,5 @@ root.GraveyardMapSizer = class GraveyardMapSizer
     window_height = $(window).height()
     map_top = this.$map.position().top;
     map_height = Math.floor window_height - map_top - 8
-    console.dir("new height " + map_height)
     this.$map.css 'height', map_height + "px"
     map_height

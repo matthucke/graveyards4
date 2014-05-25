@@ -1,9 +1,7 @@
 class MapsController < ApplicationController
   before_filter :maps_startup
   
-  # Index for one State (or Country - "England" is considered a State for this purpose.).
-  # URLs like "/Illinois", "/England"
-  # sets @state and @counties
+  # Index for one County.
   def index
     load_county or raise "county not found"
 
@@ -23,9 +21,8 @@ class MapsController < ApplicationController
       fmt.html { render :action=>:index }
     end
   end
-  
-  # Show one county's main page.
-  # Handles URLs like /Illinois/Cook.
+
+  # Map of one graveyard.  Not yet implemented.
   def show
     raise params.inspect
     

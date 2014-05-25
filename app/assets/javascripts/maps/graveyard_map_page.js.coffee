@@ -10,8 +10,8 @@ root.GraveyardMapPage = class GraveyardMapPage
     @locations.fetch url, => this.onDataLoaded()
 
   onDataLoaded: ->
-    this.createSelector()
     this.createMap()
+    this.createSelector()
     if this.options.boundary
       @boundary = new BoundaryLine(this, this.options.boundary)
       @boundary.draw(@map)
@@ -22,5 +22,5 @@ root.GraveyardMapPage = class GraveyardMapPage
     @map.draw()
 
   createSelector: ->
-    @selector = new GraveyardLocationSelector(this)
+    @selector = new GraveyardLocationSelector(this, @map)
     @selector.addLocations(@locations)

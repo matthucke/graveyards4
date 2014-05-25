@@ -9,6 +9,8 @@ root.GraveLocationsCollection = class GraveLocationsCollection
   constructor: (@parent) ->
     @locations = []
 
+  # Get from server, set into self, then invoke callback that lets the
+  # GraveyardMapPage know about this.
   fetch: (url, callback) ->
     $.get url, {}, (response) =>
       this.loadFromJson(response)
@@ -33,8 +35,9 @@ root.GraveLocationsCollection = class GraveLocationsCollection
     location = new GraveyardLocation(raw_loc)
     @locations.push(location)
 
-  bounds: (force) ->
-    if ! @_bounds || force
+  # Calculate bounding box.
+  bounds: ->
+    if ! @_bounds
       @_bounds = new google.maps.LatLngBounds();
 
     for loc in this.locations

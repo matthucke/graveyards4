@@ -6,9 +6,8 @@ root.GraveyardMap = class GraveyardMap
     @$map = $('#' + @options.mapId)
     this.resizer = new GraveyardMapSizer(@$map)
 
-  addLocations: (@locations) ->
-    console.log("adding locations")
-    console.dir(@locations)
+  addLocations: (locations) ->
+    @locations=locations
 
   googleMap: ->
     unless @the_map
@@ -17,16 +16,26 @@ root.GraveyardMap = class GraveyardMap
         zoom: 10
         mapTypeId: google.maps.MapTypeId.ROADMAP
       )
+    window.THE_MAP = @the_map
 
     @the_map
 
   panToLocation: (loc) ->
     this.panToPoint(loc.toLatLng())
+
   panToMarker: (marker) ->
     this.panToPoint(marker.position)
 
   panToPoint: (latlng) ->
-    this.googleMap().setCenter(latlng)
+    this.googleMap().panTo(latlng)
+
+  zoomToLocation: (loc) ->
+    this.panToLocation(loc)
+    if @the_map.getZoom() < 12
+      @the_map.setZoom(12)
+
+  openLocation: (location) ->
+    #//alert("open " + location.name)
 
   draw: ->
     map=this.googleMap()
@@ -35,24 +44,7 @@ root.GraveyardMap = class GraveyardMap
     map.setCenter(@bounds.getCenter())
 
   plotLocation: (loc) ->
-    m = this.makeMarker(loc)
-
-  makeMarker: (loc) ->
-    ll = loc.toLatLng()
-    return null if !ll
-
-    m = new google.maps.Marker
-      position: ll
-      visible: true
-      clickable: true
-      map: this.googleMap()
-      title: loc.name
-    loc.marker=m
-    return m
-
-
+    loc.marker = new GraveyardDisplay(loc, this)
 
   setBounds: (bounds) ->
     @bounds=bounds
-    console.log("bounds")
-    console.dir(bounds)

@@ -19,10 +19,10 @@
                     %a{href: "/book"} The Book
                 %li
                     %a{href: "/links"} Links
-                - if @current_user3
+                - if @current_user
                     %li
                         %a= @current_user.full_name
-                - else
+                - elsif Rails.env.development?  # not ready...
                     %li
                         %a{href: "/auth/facebook"} Log In
 

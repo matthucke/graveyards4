@@ -1,10 +1,14 @@
 
 root = (exports ? this)
 
+# Attributes of graveyard as passed to us by json - lat, lng, name, url, id...
 root.GraveyardLocation = class GraveyardLocation
-  constructor: (stuff) ->
-    if (stuff)
-      $.extend(this, stuff)
+  constructor: (attrs) ->
+    if (attrs)
+      $.extend(this, attrs)
+
+  isLocated: ->
+    if this.toLatLng() then true else false
 
   toLatLng: ->
     unless @_ll
