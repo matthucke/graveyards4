@@ -1,0 +1,39 @@
+.container
+    %h1 Graveyards of Illinois: Featured Sites
+
+    %p
+        Cemeteries profiled here have detailed entries with multiple photos,
+        historical and biographical information.
+
+    %p
+        Dating back to
+        %b 1996,
+        this is the oldest part of
+        %b graveyards.com,
+        and some of these entries are a bit dated
+        %i (or even broken)
+        ='- '
+        but I'll work to get them
+        migrated to the new system in 2014.  Meanwhile, please enjoy this
+        content from the dawn of the internet, and excuse any rough patches
+        that have appeared in the past eighteen years.
+
+#featured-sites-index
+    - @sections.each_pair do |sn, entries|
+        - first = entries.first or next
+        .container
+            %h2=first.section
+
+            - entries.each_slice(3) do |slice|
+                .row.clear
+                    - slice.each do |entry|
+                        .col-md-4
+                            .featured-index-entry
+                                %a{href: entry.url}
+                                    %img.entry-icon{:src=>"#{entry.url}/mainicon.jpg".gsub('//', '/'), :alt=>entry.headline}
+                                %h3
+                                    %a{href: entry.url}=entry.headline
+                                %p=entry.description
+                    .clear
+
+

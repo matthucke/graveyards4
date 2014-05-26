@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512001914) do
+ActiveRecord::Schema.define(version: 20140526005730) do
 
   create_table "book_chapters", force: true do |t|
     t.string   "qr_code",      limit: 30
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(version: 20140512001914) do
 
   add_index "counties", ["main_photo_id"], name: "index_counties_on_main_photo_id", using: :btree
   add_index "counties", ["state_id"], name: "index_counties_on_state_id", using: :btree
+
+  create_table "featured_sites", force: true do |t|
+    t.string   "section"
+    t.integer  "sort_order"
+    t.integer  "graveyard_id"
+    t.string   "url"
+    t.string   "headline"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "featured_sites", ["graveyard_id"], name: "index_featured_sites_on_graveyard_id", using: :btree
 
   create_table "graveyards", force: true do |t|
     t.integer  "feature_type",                           default: 0
@@ -88,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140512001914) do
     t.string   "upload"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "md5sum",       limit: 32
   end
 
   create_table "states", force: true do |t|

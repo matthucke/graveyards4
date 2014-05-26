@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'book/:id' => 'book#show'
   get 'book' => 'book#index'
 
+  get 'featured' => 'featured_sites#index'
+
   resources :graveyards
 
   resources :coordinates

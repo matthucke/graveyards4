@@ -1,0 +1,9 @@
+// Place all the styles related to the FeaturedSites controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#featured-sites-index {
+  .featured-index-entry { border-top: 1px solid #888; padding: 8px; }
+  h3 { font-size:14pt; margin: 0 1em 0 0; height: 2em; }
+  .entry-icon { float: left; margin: 0 8px 8px 0;}
+}
