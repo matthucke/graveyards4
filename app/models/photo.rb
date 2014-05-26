@@ -32,4 +32,16 @@ class Photo < ActiveRecord::Base
     words.pop
     words.join('/')
   end
+
+  def calculate_checksum
+    Digest::MD5.file(path.physical).hexdigest
+  end
+
+  def file_contents
+    contents=nil
+    File.open(self.path.physical, "rb") do |fh|
+      contents=fh.read
+    end
+    contents
+  end
 end

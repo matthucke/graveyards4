@@ -1,0 +1,18 @@
+%table
+
+    - fix_factor = 0
+
+    - @graveyards.each do |g|
+        - g.photos.each do |p|
+            - next if p.user_id == 1333
+            %tr
+                %td=g.name
+                %td=p.path
+                %td=p.id
+                %td
+                    - if u=User.find(p.user_id - fix_factor) rescue nil
+                        = u.full_name
+                    - elsif p.user_id
+                        = "user #{p.user_id} not found"
+                    - else
+                        blank

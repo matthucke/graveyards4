@@ -6,6 +6,7 @@ class BookController < ApplicationController
 
   def show
     @chapter = BookChapter.where(:qr_code=>params[:id]).first or return not_found
+    @graveyard=@chapter.graveyard
     @page_title=@chapter.title
   end
 end
