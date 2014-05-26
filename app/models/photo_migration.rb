@@ -31,7 +31,7 @@ class PhotoMigration < ActiveRecord::Base
 
     @photo.path.real_dir! # make directory
 
-    puts "mv #{move_from} #{move_to}"
+    # puts "mv #{move_from} #{move_to}"
 
     unless File.exist?(move_from)
       self.status = 'missing'
@@ -56,6 +56,7 @@ class PhotoMigration < ActiveRecord::Base
     self.save
   rescue Exception => ex
     puts "ERROR IN #{self.id}: #{ex.message}"
+    @photo.delete if @photo
     sleep 5
   end
 end
