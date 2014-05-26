@@ -17,14 +17,14 @@
                     %a{href: '/featured' } Featured
                 %li
                     %a{href: "/book"} The Book
-                %li
-                    %a{href: "/links"} Links
+                //%li
+                //    %a{href: "/links"} Links
                 - if @current_user
                     %li
                         %a= @current_user.full_name
                 - elsif Rails.env.development?  # not ready...
                     %li
-                        %a{href: "/auth/facebook"} Log In
+            //    %a{href: "/auth/facebook"} Log In
 
             %form#top-search-form.navbar-form.navbar-right{role: 'search', action: 'http://www.google.com/search'}
                 .form-group

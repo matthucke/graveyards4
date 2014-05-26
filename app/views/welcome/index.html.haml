@@ -12,9 +12,17 @@
             %p
                 Though it may look a bit different, the content is still here.
                 Go to
-                %a{href: url_for(:controller=>:graveyards)} Cemetery List
-                to browse listings of cemeteries by state and county.
+                %a{href: url_for(:controller=>:graveyards)} Cemetery Lists
+                to browse listings of cemeteries by state and county, or
+                %a{href: '/featured/'} Featured Sites
+                for the original 1990s-era
+                %i Graveyards of Chicago.
 
+            .text-right
+                %a{href: 'http://www.facebook.com/graveyards'}
+                    %img{src: "/images/icons/32/facebook.png", alt: "Follow on Facebook"}
+                %a{href: 'http://twitter.com/graveyards_com'}
+                    %img{src: "/images/icons/32/twitter.png", alt: "Follow on Twitter"}
             //%p.text-muted.text-right
             //    buttons - facebook twitter etc
     .row
