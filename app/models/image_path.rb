@@ -17,6 +17,16 @@ class ImagePath
     "/pix/#{dir}/#{filename}"
   end
 
+  def real_dir
+    DOCUMENT_ROOT + "/pix/#{dir}"
+  end
+
+  def real_dir!
+    real_dir.tap do |d|
+      FileUtils.mkdir_p d
+    end
+  end
+
   def exists?
     File.exist? physical
   end
