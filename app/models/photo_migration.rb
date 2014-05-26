@@ -15,7 +15,8 @@ class PhotoMigration < ActiveRecord::Base
       :graveyard_id => graveyard_id,
       :migration_id=>self.id,
       :migration_notes => "#{old_path};#{contributor_name}",
-      :old_path => physical_path
+      :old_path => physical_path,
+      :status=>100
     )
   end
 
@@ -51,6 +52,8 @@ class PhotoMigration < ActiveRecord::Base
     p = self.to_photo
     p.save
     install_file
+    self.status = 'success'
+    self.save
   rescue Exception => ex
     puts "ERROR IN #{self.id}: #{ex.message}"
     sleep 5
