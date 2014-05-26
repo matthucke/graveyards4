@@ -1,16 +1,17 @@
-.container
+#main-page-top.container
     .row
-        .col-md-8
+        .col-md-8#main-page-top-left
             %img#main-title{:src=>"/images/title/title.jpg", :alt=>"Graveyards.com"}
-        .col-md-4
+        .col-md-4#main-page-top-right
             %h1.text-center graveyards.com
             %p
                 Welcome to
                 = succeed '.' do
                     %strong graveyards.com version 4.0
+                Relaunched: Memorial Day 2014.
 
             %p
-                Though it may look a bit different, the content is still here.
+                Though it may look a bit different, the content is all still here.
                 Go to
                 %a{href: url_for(:controller=>:graveyards)} Cemetery Lists
                 to browse listings of cemeteries by state and county, or
@@ -18,7 +19,18 @@
                 for the original 1990s-era
                 %i Graveyards of Chicago.
 
-            .text-right
+            %p
+                Your host,
+                = succeed ',' do
+                    %b Matt Hucke
+                has explored and photographed
+                over
+                %b 1,200
+                cemeteries, graveyards, and mausolea, in
+                Illinois and elsewhere.
+
+            #main-page-top-share
+                %em follow Graveyards.com:
                 %a{href: 'http://www.facebook.com/graveyards'}
                     %img{src: "/images/icons/32/facebook.png", alt: "Follow on Facebook"}
                 %a{href: 'http://twitter.com/graveyards_com'}
@@ -33,7 +45,6 @@
 .container
 
     .row
-        .col-md-4
         .col-md-4.text-center#book-box
             %h3.text-muted
                 the book:
@@ -45,11 +56,18 @@
             %p
                 by Matt Hucke & Ursula Bielski
 
-            %p Second Edition - October 2013
-
             %a{href: '/book'}
                 Learn More...
         .col-md-4.text-center
+            %p
+                First Edition - October 1999
+
+            %a{href: '/book'}
+                %img#book-cover{:src=>"/images/book1999/front-cover-400.jpg", :alt=>"Graveyards.com"}
+        .col-md-4.text-center
+            %p
+                Second Edition - October 2013
+
             %a{href: '/book'}
                 %img#book-cover{:src=>"/images/book/front-cover-400.jpg", :alt=>"Graveyards.com"}
 

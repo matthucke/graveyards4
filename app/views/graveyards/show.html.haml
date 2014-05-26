@@ -1,5 +1,64 @@
+:ruby
+    main_images = @graveyard.main_photos
+    image_data = GalleryPresenter.new(main_images)
+    owners = main_images.map(&:user).compact.uniq
+    owners << User.find(1) if owners.empty?
 
-- @graveyard.photos.each do |photo|
-    %img{src: photo.thumbnail_path }
-    %br
-    %img{src: photo.path }
+.container-fluid
+    .pull-right
+        - if @graveyard.located?
+            %a.google-maps-link{target: '_blank', href:  google_maps_url(@graveyard.lat, @graveyard.lng)}
+                = "%0.5f, %0.4f" % [ @graveyard.lat, @graveyard.lng ]
+        - else
+            Location unknown.
+
+    %h1
+        =@graveyard.name
+
+.container-fluid
+    .row
+        #main-image-container.col-md-8
+            - if i=main_images.first
+                %img#main-image{src: i.path}
+        .col-md-4
+            - unless @graveyard.homepage.blank?
+                - short_url = @graveyard.homepage.gsub(%r{^https?://}, '').gsub(%r{/$}, '')
+                #official-site.text-center
+                    %div The official web site of
+                    %div
+                        %a{href: @graveyard.homepage, target: '_blank'}=@graveyard.name
+                    .small can be found at:
+                    %div
+                        %a{href: @graveyard.homepage, target: '_blank'}=short_url
+                    .small
+                        Please go there if you wish to contact the management.
+                    .small
+                        %i graveyards.com
+                        is an unaffiliated fan-operated site.
+
+            #thumbs
+                - if main_images.empty?
+                    %p No photos available.
+                - main_images.each do |photo|
+                    %a.thumb{id: "th#{photo.id}", href: photo.path, title: photo.caption.to_s, style: "background: url(#{photo.thumbnail_path}) 50% 50% no-repeat #ccc" }
+
+            - unless main_images.empty?
+                #photo-info.clear
+                    Photos by
+                    - owners.each_with_index do |owner|
+                        .owner
+                            %strong=owner.full_name
+
+                    %p
+                        Do not upload elsewhere without permission.
+
+
+
+
+
+.clear
+
+:javascript
+    $(document).ready(function() {
+        window.galleryPage = new GraveyardGallery(#{image_data.to_json});
+    });

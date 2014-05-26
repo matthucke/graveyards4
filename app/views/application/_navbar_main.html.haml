@@ -14,11 +14,9 @@
                 %li
                     %a{href: '/graveyards' } Cemetery Lists
                 %li
-                    %a{href: '/featured' } Featured
+                    %a{href: '/featured' } Featured Sites
                 %li
                     %a{href: "/book"} The Book
-                //%li
-                //    %a{href: "/links"} Links
                 - if @current_user
                     %li
                         %a= @current_user.full_name

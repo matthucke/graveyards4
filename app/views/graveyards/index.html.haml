@@ -1,6 +1,6 @@
 :ruby
-    main_state = @states.select { |st| st.priority == 1 }.first
-    other_states = @states.reject { |st| st.priority == 1 }
+    main_state = @states.select { |st| st.priority == 1000 }.first
+    other_states = @states.reject { |st| st.priority == 1000 }.sort_by { |s| [ - s.priority.to_i, s.name.to_s ]}
     columns = [ [main_state], other_states ].reject(&:empty?)
 
 - if main_state
@@ -8,11 +8,11 @@
         .row
             .col-md-6
                 %p
-                    This site focuses on the Graveyards of
-                    %strong="#{main_state.name},"
+                    This site focuses on the
+                    %strong="Graveyards of #{main_state.name},"
                     and we strive for complete listings of
                     cemeteries in
-                    %strong="#{main_state.name}."
+                    ="#{main_state.name}."
 
             .col-md-6
                 %p

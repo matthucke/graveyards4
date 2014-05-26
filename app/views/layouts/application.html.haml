@@ -36,12 +36,15 @@
             #fb-root
             = render :partial => 'navbar_main'
             - if @breadcrumbs && !@breadcrumbs.hidden?
-                %nav.breadcrumbs
-                    - @breadcrumbs.parents.each do |b|
-                        %a{href: b.url }=b.title
+                .container
+                    %nav#breadcrumbs
                         %span.separator=' > '.html_safe
-                    - @breadcrumbs.here.tap do |b|
-                        = b.title ? b.title : @page_title
+                        - @breadcrumbs.parents.each do |b|
+                            %a{href: b.url }=b.title
+                            %span.separator=' > '.html_safe
+                        - @breadcrumbs.here.tap do |b|
+                            %strong= b.title ? b.title : @page_title
+                            %span.separator=': '.html_safe
             %main#main-content
                 = yield
 

@@ -17,9 +17,9 @@ class StatesController < ApplicationController
       @state = State.where(:path => path.strip).first
     end
     return not_found unless @state
-
-    @breadcrumbs.add(url: '/graveyards', title: 'Graveyards')
+    breadcrumbs.add(url: '/graveyards', title: 'Cemetery Lists')
     self.page_title = "#{@state.name} Cemetery Lists"
+    breadcrumbs.here.title = @state.name
   end
 
   # GET /states/new

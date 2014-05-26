@@ -45,6 +45,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'spork-rails'
+  gem 'better_errors'
+  gem 'meta_request'
+  gem 'binding_of_caller'
 end
 
 gem 'haversine' # for distance between coordinates

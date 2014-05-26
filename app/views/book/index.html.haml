@@ -1,13 +1,19 @@
 .container
     .row
-        .col-md-6
+        .col-md-6.text-center
             %img{src: '/images/book/front-cover-600.jpg', alt: "Graveyards of Chicago"}
         .col-md-6
+            .inverse.p1.text-center
+                %img{src: '/images/book/spine-third.png', alt: "Graveyards of Chicago"}
+                .clear
+                The People, History, Art, and Lore of Cook County Cemeteries
+            %p.clear
             %p
                 %i Graveyards of Chicago: The People, History, Art, and Lore of Cook County Cemeteries
                 (Second Edition)
                 was released in October 2013 by
                 %a.external{target: '_blank', href: 'http://lakeclaremont.com'} Lake Claremont Press.
+
 
             %p
                 To learn more, visit the
@@ -15,7 +21,7 @@
                     %i Graveyards of Chicago
                 site at
                 = succeed '.' do
-                    %a.external{target: '_blank', href: 'http://graveyardsofchicago.com/'}
+                    %a.external{target: '_blank', href: 'http://graveyardsofchicago.com/'}<
                         graveyardsofchicago.com
 
 - if Rails.env.development?

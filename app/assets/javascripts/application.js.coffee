@@ -13,6 +13,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.draggable
+#= require jquery.ui.effect.all
+#= require jquery.ui.dialog
 #= require bootstrap/affix
 #= require bootstrap/alert
 #= require bootstrap/button

@@ -1,11 +1,20 @@
 @import "partials/base";
 
-
-
 /* utility */
 .clear { clear: both; }
 .nobr { white-space: nowrap }
-.yellowback { background: yellow; }
+
+.yellow-back { background: yellow; }
+.green-back { background: lightgreen; }
+.pink-back { background: pink; }
+
+.p0 { padding: 0 !important; }
+.p1 { padding: 0.5em; }
+.p2 { padding: 1em; }
+.p3 { padding: 1.5em; }
+
+.m0 { margin: 0 !important; }
+.m1 { margin: 0.5em; }
 
 /* page layout */
 body  {
@@ -43,6 +52,13 @@ body  {
   #top-search-field { max-width: 250px; }
   input, button { float: left; margin-right: 0.5em;}
 
+}
+
+#breadcrumbs {
+  font-size: 90%;
+  margin: -8px 0 0px;
+  .separator { color: #888; font-size: 120%; line-height: 80%;}
+  a, strong { border-bottom: 1px dotted #888; }
 }
 
 /* FOOTER */

@@ -11,4 +11,10 @@ module ApplicationHelper
   def base_url
     'http://graveyards.com'
   end
+
+  def google_maps_url lat, lng
+    return nil unless lat && lng
+
+    return "http://maps.google.com/maps?q=#{lat}+#{lng}"
+  end
 end

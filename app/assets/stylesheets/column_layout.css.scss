@@ -57,7 +57,8 @@ $gutter_width: 8px;
 
             }
         }
-        
+
+      /*
         &:hover .thumbnail-box img {
             position: absolute;
             // normal: 0, 240, 133
@@ -67,7 +68,8 @@ $gutter_width: 8px;
             width: 220px;
             height: 146px;
         } 
-        
+        */
+
         -moz-column-break-inside: avoid; 
         -webkit-column-break-inside: avoid; 
         column-break-inside: avoid; 

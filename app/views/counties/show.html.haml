@@ -21,13 +21,15 @@
         .col-md-2
             %a.map-link{href: map_url_for(@county)} Map
         .col-md-2
-            %a{href: @county.to_url + ".kml"} Google Earth
+        //  %a{href: @county.to_url + ".kml"} Google Earth
         .col-md-2
             %fb:like{:href=>full_url(@county.to_url), :send=>"false", :layout=>"button_count", :show_faces=>'true'}
 
+/ THE COLUMNS.
+/ This doesn't use bootstrap, but rather html5 columns, with the number dynamically
+/ chosen according to math involving screen width, column and gutter width.
 .column-container
     .column-set
-
         - @graveyards.each do |g|
             - pic = g.main_photo 
             - klasses = [ 'cell', pic ? 'with-pix' : 'no-pix' ] 

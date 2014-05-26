@@ -8,6 +8,8 @@ class CreatePhotos < ActiveRecord::Migration
     t.integer  "votes",                    default: 0
     t.integer  "graveyard_id"
     t.integer  "plot_id"
+    t.integer  "person_id"
+    t.integer  "story_id"
     t.integer  "width"
     t.integer  "height"
     t.string   "flags",        limit: 10,  default: ""
@@ -16,6 +18,7 @@ class CreatePhotos < ActiveRecord::Migration
     t.text     "caption"
     t.string   "format",       limit: 3,   default: "jpg"
     t.string   "upload"
+    t.string   "md5sum",  limit: 32
       t.timestamps
     end
   end

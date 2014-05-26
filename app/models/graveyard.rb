@@ -17,6 +17,14 @@ class Graveyard < ActiveRecord::Base
 
   alias_attribute :parent, :county
 
+  def main_photos
+    active_photos.where(:plot_id=>nil, :story_id=>nil)
+  end
+
+  def active_photos
+    photos.where(:status =>  Photo::STATUS_APPROVED)
+  end
+
   def located?
     (lat && lat.abs > 0.001) || (lng && lng.abs > 0.001)
   end

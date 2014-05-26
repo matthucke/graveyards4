@@ -13,8 +13,8 @@ class CountiesController < ApplicationController
     @county = County.find_by_path_elements(params[:state], params[:county]) or return not_found
     @state=@county.state
 
-    breadcrumbs.add(url: '/graveyards', title: 'Graveyards')
-    breadcrumbs.add(url: @state.to_url, title: "#{@state.name} Cemetery Lists")
+    breadcrumbs.add(url: '/graveyards', title: 'Cemetery Lists')
+    breadcrumbs.add(url: @state.to_url, title: "#{@state.name}")
 
     self.page_title=@county.fancy_name_with_state.to_s + " Cemetery List"
     breadcrumbs.here.title = @county.fancy_name_with_state.to_s + " Cemeteries"
