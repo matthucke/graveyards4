@@ -1,5 +1,8 @@
 @import "partials/base";
 
+// 768px, 992px, 1200px
+
+
 /* utility */
 .clear { clear: both; }
 .nobr { white-space: nowrap }
@@ -34,10 +37,27 @@ body  {
 
 /* NAV BAR */
 .navbar-brand {
-  #logo { height: 48px; }
-  padding-top: 6px;
+  #logo { height: 32px; }
+  padding-top: 8px;
 }
 
+@media (max-width: 991px) {
+  .navbar-nav li a {
+    padding: 4px;
+    max-width: 80px;
+    line-height: 1.0;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    #logo { height: 48px; }
+    padding-top: 6px;
+  }
+  .navbar-nav li a {
+    padding: 12px;
+  }
+}
 
 .navbar, .navbar-inverse, .navbar-nav, .navbar-form, .navbar .navbar-collapse {
   background: url(/images/backgrounds/dkmarble.jpg);
@@ -49,7 +69,7 @@ body  {
 }
 
 #top-search-form {
-  #top-search-field { max-width: 250px; }
+  #top-search-field { max-width: 150px; }
   input, button { float: left; margin-right: 0.5em;}
 
 }
@@ -64,7 +84,7 @@ body  {
 /* FOOTER */
 
 footer {
-  min-height: 40px;
+  min-height: 36px;
   position: fixed;
   bottom: 0; left: 0; right: 0;
   font-size: 15px;
@@ -81,5 +101,5 @@ footer {
   .navbar { height: 22px; }
   #logo { height: 35px; }
 
-  footer { position: static; }
+  footer { position: static; height: auto; min-height: auto;}
 }
