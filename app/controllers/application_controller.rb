@@ -18,7 +18,12 @@ class ApplicationController < ActionController::Base
 
 
   def render404
-    render :action=>'error404', :status=>404
+    respond_to do |fmt|
+      fmt.html {
+        render :action=>'error404', :status=>404
+      }
+      fmt.all { render :action=>'error404', :status=>404, :formats=>[:html]}
+    end
   end
 
   # used for supplying filenames for KML/CSV

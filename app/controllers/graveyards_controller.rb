@@ -22,6 +22,8 @@ class GraveyardsController < ApplicationController
     @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
     raise ActiveRecord::RecordNotFound unless @graveyard
 
+    @graveyard=@graveyard.decorate
+
     if county = @graveyard.county
       if s=county.state
         @breadcrumbs.add(url: s.to_url, title: s.name)
