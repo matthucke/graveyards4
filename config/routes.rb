@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   get 'featured' => 'featured_sites#index'
 
-  resources :graveyards
+  get "graveyards/:path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
+
+  get "graveyards" => "graveyards#index"
+  # resources :graveyards, :only => [ :index ]
 
   resources :coordinates
 
