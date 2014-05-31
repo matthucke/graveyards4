@@ -10,6 +10,7 @@ class CountyCemeteryListsController < ApplicationController
 
   # GET /county_cemetery_lists/1
   # GET /county_cemetery_lists/1.json
+  # GET /county_cemetery_lists/1.xml
   def show
     @county = params[:county] ?
         County.find_by_path_elements(params[:state], params[:county]) :
@@ -29,6 +30,13 @@ class CountyCemeteryListsController < ApplicationController
     breadcrumbs.here.title = "List"
 
     @graveyards = @county.graveyards.order(:name).includes(:county, :main_photo)
+
+    respond_to do |fmt|
+      fmt.kml {
+        set_filename "#{@county.fancy_name} Cemeteries.kml"
+      }
+      fmt.html { }
+    end
   end
 
 end

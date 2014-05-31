@@ -2,7 +2,15 @@
 default: &default
   main_state_id: 1
   document_root: /www/graveyards4/htdocs
+
+  # a free form text name, used mainly for META
   site_name: graveyards.com
+  
+  # base url for canonical links - no trailing slash
+  base_url: http://graveyards.com
+
+  owner_name: Matt Hucke
+  owner_email: hucke@cynico.net
 
 development: &development
   <<: *default

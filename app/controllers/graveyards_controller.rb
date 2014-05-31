@@ -33,7 +33,7 @@ class GraveyardsController < ApplicationController
       @breadcrumbs.here.title=@graveyard.name
     end
 
-    if @main_image = @graveyard.main_photos.first
+    if @main_image = @graveyard.main_photo || @graveyard.general_photos.first
       @page_meta.main_image = @main_image.path.to_s
     end
   end

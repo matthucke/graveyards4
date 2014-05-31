@@ -1,0 +1,28 @@
+!!! XML
+=raw '<' + '?xml version="1.0" encoding="utf-8"?>'
+%kml{xmlns:"http://www.opengis.net/kml/2.2", 'xmlns:atom' => "http://www.w3.org/2005/Atom" }
+    :ruby
+        base_url = SiteConfig.base_url
+        site_name = SiteConfig.site_name
+        my_name = SiteConfig.owner_name
+    %Document
+        - @graveyards.select(&:located?).each do |g|
+            - graveyard=g.decorate
+            %Placemark
+                %name=graveyard.name
+                %atom:link=graveyard.full_url
+                %atom:author
+                    %atom:name=my_name
+                %description
+                    %div
+                        %p= "#{graveyard.name} in #{@county.fancy_name_with_state} at #{site_name}."
+                        %p= graveyard.full_url
+                        - if img=graveyard.main_photo
+                            -# KLUGE - HAML refuses to close IMG tags when its global format
+                            -# setting is html5.  Thus I must make my own HTML like I did in 1996...
+                            %p
+                                :plain
+                                    <img src="#{h (base_url + img.path.to_s)}" alt="#{h graveyard.name}" />
+                %Point
+                    -# note weird order! LNG, LAT, [ALT], no spaces
+                    %coordinates="#{graveyard.lng},#{graveyard.lat}"

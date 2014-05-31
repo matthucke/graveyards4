@@ -3,9 +3,16 @@ class Graveyard < ActiveRecord::Base
   include GraveyardPath
 
   belongs_to :county
-  belongs_to :main_photo, class_name: 'Photo'
 
-  has_many :photos
+  # Always load graveyard when loading main photo, because
+  # main photo wants to do self.graveyard right away.
+  # Without the 'includes', it would result in a
+  # "1 + N" antipattern on the counties#show
+  belongs_to :main_photo,
+    -> { includes(:graveyard) },
+    class_name: 'Photo'
+
+  has_many :photos, -> { includes(:graveyard) }
 
   validates :county, presence: true
   validates :name, presence: true
@@ -17,7 +24,10 @@ class Graveyard < ActiveRecord::Base
 
   alias_attribute :parent, :county
 
-  def main_photos
+  # General photos - those not associated with a plot/story.
+  # These are the flagship photos for this graveyard and
+  # show up in the gallery on graveyards#show
+  def general_photos
     active_photos.where(:plot_id=>nil, :story_id=>nil)
   end
 

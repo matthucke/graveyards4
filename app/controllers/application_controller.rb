@@ -21,7 +21,13 @@ class ApplicationController < ActionController::Base
     render :action=>'error404', :status=>404
   end
 
-protected
+  # used for supplying filenames for KML/CSV
+  def set_filename(filename)
+    response.headers['Content-Disposition'] = 'attachment; filename="' + filename
+  end
+
+
+  protected
 
   def breadcrumb_init
     @breadcrumbs = BreadcrumbTrail.new(request)

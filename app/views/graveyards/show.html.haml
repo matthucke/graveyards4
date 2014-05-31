@@ -1,5 +1,5 @@
 :ruby
-    main_images = @graveyard.main_photos
+    main_images = @graveyard.general_photos
     image_data = GalleryPresenter.new(main_images)
     owners = main_images.map(&:user).compact.uniq
     owners << User.find(1) if owners.empty?
