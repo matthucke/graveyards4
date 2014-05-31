@@ -10,7 +10,6 @@ $cell_border_width: 1px;
 $gutter_width: 8px; 
 
 .column-set {
-
     -moz-column-gap: $gutter_width;
     -moz-column-fill: balance;
 
@@ -20,21 +19,33 @@ $gutter_width: 8px;
     column-gap: $gutter_width;
     column-fill: balance;
 
+    .cell-bottom {
+      width: $thumb_width; // + (2 * $cell_pad_width);
+      padding: $cell_pad_width;
+    }
+
+    .with-pix .cell-bottom {
+      border-top: none !important;
+    }
+
+    .no-pix .cell-bottom {
+      min-height: $thumb_width * 2 / 3;
+    }
+
     .cell {
+        border: $cell_border_width solid #888;
+        border-radius: 8px;
         display: inline-block;
         position: relative;
 
         // was originally same as $thumb_width, but bootstrap wants border-box sizing model,
         // so add padding & spacing back in
-        width: $thumb_width + (2 * $cell_pad_width) + (2 * $cell_border_width);
+        width: $thumb_width + (2 * $cell_border_width);
 
         min-height: $thumb_width / 2;
-        padding: $cell_pad_width; 
+        padding: 0;
 
         margin: 10px $gutter_width 10px 0;
-
-        border: $cell_border_width solid #666;
-        border-radius: 4px;
 
         text-align: center;
 
@@ -54,23 +65,10 @@ $gutter_width: 8px;
                 // transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
                 transition: all 0.7s;
                 transition-timing-function: ease;
-
             }
         }
 
-      /*
-        &:hover .thumbnail-box img {
-            position: absolute;
-            // normal: 0, 240, 133
-            // -10, 220, 146
-            // -20, 240, 160
-            left: -10px; 
-            width: 220px;
-            height: 146px;
-        } 
-        */
-
-        -moz-column-break-inside: avoid; 
+        -moz-column-break-inside: avoid;
         -webkit-column-break-inside: avoid; 
         column-break-inside: avoid; 
 
@@ -85,7 +83,7 @@ $gutter_width: 8px;
         .no-pix-msg {
             visibility: hidden;
             padding: 12px 0;
-            color: #000;
+            color: #444;
             text-shadow: -0.5px -1px 1px #ccc;
             font-size:80%;
             font-weight: normal !important;
@@ -104,7 +102,7 @@ $gutter_width: 8px;
             //top: 0px;
         }
     } 
-    .no-pix .cell-main { padding-top: 1em; } 
+    .no-pix .cell-bottom { padding-top: 1em; } 
 }
 
 $column_width: $thumb_width + $cell_pad_width * 2 + 4px;

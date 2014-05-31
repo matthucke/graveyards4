@@ -29,11 +29,13 @@
                         .thumbnail-box
                             %a{:href=>g.to_url }
                                 %img{:src=> pic.thumbnail_path, :alt=>"#{g.name} in #{county_name}" }
-                .cell-main
-                    %a{:href=>g.to_url }=g.name
-                - if !pic
-                    .no-pix-msg 
-                        photos not available
+                .cell-bottom
+                    .cell-main
+                        %a{:href=>g.to_url }=g.name
+                    - if !pic
+                        .no-pix-msg
+                            photos not available
+                    .clear
         .clear
     .clear
 
