@@ -37,10 +37,12 @@ class County < ActiveRecord::Base
   end
 
   def self.find_by_path_elements state_path, county_path
-    return nil if state_path.blank? || county_path.blank?
+    (state_path.blank? || county_path.blank?) ? nil :
+      find_by_full_path("#{state_path}/#{county_path}")
+  end
 
-    joined = "#{state_path}/#{county_path}"
-    return County.where(:full_path => joined).first
+  def self.find_by_full_path(path)
+    County.where(:full_path => path).first
   end
 
   def encoded_boundary

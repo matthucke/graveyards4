@@ -6,6 +6,11 @@ module BuildsPath
     fp.nil? ? nil : '/' + fp
   end
 
+  # for urls to make
+  def to_param
+    self.full_path
+  end
+
   module ClassMethods
     # Produce a clean name suitable for URLs
     # "New   York" => "New-York"

@@ -1,7 +1,16 @@
 module ApplicationHelper
+
   # used for anything that implements to_url - a County or Graveyard generally
+  # /Illinois/map
+  # /Illinois/Cumberland/map
   def map_url_for(obj)
     obj.to_url.to_s + "/map"
+  end
+
+  # /Illinois/list
+  # /Illinois/Edwards/list
+  def list_url_for(obj)
+    obj.to_url.to_s + "/list"
   end
 
   def full_url(url)

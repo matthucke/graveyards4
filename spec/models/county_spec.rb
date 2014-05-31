@@ -42,7 +42,13 @@ describe County do
       it "should have fancy name" do
         expect(c.fancy_name).to be == 'St. Louis County'
       end
+
+      it "should set to_param" do
+        c.save
+        expect(c.to_param).to be == 'Missouri/St-Louis'
+      end
     end
+
     context "city of st louis" do
       subject(:c) { County.new(:state=>@missouri, :name=>'St. Louis', :type_name=>'City')}
 
@@ -53,10 +59,26 @@ describe County do
       it "should have state name" do
         expect(c.fancy_name_with_state).to be == "City of St. Louis, Missouri"
       end
+
     end
 
   end
 
+  context "with a full path" do
+    before {
+      @illinois = create(:illinois)
+    }
+    subject(:c) { County.create(:state=>@illinois, :name=>'St. Baldrick')}
+
+    it "has expected path" do
+      expect(c.to_param).to be == "Illinois/St-Baldrick"
+    end
+
+    it "can be found at its path" do
+      found_county = County.find_by_full_path(c.to_param)
+      expect(found_county).to be == c
+    end
+  end
 
 end
 

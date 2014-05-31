@@ -1,13 +1,18 @@
 class GraveyardsController < ApplicationController
   before_action :set_graveyard, only: [:edit, :update, :destroy]
 
+  MAIN_STATE_ID = SiteConfig.fetch('main_state_id', nil)
+
+
   # GET /graveyards
   # GET /graveyards.json
 
   # This action would more properly be on StatesController - it's a list of states,
   # after all.  But historically it has been at the /graveyards URL.
   def index
-    @states = State.includes(:counties).order(:name)
+    @states = State.includes(:counties).order(:priority => :desc, :name=>:asc)
+    @main_state = @states.find { |s| s.id == MAIN_STATE_ID }
+
     self.page_title="Cemetery Lists"
   end
 
@@ -15,7 +20,7 @@ class GraveyardsController < ApplicationController
   # GET /graveyards/1.json
   def show
     @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
-    return not_found unless @graveyard
+    raise ActiveRecord::RecordNotFound unless @graveyard
 
     if county = @graveyard.county
       if s=county.state

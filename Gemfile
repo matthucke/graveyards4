@@ -66,3 +66,4 @@ gem 'bootstrap-sass'
 gem 'settingslogic'
 
 gem 'polylines'   # for encoding of boundaries
+

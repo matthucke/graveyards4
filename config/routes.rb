@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :users
 
   get 'book/:id' => 'book#show'
@@ -27,7 +28,10 @@ Rails.application.routes.draw do
   # FALLBACK ROUTES - anything not covered above will go to these.
   get ':state', to: 'states#show'
 
+  # resources :county_cemetery_lists, :only => [ :index, :show ]
+
   # /Illinois/Cook => Counties / show / Cook
+  get ':state/:county/list', to: 'county_cemetery_lists#show'
   get ':state/:county/map', to: 'maps#index'
   get ':state/:county', to: 'counties#show'
 

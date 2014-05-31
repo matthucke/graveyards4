@@ -1,25 +1,26 @@
 :ruby
-    main_state = @states.select { |st| st.priority == 1000 }.first
-    other_states = @states.reject { |st| st.priority == 1000 }.sort_by { |s| [ - s.priority.to_i, s.name.to_s ]}
-    columns = [ [main_state], other_states ].reject(&:empty?)
+    columns = [ @states ]
+    if @main_state
+        columns = [ [@main_state], @states.to_a - [ @main_state ] ].reject(&:empty?)
+    end
 
-- if main_state
+- if @main_state
     .container
         .row
             .col-md-6
                 %p
                     This site focuses on the
-                    %strong="Graveyards of #{main_state.name},"
+                    %strong="Graveyards of #{@main_state.name},"
                     and we strive for complete listings of
                     cemeteries in
-                    ="#{main_state.name}."
+                    ="#{@main_state.name}."
 
             .col-md-6
                 %p
                     Other states and countries are listed below,
                     only to show the graveyards that the site owner
                     has personally visited.  Listings outside of
-                    %strong="#{main_state.name}"
+                    %strong="#{@main_state.name}"
                     are
                     %i not
                     intended to be complete.
@@ -32,10 +33,8 @@
                 - state_list.each do |state|
                     %h1=state.name
 
-                    %ul
+                    %ul.cemetery-list
                         - state.counties.sort_by(&:name).each do |c|
                             %li
-                                %a{href: '/'+c.full_path, :title=>"#{c.fancy_name_with_state} Cemeteries"}
-                                    = c.fancy_name_with_state
-                                Cemetery List,
-                                %a{href: map_url_for(c)} Map
+                                %a{href: c.to_url, :title=>"#{c.fancy_name_with_state} Cemetery List and Photos"}
+                                    = "#{c.fancy_name_with_state} Cemeteries"

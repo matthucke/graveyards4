@@ -1,5 +1,6 @@
 
 default: &default
+  main_state_id: 1
   document_root: /www/graveyards4/htdocs
   site_name: graveyards.com
 

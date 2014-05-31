@@ -1,0 +1,43 @@
+//
+// COUNTIES / SHOW - show graveyards in a county
+//
+//      @county County
+//      @graveyards Array
+//
+// view: /counties/show.html.haml 
+// urls:
+//      /Illinois/Cook
+//      /Missouri/St_Louis_City etc
+//
+:ruby
+    county_name = @county.fancy_name_with_state
+
+.container
+    .row
+        .col-md-6
+            %h1
+                .overhead Cemetery List
+                =@county.fancy_name_with_state
+        .col-md-2
+        .col-md-2
+        //  %a{href: @county.to_url + ".kml"} Google Earth
+        .col-md-2
+            %p= @page_meta.fb_like_button
+
+.container
+    %table.table
+        %thead
+            %tr.headrow
+                %th Cemetery Name
+                %th Latitude
+                %th Longitude
+                %th Topo Map
+        %tbody
+            - @graveyards.each do |g|
+                - pic = g.main_photo
+                %tr
+                    %td
+                        %a{href: g.to_url}=g.name
+                    %td= g.located? ? "%0.5f" % g.lat : 'unknown'
+                    %td= g.located? ? "%0.5f" % g.lng : 'unknown'
+                    %td=g.usgs_map

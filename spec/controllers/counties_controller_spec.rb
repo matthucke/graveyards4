@@ -23,138 +23,29 @@ describe CountiesController do
   # This should return the minimal set of attributes required to create a valid
   # County. As you add validations to County, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "state" => "" } }
-
+  let(:valid_attributes) { {
+      name: "Pangaea",
+      state: FactoryGirl.create(:illinois) }
+  }
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CountiesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all counties as @counties" do
-      county = County.create! valid_attributes
+    it "has no index" do
       get :index, {}, valid_session
-      assigns(:counties).should eq([county])
+      expect(response.status).to eq 302
+      expect(response).to redirect_to '/graveyards'
     end
   end
 
   describe "GET show" do
     it "assigns the requested county as @county" do
       county = County.create! valid_attributes
-      get :show, {:id => county.to_param}, valid_session
-      assigns(:county).should eq(county)
+      get :show, {:state => county.state.path, :county=>county.path}, valid_session
+      expect(request.path).to be == '/Illinois/Pangaea'
+      expect(assigns :county).to be == county
     end
   end
-
-  describe "GET new" do
-    it "assigns a new county as @county" do
-      get :new, {}, valid_session
-      assigns(:county).should be_a_new(County)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested county as @county" do
-      county = County.create! valid_attributes
-      get :edit, {:id => county.to_param}, valid_session
-      assigns(:county).should eq(county)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new County" do
-        expect {
-          post :create, {:county => valid_attributes}, valid_session
-        }.to change(County, :count).by(1)
-      end
-
-      it "assigns a newly created county as @county" do
-        post :create, {:county => valid_attributes}, valid_session
-        assigns(:county).should be_a(County)
-        assigns(:county).should be_persisted
-      end
-
-      it "redirects to the created county" do
-        post :create, {:county => valid_attributes}, valid_session
-        response.should redirect_to(County.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved county as @county" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        County.any_instance.stub(:save).and_return(false)
-        post :create, {:county => { "state" => "invalid value" }}, valid_session
-        assigns(:county).should be_a_new(County)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        County.any_instance.stub(:save).and_return(false)
-        post :create, {:county => { "state" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested county" do
-        county = County.create! valid_attributes
-        # Assuming there are no other counties in the database, this
-        # specifies that the County created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        County.any_instance.should_receive(:update).with({ "state" => "" })
-        put :update, {:id => county.to_param, :county => { "state" => "" }}, valid_session
-      end
-
-      it "assigns the requested county as @county" do
-        county = County.create! valid_attributes
-        put :update, {:id => county.to_param, :county => valid_attributes}, valid_session
-        assigns(:county).should eq(county)
-      end
-
-      it "redirects to the county" do
-        county = County.create! valid_attributes
-        put :update, {:id => county.to_param, :county => valid_attributes}, valid_session
-        response.should redirect_to(county)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the county as @county" do
-        county = County.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        County.any_instance.stub(:save).and_return(false)
-        put :update, {:id => county.to_param, :county => { "state" => "invalid value" }}, valid_session
-        assigns(:county).should eq(county)
-      end
-
-      it "re-renders the 'edit' template" do
-        county = County.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        County.any_instance.stub(:save).and_return(false)
-        put :update, {:id => county.to_param, :county => { "state" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested county" do
-      county = County.create! valid_attributes
-      expect {
-        delete :destroy, {:id => county.to_param}, valid_session
-      }.to change(County, :count).by(-1)
-    end
-
-    it "redirects to the counties list" do
-      county = County.create! valid_attributes
-      delete :destroy, {:id => county.to_param}, valid_session
-      response.should redirect_to(counties_url)
-    end
-  end
-
 end
