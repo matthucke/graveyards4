@@ -1,9 +1,12 @@
 module BuildsPath
   extend ActiveSupport::Concern
 
-  def to_url
-    fp=self.full_path
-    fp.nil? ? nil : '/' + fp
+  def to_url(suffix=nil)
+    url=self.full_path or return nil
+    unless suffix.blank?
+      url += "/#{suffix}"
+    end
+    '/'+url
   end
 
   # for urls to make

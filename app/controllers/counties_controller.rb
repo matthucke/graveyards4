@@ -10,6 +10,9 @@ class CountiesController < ApplicationController
   # Index for a single county, showing graveyards in that county.
   def show
     @county = County.find_by_path_elements(params[:state], params[:county]) or return not_found
+
+    @county = @county.decorate
+
     @state=@county.state
 
     breadcrumbs.add(url: '/graveyards', title: 'Cemetery Lists')

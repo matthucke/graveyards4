@@ -1,0 +1,34 @@
+:ruby
+    overhead ||="Cemeteries and Graveyards in"
+    active ||= nil
+    links = [
+        # url suffix, caption, icon
+        [ nil, 'pix', 'camera' ],
+        [ 'map', 'map', 'map-marker' ],
+        [ 'list', 'list', 'list' ],
+        [ 'list.kml', 'google earth', 'globe' ],
+    ]
+
+.container#county-header
+    .row
+        .col-md-6
+            %h1
+                .overhead=overhead
+                %span.nobr="#{@county.fancy_name},"
+                =@county.state.name
+
+        .col-md-4
+            %nav
+                %ul.nav.nav-pills
+                    - links.each do |(which, caption, icon)|
+                        - is_active = (active==which)
+                        - link_classes = [ 'btn', is_active ? 'btn-active' : 'btn-default' ]
+                        %li{:class=>is_active ? 'active' : ''}
+                            %a{class: link_classes, href: @county.to_url(which) }
+                                %div{:class =>  "glyphicon glyphicon-#{icon}"}
+                                .caption=caption
+
+
+        //  %a{href: @county.to_url + ".kml"} Google Earth
+        .col-md-2
+            %p= @page_meta.fb_like_button

@@ -17,6 +17,8 @@ class CountyCemeteryListsController < ApplicationController
 
     raise ActiveRecord::RecordNotFound unless @county
 
+    @county = @county.decorate
+
     breadcrumbs.add(url: '/graveyards', title: 'Cemetery Lists')
     if @state=@county.state
       breadcrumbs.add(url: @state.to_url, title: "#{@state.name}")

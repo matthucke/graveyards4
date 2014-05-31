@@ -12,18 +12,8 @@
 :ruby
     county_name = @county.fancy_name_with_state
 
-.container
-    .row
-        .col-md-6
-            %h1
-                .overhead Cemeteries and Graveyards in
-                =@county.fancy_name_with_state
-        .col-md-2
-            %a.map-link{href: map_url_for(@county)} Map
-        .col-md-2
-        //  %a{href: @county.to_url + ".kml"} Google Earth
-        .col-md-2
-            %p= @page_meta.fb_like_button
+= render :partial => "counties/county_header", :locals => { :overhead => 'Cemeteries and Graveyards in'}
+
 
 / THE COLUMNS.
 / This doesn't use bootstrap, but rather html5 columns, with the number dynamically
