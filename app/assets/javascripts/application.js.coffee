@@ -29,3 +29,6 @@
 #= require bootstrap/popover
 #= # require turbolinks
 #= require_tree .
+
+$ ->
+  (exports ? window).page = new GraveyardsComPage().init();
