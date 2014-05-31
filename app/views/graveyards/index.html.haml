@@ -37,4 +37,5 @@
                             %li
                                 %a{href: '/'+c.full_path, :title=>"#{c.fancy_name_with_state} Cemeteries"}
                                     = c.fancy_name_with_state
-                                Cemetery List
+                                Cemetery List,
+                                %a{href: map_url_for(c)} Map

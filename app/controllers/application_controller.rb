@@ -3,9 +3,23 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :breadcrumb_init, :current_user
+  before_action :breadcrumb_init, :current_user, :page_meta
 
   attr_accessor :breadcrumbs
+
+  #unless Rails.application.config.consider_all_requests_local
+    rescue_from ActiveRecord::RecordNotFound,
+                ActionController::RoutingError,
+                ActionController::UnknownController,
+                ActionController::MethodNotAllowed do |exception|
+      render404
+    end
+  #end
+
+
+  def render404
+    render :action=>'error404', :status=>404
+  end
 
 protected
 
@@ -44,4 +58,9 @@ protected
     @identity
   end
 
+  def page_meta
+    unless @page_meta
+      @page_meta = PageMeta.new(request)
+    end
+  end
 end

@@ -1,6 +1,7 @@
 
 default: &default
   document_root: /www/graveyards4/htdocs
+  site_name: graveyards.com
 
 development: &development
   <<: *default

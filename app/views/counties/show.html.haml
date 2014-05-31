@@ -23,7 +23,7 @@
         .col-md-2
         //  %a{href: @county.to_url + ".kml"} Google Earth
         .col-md-2
-            %fb:like{:href=>full_url(@county.to_url), :send=>"false", :layout=>"button_count", :show_faces=>'true'}
+            %p= @page_meta.fb_like_button
 
 / THE COLUMNS.
 / This doesn't use bootstrap, but rather html5 columns, with the number dynamically
