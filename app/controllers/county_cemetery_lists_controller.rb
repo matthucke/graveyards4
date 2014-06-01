@@ -29,7 +29,7 @@ class CountyCemeteryListsController < ApplicationController
     self.page_title=@county.fancy_name_with_state.to_s + " Cemetery List"
     breadcrumbs.here.title = "List"
 
-    @graveyards = @county.graveyards.order(:name).includes(:county, :main_photo)
+    @graveyards = @county.graveyards.order(:name).includes(:county)
 
     respond_to do |fmt|
       fmt.kml {
