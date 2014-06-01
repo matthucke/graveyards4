@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :visits
+
   resources :users
 
   get 'book/:id' => 'book#show'

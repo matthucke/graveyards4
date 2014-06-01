@@ -2,14 +2,20 @@
 
     - fix_factor = 0
 
-    - @graveyards.each do |g|
+    - @graveyards.sort_by(&:name).each do |g|
         - next if g.photos.empty?
         - g.photos.each_with_index do |p, i|
             - migration = nil # p.migration_id ?  (PhotoMigration.find(p.migration_id) rescue nil) : nil
+            - contrib_names = g.photos.map(&:user).compact.map(&:full_name).uniq
             %tr{:class=>"count-#{i}"}
                 %td=g.id
                 %td
                     %a{href: g.to_url}=g.name
+                    - if contrib_names.length > 1
+                        .red="#{contrib_names.length} contributors"
+                    - g.visits.each do |v|
+                        .yellow-back
+                            %b visited: #{v.notes}
                 %td=p.path
                 %td
                     %img{src: p.thumbnail_path}

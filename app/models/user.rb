@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :identities
+  has_many :visits
 
   def self.from_omniauth(auth)
     info = auth['info']

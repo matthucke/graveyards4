@@ -4,6 +4,8 @@ class Graveyard < ActiveRecord::Base
 
   belongs_to :county
 
+  has_many :visits
+
   # Always load graveyard when loading main photo, because
   # main photo wants to do self.graveyard right away.
   # Without the 'includes', it would result in a

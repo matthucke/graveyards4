@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @visit.user
+%p
+  %b Graveyard:
+  = @visit.graveyard
+%p
+  %b Visited at:
+  = @visit.visited_at
+%p
+  %b Visit type:
+  = @visit.visit_type
+%p
+  %b Notes:
+  = @visit.notes
+
+= link_to 'Edit', edit_visit_path(@visit)
+\|
+= link_to 'Back', visits_path

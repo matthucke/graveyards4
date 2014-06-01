@@ -1,0 +1,27 @@
+%h1 Listing visits
+
+%table
+  %tr
+    %th User
+    %th Graveyard
+    %th Visited at
+    %th Visit type
+    %th Notes
+    %th
+    %th
+    %th
+
+  - @visits.each do |visit|
+    %tr
+      %td= visit.user
+      %td= visit.graveyard
+      %td= visit.visited_at
+      %td= visit.visit_type
+      %td= visit.notes
+      %td= link_to 'Show', visit
+      %td= link_to 'Edit', edit_visit_path(visit)
+      %td= link_to 'Destroy', visit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Visit', new_visit_path
