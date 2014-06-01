@@ -1,14 +1,20 @@
-%table
+%table.table
 
     - fix_factor = 0
 
     - @graveyards.each do |g|
-        - g.photos.each do |p|
-            - next if p.user_id == 1333
-            %tr
-                %td=g.name
+        - next if g.photos.empty?
+        - g.photos.each_with_index do |p, i|
+            - migration = nil # p.migration_id ?  (PhotoMigration.find(p.migration_id) rescue nil) : nil
+            %tr{:class=>"count-#{i}"}
+                %td=g.id
+                %td
+                    %a{href: g.to_url}=g.name
                 %td=p.path
+                %td
+                    %img{src: p.thumbnail_path}
                 %td=p.id
+                %td=p.user_id
                 %td
                     - if u=User.find(p.user_id - fix_factor) rescue nil
                         = u.full_name
@@ -16,3 +22,8 @@
                         = "user #{p.user_id} not found"
                     - else
                         blank
+                %td=p.migration_notes
+
+%style{:type=>'text/css'}
+    :plain
+        .count-0 td { border-top: 2px solid black !important;}
