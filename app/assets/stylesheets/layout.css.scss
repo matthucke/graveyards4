@@ -41,13 +41,6 @@ body  {
   padding-top: 8px;
 }
 
-@media (max-width: 991px) {
-  .navbar-nav li a {
-    padding: 4px;
-    max-width: 80px;
-    line-height: 1.0;
-  }
-}
 
 @media (min-width: 992px) {
   .navbar-brand {
@@ -95,11 +88,54 @@ footer {
 }
 
 /* MOBILE OVERRIDES */
-@media screen and (max-width: 767px) {
+@media #{$MEDIA_XS} {
   #wrapd { margin-bottom: 0 }
 
   .navbar { height: 22px; }
   #logo { height: 35px; }
 
   footer { position: static; height: auto; min-height: auto;}
+}
+
+/*
+ When in Medium mode - only - the navbar is uncollapsed but very
+ crowded.  Make the links at top flow onto separate lines.
+ */
+@media #{$MEDIA_MD} {
+  .navbar-nav li {
+    padding: 0 8px;
+    a {
+      text-align: center;
+      padding: 8px 0 0;
+      max-width: 80px;
+      line-height: 1.0;
+      font-size: 16px;
+    }
+  }
+}
+
+.body-prod .debug { display: none; }
+
+#debug-size {
+  z-index: 999;
+  position: fixed;
+  bottom: 8px;
+  right: 4px;
+  background: #222;
+  padding: 4px;
+  font-weight: bold;
+
+  line-height: 1.5em;
+  font-size:18pt;
+  > div {
+    padding: 2px 12px;
+    color: white;
+    float: left;
+  }
+
+  .xs { background: #800; }
+  .sm { background: #080; }
+  .md { background: #008; }
+  .lg { background: #606; }
+
 }

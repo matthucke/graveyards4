@@ -75,4 +75,10 @@
                 = yield
 
         = render :partial => 'footer'
-
+        - if Rails.env.development?
+            #debug-size.debug
+                .xs.hidden-md.hidden-lg.hidden-sm Xtra-Small
+                .sm.hidden-md.hidden-lg.hidden-xs Small
+                .md.hidden-xs.hidden-lg.hidden-sm Medium
+                .lg.hidden-md.hidden-sm.hidden-xs Large
+                %br.clear
