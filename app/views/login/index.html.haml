@@ -3,11 +3,10 @@
 
     .row
         - provider_config.each_pair do |symbol, config|
-            - config = OpenStruct.new(config)
-            - img = "/images/icons/512/#{symbol}.png"
+            - img = "/images/icons/512/#{config[:icon_name] || symbol}.png"
             .col-md-6.login-option
-                %a{href: config.url || "/auth/#{symbol}"}
-                    %img.icon{src: img, alt: "Log in with #{config.name}"}
+                %a{href: config[:url] || "/auth/#{symbol}"}
+                    %img.icon{src: img, alt: "Log in with #{config[:name]}"}
                 %br
-                %a{href: config.url || "/auth/#{symbol}"}
-                    = config.name
+                %a{href: config[:url] || "/auth/#{symbol}"}
+                    = config[:name]

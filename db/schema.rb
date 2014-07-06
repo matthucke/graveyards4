@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601164929) do
+ActiveRecord::Schema.define(version: 20140706221001) do
 
   create_table "book_chapters", force: true do |t|
     t.string   "qr_code",      limit: 30
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20140601164929) do
     t.text     "provider_text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar"
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
@@ -177,6 +178,7 @@ ActiveRecord::Schema.define(version: 20140601164929) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "full_name"
     t.integer  "security_level"
     t.datetime "created_at"
     t.datetime "updated_at"

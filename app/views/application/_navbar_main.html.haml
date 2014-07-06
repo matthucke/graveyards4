@@ -15,14 +15,22 @@
                     %a{href: '/featured' } Featured Sites
                 %li
                     %a{href: "/book"} The Book
-                - if @current_user
+                - if identity=current_identity
                     %li.dropdown
                         %a.dropdown-toggle{href: '#', 'data-toggle'=>'dropdown'}
-                            = @current_user.full_name
+                            - if identity.avatar.blank?
+                                = identity.full_name
+                            - else
+                                %img#top-avatar{src: identity.avatar, alt: identity.full_name}
+
                             %span.caret
                         %ul.dropdown-menu{role: 'menu'}
+                            %li.p1
+                                %img{src: identity.provider_icon, alt: "Logged in via #{identity.provider}"}
+                                = identity.full_name
                             %li
-                                %a{href: '#'} Account
+                                %a{href: '#'}
+                                    Account
                             %li.divider
                             %li
                                 %a{href: url_for(controller: :sessions, action: :destroy)} Log Out

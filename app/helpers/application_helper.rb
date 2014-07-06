@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  def current_user
+    @current_user
+  end
+  def current_identity
+    @identity
+  end
+
   # used for anything that implements to_url - a County or Graveyard generally
   # /Illinois/map
   # /Illinois/Cumberland/map

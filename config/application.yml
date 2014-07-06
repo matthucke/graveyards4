@@ -21,7 +21,12 @@ default: &default
     twitter:
       :name: 'Twitter'
       :opts: 
-        :force_login: true
+      #  :force_login: true
+    pinterest:
+      :name: 'Pinterest'
+    google_oauth2:
+      :name: 'Google'
+      :icon_name: 'google'
 
 development: &development
   <<: *default

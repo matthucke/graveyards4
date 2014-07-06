@@ -60,6 +60,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-pinterest'
 gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
 
 gem 'bootstrap-sass'
 
