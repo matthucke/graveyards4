@@ -13,7 +13,7 @@ module UserFactory
     end
 
     def email
-      e=@user_info['email']
+      e=user_info['email']
       return e unless e.blank?
 
       # Provide a fake one.
@@ -22,9 +22,9 @@ module UserFactory
 
     def find_or_create_user
       if email.blank?
-        find_or_create_user_from_email
-      else
         create_user_without_email
+      else
+        find_or_create_user_from_email
       end
     end
 
