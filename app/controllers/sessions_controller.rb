@@ -2,13 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    begin
-      File.open("/tmp/omni.log", "ab") do |fh|
-        fh.puts auth_hash.to_yaml
-      end
-    rescue Exception => ex
-      # IGNORED.
-    end
+    # for debug, dump to file.
+    dump_auth_hash unless Rails.env.production?
 
     if identity = Identity.from_omniauth(auth_hash)
       session[:identity_id] = identity.id
@@ -31,4 +26,13 @@ protected
   def auth_hash
     request.env['omniauth.auth']
   end
+
+  def dump_auth_hash
+    File.open("/tmp/omniauth-#{Time.now.to_i}.log", "ab") do |fh|
+      fh.puts auth_hash.to_yaml
+    end
+  rescue Exception => ex
+    # IGNORED.
+  end
+
 end

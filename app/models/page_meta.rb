@@ -57,7 +57,7 @@ class PageMeta
   end
 
   def facebook_id
-    Rails.application.secrets.facebook['app_id']
+    Rails.application.secrets.facebook['api_key']
   end
 
   private
