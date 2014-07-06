@@ -11,7 +11,10 @@ root.GraveyardsComPage = class GraveyardsComPage
 
   initNavbar: ->
     $n = $('#main-navbar')
+
     # uses https://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar.git
     if ($n.autoHidingNavbar)
       $n.autoHidingNavbar()
 
+    if (window.LoginLink)
+      window.LoginLink.bindAll()

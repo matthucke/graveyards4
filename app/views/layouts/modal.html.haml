@@ -1,0 +1,17 @@
+:ruby
+    @modal_size ||= 'sm'
+    @modal_id ||= "modal-#{controller.controller_name}-#{params[:action]}"
+
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "", :role => "dialog", :tabindex => "-1", :id=>@modal_id}
+    %div{:class=>"modal-dialog modal-#{@modal_size}"}
+        .modal-content
+            .modal-header.inverse
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+                %h4.modal-title=@page_title
+            .modal-body
+                =yield
+
+            .modal-footer.inverse
+                %button.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close
+
+- ###########

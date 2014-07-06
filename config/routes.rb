@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :login, :only => [ :index ]
+
   resources :visits
 
   resources :users
@@ -23,12 +25,14 @@ Rails.application.routes.draw do
   #get 'photos', to: 'photos#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # See how all your routes lay out with "rake rouppliatites".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  # omniauth
   match '/auth/:provider/callback', to: 'sessions#create', :via => [ :get, :post ]
+  get '/logout' => 'sessions#destroy'
 
   # FALLBACK ROUTES - anything not covered above will go to these.
   get ':state', to: 'states#show'

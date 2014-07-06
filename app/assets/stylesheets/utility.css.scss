@@ -1,0 +1,44 @@
+@import "partials/base";
+
+.clear { clear: both; }
+.nobr { white-space: nowrap }
+
+/* these -back classes are for quick layout debugging */
+.yellow-back { background: yellow; }
+.green-back { background: lightgreen; }
+.pink-back { background: pink; }
+
+.p0 { padding: 0 !important; }
+.p1 { padding: 0.5em !important; }
+.p2 { padding: 1em !important; }
+.p3 { padding: 1.5em !important; }
+
+.m0 { margin: 0 !important; }
+.m1 { margin: 0.5em !important; }
+.m2 { margin: 1em !important; }
+
+.body-production .debug { display: none; }
+
+#debug-size {
+  z-index: 999;
+  position: fixed;
+  bottom: 8px;
+  right: 4px;
+  background: #222;
+  padding: 4px;
+  font-weight: bold;
+
+  line-height: 1.5em;
+  font-size:18pt;
+  > div {
+    padding: 2px 12px;
+    color: white;
+    float: left;
+  }
+
+  .xs { background: #800; }
+  .sm { background: #080; }
+  .md { background: #008; }
+  .lg { background: #606; }
+
+}

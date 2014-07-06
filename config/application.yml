@@ -12,6 +12,17 @@ default: &default
   owner_name: Matt Hucke
   owner_email: hucke@cynico.net
 
+  # Each of these must exist as a section in secrets.yml.
+  auth_providers:
+    # name: config hash
+    facebook:
+      :name: 'Facebook'
+      :opts: 
+    twitter:
+      :name: 'Twitter'
+      :opts: 
+        :force_login: true
+
 development: &development
   <<: *default
 

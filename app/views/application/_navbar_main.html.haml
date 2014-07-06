@@ -16,12 +16,21 @@
                 %li
                     %a{href: "/book"} The Book
                 - if @current_user
-                    %li
-                        %a= @current_user.full_name
+                    %li.dropdown
+                        %a.dropdown-toggle{href: '#', 'data-toggle'=>'dropdown'}
+                            = @current_user.full_name
+                            %span.caret
+                        %ul.dropdown-menu{role: 'menu'}
+                            %li
+                                %a{href: '#'} Account
+                            %li.divider
+                            %li
+                                %a{href: url_for(controller: :sessions, action: :destroy)} Log Out
+
                 - else
                     %li
-                        %a{href: "/auth/facebook"} Log In
-
+                        /%a{href: "/auth/facebook"} Log In
+                        %a.login-link{href: url_for(controller: :login, action: :index)} Log In
             %form#top-search-form.navbar-form.navbar-right{role: 'search', action: 'http://www.google.com/search'}
                 .form-group
                     %input{type: 'hidden', name: 'sitesearch', value: 'graveyards.com'}
