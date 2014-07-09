@@ -18,3 +18,6 @@ root.GraveyardsComPage = class GraveyardsComPage
 
     if (window.LoginLink)
       window.LoginLink.bindAll()
+
+    if (window.VisitLogger)
+      window.VisitLogger.bindAll()

@@ -3,8 +3,8 @@ class Identity < ActiveRecord::Base
 
   delegate :full_name, to: :user, allow_nil: true
 
-  def provider_icon
-    "/images/icons/32/#{self.provider}.png"
+  def provider_icon(size=32)
+    "/images/icons/#{size}/#{self.provider}.png"
   end
 
   # based on:

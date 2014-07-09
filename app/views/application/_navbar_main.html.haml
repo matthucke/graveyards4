@@ -29,8 +29,8 @@
                                 %img{src: identity.provider_icon, alt: "Logged in via #{identity.provider}"}
                                 = identity.full_name
                             %li
-                                %a{href: '#'}
-                                    Account
+                                %a{href: url_for(:controller=>:profiles, :action=>:show)}
+                                    Your Profile
                             %li.divider
                             %li
                                 %a{href: url_for(controller: :sessions, action: :destroy)} Log Out

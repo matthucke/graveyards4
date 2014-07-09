@@ -1,0 +1,27 @@
+:ruby
+    @profiled_user ||= current_user
+    @visits=@profiled_user.visits.includes(:graveyard => :county)
+    @pics=@profiled_user.photos
+
+.container
+    .col-md-8
+        %h1=@profiled_user.full_name
+
+        %table#stats-table.table
+            %tr
+                %th Graveyards visited
+                %td=@visits.length
+            %tr
+                %th Photos on #{SiteConfig.site_name}
+                %td=@pics.count
+
+
+
+    .col-md-4
+        - @profiled_user.identities.each do |identity|
+            .identity
+                %img{src: identity.provider_icon}
+                - unless identity.avatar.blank?
+                    %img{src: identity.avatar}
+
+

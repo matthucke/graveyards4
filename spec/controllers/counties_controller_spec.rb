@@ -41,11 +41,44 @@ describe CountiesController do
   end
 
   describe "GET show" do
-    it "assigns the requested county as @county" do
-      county = County.create! valid_attributes
-      get :show, {:state => county.state.path, :county=>county.path}, valid_session
-      expect(request.path).to be == '/Illinois/Pangaea'
-      expect(assigns :county).to be == county
+    before do
+      @county = FactoryGirl.create(:pangaea)
+      9.times {
+        @county.graveyards << create(:graveyard, :county=>@county)
+      }
     end
+
+    it "assigns the requested county as @county" do
+      get :show, {:state => @county.state.path, :county=>@county.path}, valid_session
+      expect(request.path).to be == '/Illinois/Pangaea'
+      expect(assigns :county).to be == @county
+    end
+
+    it "assigns graveyards" do
+      get :show, {:state => @county.state.path, :county=>@county.path}, valid_session
+      expect(assigns(:graveyards)).to_not be_nil
+      expect(assigns(:graveyards).length).to be == 9
+    end
+
+    context "with a user" do
+      before {
+        @user = FactoryGirl.create(:user)
+        session[:identity_id] = @user.identities.first.id
+      }
+
+      it "sets user" do
+        get :show, {:state => @county.state.path, :county=>@county.path}, valid_session
+        expect(assigns :current_user).to be == @user
+      end
+
+      it "sets visits" do
+        get :show, {:state => @county.state.path, :county=>@county.path}, valid_session
+        expect(assigns(:visits)).to_not be_nil
+        expect(assigns(:visits)).to be_kind_of(UserVisitsCollection)
+        expect(assigns(:visits).visits).to be_kind_of(Hash)
+      end
+    end
+
   end
+
 end

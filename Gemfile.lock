@@ -65,6 +65,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faker (1.4.1)
+      i18n (~> 0.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     geokit (1.8.4)
@@ -237,6 +239,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   draper
   factory_girl_rails
+  faker
   geokit-rails
   haml-rails
   haversine

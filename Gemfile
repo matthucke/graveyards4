@@ -50,7 +50,9 @@ group :development, :test do
   gem 'better_errors'
   gem 'meta_request'
   gem 'binding_of_caller'
+  gem 'faker'
 end
+
 
 gem 'haversine' # for distance between coordinates
 # gem 'geo_location'

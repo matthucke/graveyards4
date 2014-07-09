@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resource :profile
+
   get 'book/:id' => 'book#show'
   get 'book' => 'book#index'
 

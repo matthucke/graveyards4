@@ -37,6 +37,8 @@ body  {
 }
 #top-avatar {
   margin: -8px 0 -10px;
+  max-height: 50px;
+  max-width: 50px;
 }
 
 .navbar, .navbar-inverse, .navbar-nav, .navbar-form, .navbar .navbar-collapse {

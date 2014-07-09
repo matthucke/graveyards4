@@ -3,15 +3,15 @@
 FactoryGirl.define do
   factory :graveyard do
     feature_type 1
-    county nil
+    # county nil
     status 1
-    name "MyString"
-    path "MyString"
-    lat "9.99"
-    lng "9.99"
-    year_started 1
-    usgs_id 1
-    usgs_map "MyString"
-    homepage "MyString"
+    name { "St. #{Faker::Name.first_name} Cemetery" }
+    # path "MyString"
+    lat { (39.0 + 3.0 * Random.rand) }
+    lng { -(85.0 + 3.0 * Random.rand) }
+    year_started 1850
+    # usgs_id 1
+    # usgs_map "MyString"
+    # homepage "MyString"
   end
 end

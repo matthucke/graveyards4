@@ -22,6 +22,8 @@ class CountiesController < ApplicationController
     breadcrumbs.here.title = @county.fancy_name_with_state.to_s + " Cemeteries"
 
     @graveyards = @county.graveyards.order(:name).includes(:county, :main_photo)
+    @visits=UserVisitsCollection.new(current_user)
+    @visits.add_graveyards(@graveyards)
   end
 
 end

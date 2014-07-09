@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "partials/base";
+
 #county-header {
   nav {
     .btn {
@@ -21,3 +23,33 @@
 
 #counties-show {
 }
+
+
+$VISIT_COLOUR: #daa520; /* goldenrod */
+$NO_VISIT_COLOUR: #aaa; /* light grey */
+
+.cell.visited {
+  border-color: black;
+  background:  #ffa;
+  .cell-bottom  { color: $brand-primary * 0.5;  }
+  a.visit-details {
+    color: $VISIT_COLOUR;
+  }
+}
+
+#symbol-key {
+  ul {
+    margin: 4px; padding: 0;
+    font-size: 16px; list-style-type: none; text-align: left !important;
+    li { padding: 2px 0;}
+  }
+  li.visited { color: $VISIT_COLOUR }
+  li.not-visited { color: $NO_VISIT_COLOUR; }
+}
+
+.cell.not-visited {
+  a.visit-details {
+    color: $NO_VISIT_COLOUR;
+  }
+}
+
