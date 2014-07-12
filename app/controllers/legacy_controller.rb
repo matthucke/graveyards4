@@ -2,12 +2,20 @@ class LegacyController < ApplicationController
   # Handles old URLs like:
   # http://dev.graveyards.com/graveyards/MO/St._Louis_City/Bellefontaine.kml
   def show
+    if id=params[:id]
+      if id.to_i > 0
+        if @graveyard = Graveyard.find(id) rescue nil
+          return redirect_to(@graveyard.to_url, :status =>301)
+        end
+      end
+    end
+
     (state_path, county_path, grave_path) = params[:path].to_s.split('/', 3)
 #    raise "ST=#{state_path} C=#{county_path} GN=#{grave_path}"
 
     (grave_path, fmt) = grave_path.to_s.split('.', 2)
 
-    raise ActionController::RoutingError if state_path.blank?
+    raise ActionController::RoutingError.new("bad graveyard path: #{grave_path}") if state_path.blank?
 
     if @state =find_state(state_path)
       if @county = find_county(@state, county_path)
