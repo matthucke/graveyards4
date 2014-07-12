@@ -36,7 +36,7 @@
 
         - @graveyards.each do |g|
             - pic = g.main_photo
-            - klasses = [ 'cell', pic ? 'with-pix' : 'no-pix' ]
+            - klasses = [ 'graveyard', 'cell', pic ? 'with-pix' : 'no-pix' ]
             - visit = @visits.visit_for(g)
             - status = visit ? visit.status : nil
             - klasses.push(visit ? "visits-#{status}" : 'visits-none') if current_user

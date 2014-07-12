@@ -1,7 +1,20 @@
 // Place all the styles related to the visits controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'partials/base';
+
 a.use-date {
   white-space: nowrap;
   margin: 4px;
+}
+
+.visit-list {
+  .county-header {
+    th { color: #bbb; }
+    a { color: white !important }
+    background: $brand-primary;
+  }
+  .grave-row {
+    .name { padding-left: 20px; }
+  }
 }

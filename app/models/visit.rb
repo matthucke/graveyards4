@@ -2,6 +2,8 @@ class Visit < ActiveRecord::Base
   belongs_to :user
   belongs_to :graveyard
 
+  delegate :county, :county_id, :name, :state_id, :state, to: :graveyard
+
   VISITED='visited'
   TODO='todo'
 
@@ -15,9 +17,13 @@ class Visit < ActiveRecord::Base
     0 => 'Private - Only you can see this'
   }
 
+  def todo?
+    status == TODO
+  end
+
   # status, nounified
   def what
-    status == TODO ? 'todo' : 'visit'
+    todo? ? 'todo' : 'visit'
   end
 
   # A very brief description for link tooltip text

@@ -33,19 +33,32 @@ $NO_VISITED_COLOUR: #aaa; /* light grey */
   border-color: black;
   background:  #ffa;
   .cell-bottom  { color: $brand-primary * 0.5;  }
-  a.visit-details {
-    color: $VISITED_COLOUR;
-  }
 }
 
 .cell.visits-todo {
   border-color: black;
   background:  #def;
   .cell-bottom  { color: $TODO_COLOUR;  }
-  a.visit-details {
-    color: $TODO_COLOUR;
-  }
 }
+.graveyard.visits-none {
+}
+
+/* the link colours are used on counties/index and on /visits */
+.visits-none a.visit-details  {
+  color: $NO_VISITED_COLOUR;
+}
+
+.visits-todo a.visit-details {
+  color: $TODO_COLOUR;
+}
+.visits-visited a.visit-details {
+  color: $VISITED_COLOUR;
+}
+
+/* used in symbol key and in the popup form */
+li.visits-visited, .flag-visits-visited { color: $VISITED_COLOUR; }
+li.visits-todo, .flag-visits-todo { color: $TODO_COLOUR; }
+li.visits-none { color: $NO_VISITED_COLOUR; }
 
 #symbol-key {
   ul {
@@ -53,14 +66,7 @@ $NO_VISITED_COLOUR: #aaa; /* light grey */
     font-size: 16px; list-style-type: none; text-align: left !important;
     li { padding: 2px 0;}
   }
-  li.visits-visited { color: $VISITED_COLOUR; }
-  li.visits-todo { color: $TODO_COLOUR; }
-  li.visits-none { color: $NO_VISITED_COLOUR; }
 }
 
-.cell.visits-none {
-  a.visit-details {
-    color: $NO_VISITED_COLOUR;
-  }
-}
+
 

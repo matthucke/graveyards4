@@ -38,8 +38,9 @@
 
                 - Visit::STATUS_OPTIONS.each_pair do |val, text|
                     .field.form-group
-                        %label
+                        %label{class: "flag-visits-#{val}"}
                             = f.radio_button :status, val
+                            %span.glyphicon.glyphicon-flag
                             = text
 
             .col-sm-6

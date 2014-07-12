@@ -1,27 +1,58 @@
-%h1 Listing visits
+:ruby
+    tabs = {
+        visits: {
+            active: 'active',
+            title: "Visited Graveyards", list: @visits
+        },
+        todos: {
+            title: "Your To-Do List", list: @todos
+        },
+    }
 
-%table
-  %tr
-    %th User
-    %th Graveyard
-    %th Visited at
-    %th Visit type
-    %th Notes
-    %th
-    %th
-    %th
+%h1 Your Graveyard Visits and To-Dos
 
-  - @visits.each do |visit|
-    %tr
-      %td= visit.user
-      %td= visit.graveyard
-      %td= visit.visited_on
-      %td= visit.status
-      %td= visit.notes
-      %td= link_to 'Show', visit
-      %td= link_to 'Edit', edit_visit_path(visit)
-      %td= link_to 'Destroy', visit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%ul.nav.nav-tabs{role: 'tablist'}
+    - tabs.each_pair do |tab_id, tab_info|
+        - list = tab_info[:list]
+        %li{:class=> tab_info[:active]}
+            %a.tab-link{href: "##{tab_id}", role: 'tab', "data-toggle"=>'tab' }
+                =tab_info[:title]
+                %em="(#{list.length})"
 
-%br
+.tab-content
+    - tabs.each_pair do |tab_id, tab_info|
+        - list = tab_info[:list]
+        - groups = group_by_county(list)
+        %div{:class=>"tab-pane #{tab_info[:active]}", id: tab_id}
 
-= link_to 'New Visit', new_visit_path
+            %p
+                To record your
+                %b Visits
+                or
+                %b To-Dos,
+                go to the county pages under
+                %a{href: url_for(controller: :graveyards)} Cemetery Lists
+                and click the flags under each entry.
+
+            %table.table.visit-list
+                - groups.each_pair do |county, group|
+                    - next if ! county
+                    %tr.county-header
+                        %th
+                            %a{href: county.to_url}=county.fancy_name_with_state
+                        %th Latitude
+                        %th Longitude
+                        %th Topo Map
+                    - group.each do |visit|
+                        - graveyard=visit.graveyard.decorate
+                        %tr{id: "g#{graveyard.id}", class: "graveyard grave-row visits-#{visit.status}"}
+                            %td.name
+                                %a.visit-details{href: '#'}
+                                    %span.glyphicon.glyphicon-flag
+                                %a{href: graveyard.to_url}=graveyard.name
+                            %td.lat= graveyard.lat_or_unknown
+                            %td.lng= graveyard.lng_or_unknown
+                            %td.usgs= graveyard.usgs_map
+
+
+

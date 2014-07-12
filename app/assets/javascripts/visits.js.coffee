@@ -1,13 +1,13 @@
 
 root = (exports ? this)
 
+## MULTIPLE CLASSES ARE DEFINED IN THIS FILE ##
+
 root.VisitLogger = class VisitLogger extends AjaxForm
   constructor: (@link) ->
     @$link= $(link)
-    @$cell = @$link.parents('.cell')
-    @graveyard_id = @$cell.attr('data-location-id')
-
-    window.VISITOR = this # FIXME
+    @$cell = @$link.parents('.graveyard')
+    @graveyard_id = (""+@$cell.attr('id')).replace('g', '')
 
   handleClick: ->
     unless (@graveyard_id)
@@ -81,7 +81,6 @@ root.DeleteVisitWidget = class DeleteVisitWidget  extends AjaxForm
       return
     this.bindForm()
     this.confirmChanged()
-    window.DELETER=this
 
   bindForm: ->
     @$confirm = $('#confirm-delete-visit').change => this.confirmChanged()

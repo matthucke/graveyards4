@@ -4,9 +4,16 @@ class VisitsController < ApplicationController
   # GET /visits
   # GET /visits.json
   def index
-    return redirect_to '/'
-    @visits = Visit.where(user_id: current_user!.id)
-      .includes(graveyard: :county)
+    if current_user
+      all_visits = Visit.where(user_id: current_user.id)
+        .includes(graveyard: :county).select(&:county)
+
+      @visits = all_visits.reject(&:todo?)
+      @todos = all_visits.select(&:todo?)
+
+    else
+      redirect_to '/'
+    end
   end
 
   # GET /visits/1
