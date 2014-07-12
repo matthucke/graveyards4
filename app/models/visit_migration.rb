@@ -7,7 +7,7 @@ class VisitMigration < ActiveRecord::Base
         user_id: 1,
         graveyard_id: graveyard_id,
         visited_at: (Date.parse(visitdate) rescue nil),  # dates like 11-jul-2003
-        visit_type: visited,
+        status: visited,
         notes: "import:#{visited};#{visitdate}"
     )
     #  VisitMigration.order(:graveyard_id).map(&:to_visit).map(&:save)

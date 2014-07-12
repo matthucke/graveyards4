@@ -15,6 +15,7 @@
  *= require jquery.ui.resizable
  *= require jquery.ui.selectable
  *= require jquery.ui.dialog
+ #= require jquery.ui.datepicker
  *= require_tree .
  *= require_self
  */

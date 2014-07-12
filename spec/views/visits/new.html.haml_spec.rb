@@ -5,7 +5,7 @@ describe "visits/new" do
     assign(:visit, stub_model(Visit,
       :user => nil,
       :graveyard => nil,
-      :visit_type => 1,
+      :status => 1,
       :notes => "MyText"
     ).as_new_record)
   end
@@ -17,7 +17,7 @@ describe "visits/new" do
     assert_select "form[action=?][method=?]", visits_path, "post" do
       assert_select "input#visit_user[name=?]", "visit[user]"
       assert_select "input#visit_graveyard[name=?]", "visit[graveyard]"
-      assert_select "input#visit_visit_type[name=?]", "visit[visit_type]"
+      assert_select "input#visit_status[name=?]", "visit[status]"
       assert_select "textarea#visit_notes[name=?]", "visit[notes]"
     end
   end

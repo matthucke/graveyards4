@@ -24,18 +24,22 @@
             .cell#symbol-key
                 .cell-bottom
                     %ul.symbol-key
-                        %li.visited
+                        %li.visits-visited
                             %span.glyphicon.glyphicon-flag
                             you've visited
-                        %li.not-visited
+                        %li.visits-none
                             %span.glyphicon.glyphicon-flag
                             not visited
+                        %li.visits-todo
+                            %span.glyphicon.glyphicon-flag
+                            your to-do list
 
         - @graveyards.each do |g|
             - pic = g.main_photo
-            - visit = @visits.visit_for(g)
             - klasses = [ 'cell', pic ? 'with-pix' : 'no-pix' ]
-            - klasses.push(visit ? 'visited' : 'not-visited') if current_user
+            - visit = @visits.visit_for(g)
+            - status = visit ? visit.status : nil
+            - klasses.push(visit ? "visits-#{status}" : 'visits-none') if current_user
             %div{class: klasses, data: { location_id: g.id }, id: "g#{g.id}" }
                 - if pic
                     .cell-top
@@ -50,12 +54,14 @@
                             photos not available
                     .cell-tools
                         - if current_user
-                            // later use glyphicon-pushpin to add to one's to-do list
-                            - if visit
-                                %a.visit-details{href: '#', title: "You visited this location #{visit.visited_at}"}
+                            - if status == 'todo'
+                                %a.visit-details{href: '#', title: "On your To-Do list"}
+                                    %span.glyphicon.glyphicon-flag
+                            - elsif ! status.blank?
+                                %a.visit-details{href: '#', title: "You visited this location #{visit.visited_on}"}
                                     %span.glyphicon.glyphicon-flag
                             - else
-                                %a.visit-details{href: '#', title: "Not visited - click to add to your list."}
+                                %a.visit-details{href: '#', title: "Not visited - click to add to your lists."}
                                     %span.glyphicon.glyphicon-flag
         .clear
     .clear

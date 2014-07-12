@@ -1,0 +1,18 @@
+#delete-area
+    = form_for(@visit, method: :delete, html: { id: 'delete-visit'}) do |f|
+        - what = @visit.what.titlecase
+        %h2 Or, Delete Your #{what} Record
+
+        .row
+            .col-sm-6
+                %p Made a mistake or just want to delete this entry?
+
+            .col-sm-6
+                .field.form-group
+                    %label.red
+                        %input#confirm-delete-visit{name: :confirm, type: :checkbox, value: 'yes'}
+                        Yes, delete this #{what}.
+                = f.submit "Delete #{what}", :class=>'btn btn-danger', :disabled=>true
+
+        .red
+

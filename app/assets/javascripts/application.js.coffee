@@ -15,6 +15,7 @@
 #= require jquery.ui.draggable
 #= require jquery.ui.effect.all
 #= require jquery.ui.dialog
+#= require jquery.ui.datepicker
 #= require bootstrap/affix
 #= require bootstrap/alert
 #= require bootstrap/button
@@ -28,7 +29,10 @@
 #= require bootstrap/tooltip
 #= require bootstrap/popover
 #= # require turbolinks
+#= require_tree ./libs
 #= require_tree .
+
+_.mixin(_.string.exports());
 
 $ ->
   (exports ? window).page = new GraveyardsComPage().init();

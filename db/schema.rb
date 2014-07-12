@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706221001) do
+ActiveRecord::Schema.define(version: 20140710174752) do
 
   create_table "book_chapters", force: true do |t|
     t.string   "qr_code",      limit: 30
@@ -196,11 +196,13 @@ ActiveRecord::Schema.define(version: 20140706221001) do
   create_table "visits", force: true do |t|
     t.integer  "user_id"
     t.integer  "graveyard_id"
-    t.date     "visited_at"
-    t.integer  "visit_type"
+    t.date     "visited_on"
+    t.integer  "quality"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",       limit: 10, default: "visited"
+    t.integer  "visibility",              default: 1000
   end
 
   add_index "visits", ["graveyard_id"], name: "index_visits_on_graveyard_id", using: :btree

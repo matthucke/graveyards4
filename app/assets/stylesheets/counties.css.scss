@@ -25,15 +25,25 @@
 }
 
 
-$VISIT_COLOUR: #daa520; /* goldenrod */
-$NO_VISIT_COLOUR: #aaa; /* light grey */
+$VISITED_COLOUR: #daa520; /* goldenrod */
+$TODO_COLOUR: darkblue;
+$NO_VISITED_COLOUR: #aaa; /* light grey */
 
-.cell.visited {
+.cell.visits-visited {
   border-color: black;
   background:  #ffa;
   .cell-bottom  { color: $brand-primary * 0.5;  }
   a.visit-details {
-    color: $VISIT_COLOUR;
+    color: $VISITED_COLOUR;
+  }
+}
+
+.cell.visits-todo {
+  border-color: black;
+  background:  #def;
+  .cell-bottom  { color: $TODO_COLOUR;  }
+  a.visit-details {
+    color: $TODO_COLOUR;
   }
 }
 
@@ -43,13 +53,14 @@ $NO_VISIT_COLOUR: #aaa; /* light grey */
     font-size: 16px; list-style-type: none; text-align: left !important;
     li { padding: 2px 0;}
   }
-  li.visited { color: $VISIT_COLOUR }
-  li.not-visited { color: $NO_VISIT_COLOUR; }
+  li.visits-visited { color: $VISITED_COLOUR; }
+  li.visits-todo { color: $TODO_COLOUR; }
+  li.visits-none { color: $NO_VISITED_COLOUR; }
 }
 
-.cell.not-visited {
+.cell.visits-none {
   a.visit-details {
-    color: $NO_VISIT_COLOUR;
+    color: $NO_VISITED_COLOUR;
   }
 }
 

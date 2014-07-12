@@ -6,13 +6,13 @@ describe "visits/index" do
       stub_model(Visit,
         :user => nil,
         :graveyard => nil,
-        :visit_type => 1,
+        :status => 1,
         :notes => "MyText"
       ),
       stub_model(Visit,
         :user => nil,
         :graveyard => nil,
-        :visit_type => 1,
+        :status => 1,
         :notes => "MyText"
       )
     ])

@@ -1,7 +1,11 @@
-%h1 Editing visit
+%h2
+    .overhead Edit your Visit Record
+    = @graveyard.name
+
+%p
+    This lets you record the fact that you've been to this cemetery
+    at least once - or intend to in the future.
+    You'll be able to see at a glance which graveyards you've visited.
 
 = render 'form'
-
-= link_to 'Show', @visit
-\|
-= link_to 'Back', visits_path
+= render 'delete_form'

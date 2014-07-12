@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
     response.headers['Content-Disposition'] = 'attachment; filename="' + filename
   end
 
-
-  protected
+protected
 
   def breadcrumb_init
     @breadcrumbs = BreadcrumbTrail.new(request)
@@ -60,6 +59,11 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
+  def current_user!(msg=nil)
+    msg ||= "You must be logged in to use this feature."
+    current_user or raise msg
+  end
+
   def identity
     unless @identity
       if iid = session[:identity_id]
@@ -74,4 +78,21 @@ class ApplicationController < ActionController::Base
       @page_meta = PageMeta.new(request)
     end
   end
+
+  # Allow user to override layout via layout=[something] param.
+  def render_with_selected_layout(*args)
+    if layout = allowed_layout
+      args.push({}) unless args.last.is_a?(Hash)
+      args.last[:layout] = layout
+    end
+    render *args
+  end
+
+  def allowed_layout
+    layouts = [ 'application', 'modal']
+
+    l = params[:layout] or return false
+    return layouts.index(l) ? l : false
+  end
+
 end
