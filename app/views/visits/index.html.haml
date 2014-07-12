@@ -24,35 +24,36 @@
         - list = tab_info[:list]
         - groups = group_by_county(list)
         %div{:class=>"tab-pane #{tab_info[:active]}", id: tab_id}
-
-            %p
-                To record your
-                %b Visits
-                or
-                %b To-Dos,
-                go to the county pages under
-                %a{href: url_for(controller: :graveyards)} Cemetery Lists
-                and click the flags under each entry.
-
-            %table.table.visit-list
-                - groups.each_pair do |county, group|
-                    - next if ! county
-                    %tr.county-header
-                        %th
-                            %a{href: county.to_url}=county.fancy_name_with_state
-                        %th Latitude
-                        %th Longitude
-                        %th Topo Map
-                    - group.each do |visit|
-                        - graveyard=visit.graveyard.decorate
-                        %tr{id: "g#{graveyard.id}", class: "graveyard grave-row visits-#{visit.status}"}
-                            %td.name
-                                %a.visit-details{href: '#'}
-                                    %span.glyphicon.glyphicon-flag
-                                %a{href: graveyard.to_url}=graveyard.name
-                            %td.lat= graveyard.lat_or_unknown
-                            %td.lng= graveyard.lng_or_unknown
-                            %td.usgs= graveyard.usgs_map
+            .container
+                .row
+                    %p
+                        To record your
+                        %b Visits
+                        or
+                        %b To-Dos,
+                        go to the county pages under
+                        %a{href: url_for(controller: :graveyards)} Cemetery Lists
+                        and click the flags under each entry.
+                .row
+                    %table.table.visit-list
+                        - groups.each_pair do |county, group|
+                            - next if ! county
+                            %tr.county-header
+                                %th
+                                    %a{href: county.to_url}=county.fancy_name_with_state
+                                %th Latitude
+                                %th Longitude
+                                %th Topo Map
+                            - group.each do |visit|
+                                - graveyard=visit.graveyard.decorate
+                                %tr{id: "g#{graveyard.id}", class: "graveyard grave-row visits-#{visit.status}"}
+                                    %td.name
+                                        %a.visit-details{href: '#'}
+                                            %span.glyphicon.glyphicon-flag
+                                        %a{href: graveyard.to_url}=graveyard.name
+                                    %td.lat= graveyard.lat_or_unknown
+                                    %td.lng= graveyard.lng_or_unknown
+                                    %td.usgs= graveyard.usgs_map
 
 
 

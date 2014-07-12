@@ -33,7 +33,8 @@
                             -#        Your Profile
                             %li
                                 %a{href: url_for(controller: :visits, action: :index)}
-                                    Graveyards Visited
+                                    %span.glyphicon.glyphicon-flag
+                                    Graveyards You've Visited
                             %li.divider
                             %li
                                 %a{href: url_for(controller: :sessions, action: :destroy)} Log Out
