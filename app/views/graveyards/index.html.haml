@@ -31,28 +31,4 @@
         - columns.each do |state_list|
             .col-md-6
                 - state_list.each do |state|
-                    %h1=state.name
-
-                    %ul.cemetery-list
-                        - state.counties.sort_by(&:name).each do |c|
-                            %li
-                                %a{href: c.to_url, :title=>"#{c.fancy_name_with_state} Cemetery List and Photos"}
-                                    = "#{c.fancy_name_with_state} Cemeteries"
-                                =raw '&mdash;'
-                                - if current_user && @visit_summary
-                                    - if s = @visit_summary.get(c.id)
-                                        - if s.visited.to_i > 0
-                                            %span.flag-visits-visited
-                                                %span.glyphicon.glyphicon-flag
-                                                %strong=s.visited.to_i
-                                        - else
-                                            %span.flag-visits-none
-                                                %span.glyphicon.glyphicon-flag
-                                                %strong=0
-                                        - if (todo=s.todo.to_i) > 0
-                                            %span.flag-visits-todo
-                                                %span.glyphicon.glyphicon-flag
-                                                %strong=todo.to_i
-                                    %em="/ #{c.graveyards_count}"
-                                - else
-                                    %em=c.graveyards_count
+                    = render partial: "graveyards/state_index_table", locals: { state: state }
