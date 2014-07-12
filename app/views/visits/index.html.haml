@@ -1,10 +1,10 @@
 :ruby
     tabs = {
-        visits: {
+        visited: {
             active: 'active',
             title: "Visited Graveyards", list: @visits
         },
-        todos: {
+        todo: {
             title: "Your To-Do List", list: @todos
         },
     }
@@ -17,6 +17,7 @@
         %li{:class=> tab_info[:active]}
             %a.tab-link{href: "##{tab_id}", role: 'tab', "data-toggle"=>'tab' }
                 =tab_info[:title]
+                %span{:class => "glyphicon glyphicon-flag flag-visits-#{tab_id}"}
                 %em="(#{list.length})"
 
 .tab-content

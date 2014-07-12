@@ -25,19 +25,16 @@
 }
 
 
-$VISITED_COLOUR: #daa520; /* goldenrod */
-$TODO_COLOUR: darkblue;
-$NO_VISITED_COLOUR: #aaa; /* light grey */
 
 .cell.visits-visited {
   border-color: black;
-  background:  #ffa;
+  background:  #def;
   .cell-bottom  { color: $brand-primary * 0.5;  }
 }
 
 .cell.visits-todo {
   border-color: black;
-  background:  #def;
+  background:  #ffa;
   .cell-bottom  { color: $TODO_COLOUR;  }
 }
 .graveyard.visits-none {
@@ -58,7 +55,7 @@ $NO_VISITED_COLOUR: #aaa; /* light grey */
 /* used in symbol key and in the popup form */
 li.visits-visited, .flag-visits-visited { color: $VISITED_COLOUR; }
 li.visits-todo, .flag-visits-todo { color: $TODO_COLOUR; }
-li.visits-none { color: $NO_VISITED_COLOUR; }
+li.visits-none, .flag-visits-none { color: $NO_VISITED_COLOUR; }
 
 #symbol-key {
   ul {

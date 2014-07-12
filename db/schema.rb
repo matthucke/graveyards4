@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710174752) do
+ActiveRecord::Schema.define(version: 20140712210101) do
 
   create_table "book_chapters", force: true do |t|
     t.string   "qr_code",      limit: 30
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(version: 20140710174752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "boundary"
-    t.string   "type_name",     default: "County"
+    t.string   "type_name",        default: "County"
     t.integer  "main_photo_id"
+    t.integer  "graveyards_count", default: 0
   end
 
   add_index "counties", ["main_photo_id"], name: "index_counties_on_main_photo_id", using: :btree

@@ -13,6 +13,9 @@ class GraveyardsController < ApplicationController
     @states = State.includes(:counties).order(:priority => :desc, :name=>:asc)
     @main_state = @states.find { |s| s.id == MAIN_STATE_ID }
 
+    # @visits will be used for county_summary
+    @visit_summary = UserVisitsSummary.new(current_user)
+
     self.page_title="Cemetery Lists"
   end
 

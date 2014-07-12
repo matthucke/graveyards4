@@ -2,7 +2,7 @@ class Graveyard < ActiveRecord::Base
   include BuildsPath
   include GraveyardPath
 
-  belongs_to :county
+  belongs_to :county, counter_cache: true
 
   has_many :visits
 

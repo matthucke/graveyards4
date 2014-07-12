@@ -63,7 +63,6 @@
             - if @breadcrumbs && !@breadcrumbs.hidden?
                 .container
                     %nav#breadcrumbs
-                        %span.separator=' > '.html_safe
                         - @breadcrumbs.parents.each do |b|
                             %a{href: b.url }=b.title
                             %span.separator=' > '.html_safe
