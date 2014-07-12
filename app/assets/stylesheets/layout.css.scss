@@ -96,15 +96,21 @@ footer {
  crowded.  Make the links at top flow onto separate lines.
  */
 @media #{$MEDIA_MD} {
+
+  // All navbar stuff including links in pulldown menu
   .navbar-nav li {
     padding: 0 8px;
     a {
-      text-align: center;
-      padding: 8px 0 0;
-      max-width: 80px;
       line-height: 1.0;
       font-size: 16px;
     }
+  }
+
+  // TOP LEVEL only
+  .navbar-nav > li > a {
+    padding: 8px 0 0;
+    text-align: center;
+    max-width: 80px;
   }
 }
 
