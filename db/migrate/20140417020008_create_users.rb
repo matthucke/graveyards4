@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :url
       t.string :username
-      t.integer :security_level
+      t.integer :security_level, :default=>0
 
       t.timestamps
     end
