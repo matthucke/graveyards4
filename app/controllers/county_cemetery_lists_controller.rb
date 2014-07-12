@@ -30,6 +30,8 @@ class CountyCemeteryListsController < ApplicationController
     breadcrumbs.here.title = "List"
 
     @graveyards = @county.graveyards.order(:name).includes(:county)
+    @visits=UserVisitsCollection.new(current_user)
+    @visits.add_graveyards(@graveyards)
 
     respond_to do |fmt|
       fmt.kml {

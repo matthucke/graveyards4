@@ -14,8 +14,12 @@
         %tbody
             - @county.graveyards.each do |g|
                 - g = g.decorate
-                %tr
+                - visit = @visits.visit_for(g)
+                - klasses = [ 'graveyard', "visits-#{visit ? visit.status : :none }"]
+                %tr{id: "g#{g.id}", class: klasses }
                     %td
+                        %a.visit-details{href: '#', title: visit ? visit.caption : nil}
+                            %span.glyphicon.glyphicon-flag
                         %a{href: g.to_url}=g.name
                     %td= g.lat_or_unknown
                     %td= g.lng_or_unknown

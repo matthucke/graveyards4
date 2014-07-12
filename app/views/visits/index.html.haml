@@ -44,6 +44,7 @@
                                 %th Latitude
                                 %th Longitude
                                 %th Topo Map
+                                %th Notes
                             - group.each do |visit|
                                 - graveyard=visit.graveyard.decorate
                                 %tr{id: "g#{graveyard.id}", class: "graveyard grave-row visits-#{visit.status}"}
@@ -54,6 +55,7 @@
                                     %td.lat= graveyard.lat_or_unknown
                                     %td.lng= graveyard.lng_or_unknown
                                     %td.usgs= graveyard.usgs_map
+                                    %td.notes=visit.notes
 
 
 
