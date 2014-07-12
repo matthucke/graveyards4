@@ -1,11 +1,13 @@
+:ruby
+    all_counties = @state.counties.sort_by(&:name)
+    columns = all_counties.in_groups(2, false)
 
 .container
     %h1=@state.name
 
 .container
-    %ul
-        - @state.counties.sort_by(&:name).each do |c|
-            %li
-                %a{href: '/'+c.full_path, :title=>"#{c.fancy_name_with_state} Cemeteries"}
-                    = c.fancy_name_with_state
-                Cemetery List
+    .row
+        - columns.each do |column|
+            .col-md-6
+                - locals = { state: @state, counties: column, name_format: "Cemeteries in %s" }
+                = render partial: "graveyards/state_index_table", locals: locals

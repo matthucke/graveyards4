@@ -1,14 +1,17 @@
--#
--# used in graveyards/index, this shows the list of counties in one state.
--#
+:ruby
+    #
+    # used in graveyards/index, this shows the list of counties in one state.
+    #
+    counties ||= state.counties.sort_by(&:name)
 
-%h1=state.name
+    # name_format lets us mix it up a bit for SEO...
+    name_format ||= "%s Cemeteries"
 
 %ul.cemetery-list
-    - state.counties.sort_by(&:name).each do |c|
+    - counties.each do |c|
         %li
             %a{href: c.to_url, :title=>"#{c.fancy_name_with_state} Cemetery List and Photos"}
-                = "#{c.fancy_name_with_state} Cemeteries"
+                = name_format % [ c.fancy_name_with_state ]
             =raw '&mdash;'
             - if current_user && @visit_summary
                 %span.nobr

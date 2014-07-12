@@ -21,6 +21,9 @@ class StatesController < ApplicationController
     breadcrumbs.add(url: '/graveyards', title: 'Cemetery Lists')
     self.page_title = "#{@state.name} Cemetery Lists"
     breadcrumbs.here.title = @state.name
+
+    # @visits will be used for county_summary
+    @visit_summary = UserVisitsSummary.new(current_user)
   end
 
 

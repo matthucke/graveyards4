@@ -31,4 +31,6 @@
         - columns.each do |state_list|
             .col-md-6
                 - state_list.each do |state|
+                    %h1=state.name
+
                     = render partial: "graveyards/state_index_table", locals: { state: state }
