@@ -30,6 +30,7 @@
 #= require bootstrap/popover
 #= # require turbolinks
 #= require_tree ./libs
+#= require tinymce-jquery
 #= require_tree .
 
 _.mixin(_.string.exports());

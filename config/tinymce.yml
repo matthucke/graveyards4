@@ -1,0 +1,14 @@
+default:
+  theme: 'modern'
+
+  plugins:
+    - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
+    - "searchreplace wordcount visualblocks visualchars code fullscreen"
+    - "insertdatetime media nonbreaking save table contextmenu directionality"
+    - "emoticons template paste textcolor"
+
+  menubar: "file edit insert view format table tools"
+  toolbar1: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+  toolbar2: "styleselect | print preview media | forecolor backcolor"
+  image_advtab: true
+  # templates:

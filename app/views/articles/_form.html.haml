@@ -37,8 +37,10 @@
             = f.text_field :path, class: 'form-control'
         .field
             = f.label :teaser, "First Paragraph"
-            = f.text_area :teaser, class: 'form-control'
+            = f.text_area :teaser, class: 'form-control tinymce'
         .field
             = f.label :body, "Below the Fold"
-            = f.text_area :body, class: 'form-control'
+            = f.text_area :body, class: 'form-control tinymce'
 
+
+= tinymce

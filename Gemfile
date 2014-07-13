@@ -70,5 +70,5 @@ gem 'settingslogic'
 
 gem 'polylines'   # for encoding of boundaries
 gem 'draper'      # decorators
-
+gem 'tinymce-rails'
 
