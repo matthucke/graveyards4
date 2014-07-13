@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
     self.security_level.to_i >= 1000
   end
 
+  def avatar
+    ident = identities.find(&:avatar)
+    ident ? ident.avatar : nil
+  end
 end

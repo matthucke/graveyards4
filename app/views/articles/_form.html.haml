@@ -1,37 +1,44 @@
-= form_for @article do |f|
-  - if @article.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
-      %ul
-        - @article.errors.full_messages.each do |msg|
-          %li= msg
+.container
+    = form_for @article do |f|
+        - if @article.errors.any?
+            #error_explanation
+                %h2= "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
+                %ul
+                    - @article.errors.full_messages.each do |msg|
+                        %li= msg
+        .row
+            .col-sm-6
+                .field.form-group
+                    = f.label :status
+                    = f.select :status, Article::STATUS_OPTIONS.invert, {}, class: 'form-control'
+            .col-sm-6
+                .field.form-group
+                    = f.label :section
+                    = f.select :section, Article::SECTIONS.invert, {}, class: 'form-control'
+        .row
+            .col-sm-6
+                .field.form-group
+                    = f.label :published_at
+                    %br
+                    = f.datetime_select :published_at, class: 'form-control'
+            .col-sm-6
+                .text-right
+                    = f.submit 'Save Article', class: 'btn btn-primary'
 
-  .field
-    = f.label :status
-    = f.number_field :status
-  .field
-    = f.label :section
-    = f.number_field :section
-  .field
-    = f.label :graveyard
-    = f.text_field :graveyard
-  .field
-    = f.label :author
-    = f.text_field :author
-  .field
-    = f.label :headline
-    = f.text_field :headline
-  .field
-    = f.label :path
-    = f.text_field :path
-  .field
-    = f.label :published_at
-    = f.datetime_select :published_at
-  .field
-    = f.label :teaser
-    = f.text_area :teaser
-  .field
-    = f.label :body
-    = f.text_area :body
-  .actions
-    = f.submit 'Save'
+        //.field
+        //    = f.label :graveyard
+        //    = f.text_field :graveyard
+
+        .field.form-group
+            = f.label :headline
+            = f.text_field :headline, class: 'form-control'
+        .field
+            = f.label :path
+            = f.text_field :path, class: 'form-control'
+        .field
+            = f.label :teaser, "First Paragraph"
+            = f.text_area :teaser, class: 'form-control'
+        .field
+            = f.label :body, "Below the Fold"
+            = f.text_area :body, class: 'form-control'
+

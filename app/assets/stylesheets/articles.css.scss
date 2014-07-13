@@ -1,3 +1,22 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.article-headline {
+  h2.headline { text-align: right; margin-top: 0;  }
+
+}
+
+.article-author {
+  padding-top: 0px;
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+.article-text {
+  .tools { text-align: right; }
+  .the-fold {
+    hr { width: 300px; border-top: 1px solid #ccc; margin: 8px auto; }
+  }
+}

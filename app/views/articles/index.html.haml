@@ -1,35 +1,28 @@
-%h1 Listing articles
 
-%table
-  %tr
-    %th Status
-    %th Section
-    %th Graveyard
-    %th Author
-    %th Headline
-    %th Path
-    %th Published at
-    %th Teaser
-    %th Body
-    %th
-    %th
-    %th
+.container
+    %h1="#{SiteConfig.site_name} Blog"
 
-  - @articles.each do |article|
-    %tr
-      %td= article.status
-      %td= article.section
-      %td= article.graveyard
-      %td= article.author
-      %td= article.headline
-      %td= article.path
-      %td= article.published_at
-      %td= article.teaser
-      %td= article.body
-      %td= link_to 'Show', article
-      %td= link_to 'Edit', edit_article_path(article)
-      %td= link_to 'Destroy', article, :method => :delete, :data => { :confirm => 'Are you sure?' }
+.container
+    - @articles.each do |article|
+        %article.blog-article{:id=>article.id}
+            .row.article-headline
+                %h2.headline=article.headline
+            .row
+                .col-md-3.article-author
+                    - if author=article.author
+                        - if pic=author.avatar
+                            %img.author-avatar{src: pic, alt: author.full_name}
+                        .name=author.full_name
+                        .date=article.published_at.strftime("%d %B %Y")
 
-%br
+                .col-md-9.article-text
 
-= link_to 'New Article', new_article_path
+                    .article-teaser=raw article.teaser
+                    .tools
+                        - if article.editable_by?(current_user)
+                            %a{href: url_for(action: :edit, id: article.id)} edit
+                    - unless article.teaser.blank?
+                        .the-fold
+                            %hr
+                    .article-body=raw article.body
+

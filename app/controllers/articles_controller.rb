@@ -1,21 +1,26 @@
 class ArticlesController < ApplicationController
-  before_action :require_admin, only: [ :new, :edit, :create ]
+  before_action :require_admin, only: [ :new, :edit, :create, :update, :destroy ]
+  before_action {
+    breadcrumbs.add(url: '/blog', title: 'Blog')
+  }
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all.order('id desc').limit(10)
+    @articles = Article.published.limit(10)
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    redirect_to '/' unless @article && @article.section_blog?
   end
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = Article.new(author: current_user!)
+    self.page_title = "New Article"
   end
 
   # GET /articles/1/edit
@@ -26,6 +31,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @article.author = current_user!
 
     respond_to do |format|
       if @article.save
@@ -71,7 +77,7 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:status, :section, :graveyard_id, :headline, :path, :published_at, :teaser, :body).tap do |a|
-        a.author_id = current_user!.id
+        # a.author_id = current_user!.id
       end
     end
 end

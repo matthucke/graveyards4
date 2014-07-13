@@ -38,7 +38,9 @@
                                     Graveyards You've Visited
                             %li.divider
                             %li
-                                %a{href: url_for(controller: :sessions, action: :destroy)} Log Out
+                                %a{href: url_for(controller: :sessions, action: :destroy)}
+                                    %span.glyphicon.glyphicon-log-out
+                                    Log Out
 
                 - else
                     %li
