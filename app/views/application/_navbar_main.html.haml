@@ -12,9 +12,16 @@
                 %li
                     %a{href: '/graveyards' } Cemetery Lists
                 %li
-                    %a{href: '/featured' } Featured Sites
+                    %a{href: '/blog' } Blog
+                %li.dropdown
+                    %a.dropdown-toggle{href: '#', 'data-toggle'=>'dropdown'}
+                        Features
+                        %span.caret
+                    %ul.dropdown-menu{role: 'menu'}
+                        %li
+                            %a{href: '/featured' } Featured Sites
                 %li
-                    %a{href: "/book"} The Book
+                    %a{href: "/book"} Book
                 - if identity=current_identity
                     %li.dropdown
                         %a.dropdown-toggle{href: '#', 'data-toggle'=>'dropdown'}

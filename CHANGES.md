@@ -2,6 +2,18 @@
 graveyards4
 ===========
 
+### 4.0.4 (2014-07-13)
+
+- added /blog, and Article object to provide its content
+- mapped route /graveyard?id=XXX to Legacy controller (thus release 4.0.4 diminishes 404s).
+
+### 4.0.3 (2014-07-12)
+
+- supports login via Facebook, Twitter, Google+
+- allows logged-in users to register Visits and Todos for each cemetery
+- scss constructs for easier media queries
+- layout tweaks, including changing menu break point
+
 ### 4.0.2 (2014-05-31)
 
 - add cemetery list feature (tabular layout)
