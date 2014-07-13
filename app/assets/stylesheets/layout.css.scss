@@ -25,6 +25,25 @@ body  {
   padding-top: 8px;
 }
 
+.inverse {
+  color: white;
+  // background: url(/images/backgrounds/dkmarble.jpg);
+}
+
+.navbar .caret {
+  font-size: 200%;
+}
+
+.navbar-inverse {
+  background: url(/images/backgrounds/dkmarble.jpg);
+}
+.navbar, .navbar-inverse, .navbar-nav, .navbar-form, .navbar .navbar-collapse {
+  //
+}
+
+.in .navbar-nav {
+
+}
 
 @media (min-width: 992px) {
   .navbar-brand {
@@ -35,20 +54,14 @@ body  {
     padding: 12px;
   }
 }
+
 #top-avatar {
   margin: -8px 0 -10px;
   max-height: 50px;
   max-width: 50px;
 }
 
-.navbar, .navbar-inverse, .navbar-nav, .navbar-form, .navbar .navbar-collapse {
-  background: url(/images/backgrounds/dkmarble.jpg);
-}
 
-.inverse {
-  color: white;
-  background: url(/images/backgrounds/dkmarble.jpg);
-}
 
 #top-search-form {
   #top-search-field { max-width: 150px; }
@@ -116,4 +129,13 @@ footer {
 
 .modal-body h2 {
   margin-top: 0;
+}
+
+/* flash area.  #status-messages is always present, even if empty */
+#status-messages > div {
+  font-size: 24px;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: 1px solid #888;
+  background: #eee;
 }

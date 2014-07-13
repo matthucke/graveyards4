@@ -26,8 +26,9 @@
                             %span.caret
                         %ul.dropdown-menu{role: 'menu'}
                             %li.p1
-                                %img{src: identity.provider_icon, alt: "Logged in via #{identity.provider}"}
-                                = identity.full_name
+                                %a{href: '#'}
+                                    %img{src: identity.provider_icon, alt: "Logged in via #{identity.provider}"}
+                                    = identity.full_name
                             -#%li
                             -#     %a{href: url_for(controller: :profiles, action: :show)}
                             -#        Your Profile

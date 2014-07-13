@@ -41,6 +41,6 @@ class Visit < ActiveRecord::Base
   def visible_to?(user)
     return false unless user
 
-    (user.id == self.user_id) || (user.is_admin?)
+    (user.id == self.user_id) || (user.admin?)
   end
 end

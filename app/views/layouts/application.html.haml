@@ -69,6 +69,10 @@
                         - @breadcrumbs.here.tap do |b|
                             %strong= b.title ? b.title : @page_title
                             %span.separator=': '.html_safe
+            #status-messages.container
+                - flash.each do |name, msg|
+                    %div{:class=>name}=msg
+
             %main#main-content
                 = yield
 

@@ -43,7 +43,12 @@ protected
   end
 
   def require_admin
-    raise "admin login not supported yet"
+    current_user.tap do |u|
+      unless u && u.admin?
+        flash[:error] = "This action is restricted to admin users only."
+        redirect_to root_path
+      end
+    end
   end
 
   def not_found

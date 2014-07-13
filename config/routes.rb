@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :articles, path: 'blog' do
+
+  end
+
   resources :login, :only => [ :index ]
 
   resources :visits

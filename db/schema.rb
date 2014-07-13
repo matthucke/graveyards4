@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712210101) do
+ActiveRecord::Schema.define(version: 20140713000419) do
+
+  create_table "articles", force: true do |t|
+    t.integer  "status",       default: 0
+    t.integer  "section",      default: 1
+    t.integer  "graveyard_id"
+    t.integer  "author_id"
+    t.string   "headline"
+    t.string   "path"
+    t.datetime "published_at"
+    t.text     "teaser"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["author_id"], name: "index_articles_on_author_id", using: :btree
+  add_index "articles", ["graveyard_id"], name: "index_articles_on_graveyard_id", using: :btree
 
   create_table "book_chapters", force: true do |t|
     t.string   "qr_code",      limit: 30
