@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713000419) do
+ActiveRecord::Schema.define(version: 20140714034005) do
 
   create_table "articles", force: true do |t|
     t.integer  "status",       default: 0
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20140713000419) do
 
   add_index "counties", ["main_photo_id"], name: "index_counties_on_main_photo_id", using: :btree
   add_index "counties", ["state_id"], name: "index_counties_on_state_id", using: :btree
+
+  create_table "expeditions", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.date     "started_on"
+    t.date     "ended_on"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "expeditions", ["user_id"], name: "index_expeditions_on_user_id", using: :btree
 
   create_table "featured_sites", force: true do |t|
     t.string   "section"
@@ -197,7 +209,7 @@ ActiveRecord::Schema.define(version: 20140713000419) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "full_name"
-    t.integer  "security_level"
+    t.integer  "security_level", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
@@ -219,10 +231,13 @@ ActiveRecord::Schema.define(version: 20140713000419) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",       limit: 10, default: "visited"
-    t.integer  "visibility",              default: 1000
+    t.string   "status",        limit: 10, default: "visited"
+    t.integer  "visibility",               default: 1000
+    t.integer  "ordinal"
+    t.integer  "expedition_id"
   end
 
+  add_index "visits", ["expedition_id"], name: "index_visits_on_expedition_id", using: :btree
   add_index "visits", ["graveyard_id"], name: "index_visits_on_graveyard_id", using: :btree
   add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
