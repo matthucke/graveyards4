@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @expedition.user
+%p
+  %b Name:
+  = @expedition.name
+%p
+  %b Started on:
+  = @expedition.started_on
+%p
+  %b Ended on:
+  = @expedition.ended_on
+%p
+  %b Notes:
+  = @expedition.notes
+
+= link_to 'Edit', edit_expedition_path(@expedition)
+\|
+= link_to 'Back', expeditions_path

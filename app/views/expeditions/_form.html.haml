@@ -1,0 +1,25 @@
+= form_for @expedition do |f|
+  - if @expedition.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@expedition.errors.count, "error")} prohibited this expedition from being saved:"
+      %ul
+        - @expedition.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :started_on
+    = f.date_select :started_on
+  .field
+    = f.label :ended_on
+    = f.date_select :ended_on
+  .field
+    = f.label :notes
+    = f.text_area :notes
+  .actions
+    = f.submit 'Save'

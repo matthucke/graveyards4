@@ -1,0 +1,27 @@
+%h1 Listing expeditions
+
+%table
+  %tr
+    %th User
+    %th Name
+    %th Started on
+    %th Ended on
+    %th Notes
+    %th
+    %th
+    %th
+
+  - @expeditions.each do |expedition|
+    %tr
+      %td= expedition.user
+      %td= expedition.name
+      %td= expedition.started_on
+      %td= expedition.ended_on
+      %td= expedition.notes
+      %td= link_to 'Show', expedition
+      %td= link_to 'Edit', edit_expedition_path(expedition)
+      %td= link_to 'Destroy', expedition, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Expedition', new_expedition_path
