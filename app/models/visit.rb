@@ -4,6 +4,8 @@ class Visit < ActiveRecord::Base
 
   delegate :county, :county_id, :name, :state_id, :state, to: :graveyard
 
+  before_validation :populate_ordinal
+
   VISITED='visited'
   TODO='todo'
 
@@ -19,6 +21,10 @@ class Visit < ActiveRecord::Base
 
   def todo?
     status == TODO
+  end
+
+  def visited?
+    status == VISITED
   end
 
   # status, nounified
@@ -42,5 +48,19 @@ class Visit < ActiveRecord::Base
     return false unless user
 
     (user.id == self.user_id) || (user.admin?)
+  end
+
+  def populate_ordinal
+    if self.visited? && ! self.ordinal && self.user
+      max = self.user.visits.visited_with_quality.select('max(ordinal) as ordinal').map(&:ordinal).last.to_i
+      count = self.user.visits.visited_with_quality.count
+
+      return self.ordinal = 1 + ((max > count) ? max : count)
+    end
+    true
+  end
+
+  def self.visited_with_quality
+    where(:status=> 'visited').where("quality >= 8")
   end
 end
