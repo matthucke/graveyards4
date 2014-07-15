@@ -22,7 +22,9 @@ ul.location-selector {
         margin: 4px 0; 
         line-height: 1.0;
         white-space: nowrap;
-    } 
+    }
+
+    a.flag-visits-none { color: #444; }
 }
 
 #map {

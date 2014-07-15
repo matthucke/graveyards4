@@ -15,9 +15,19 @@ root.GraveyardDisplay = class GraveyardDisplay
       position: @location.toLatLng()
       map: @map.googleMap()
       title: @location.name
+      icon: this.iconForLocation()
       visible: true
       clickable: true
     m
+
+  iconForLocation: ->
+    v = @location.visit
+    if v
+      if v.status == 'todo'
+        return '/images/pushpins/yellow.png'
+      else
+        return '/images/pushpins/blue.png'
+    return '/images/pushpins/red.png'
 
   makeInfoWindow: ->
     w = new google.maps.InfoWindow

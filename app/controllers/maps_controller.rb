@@ -12,10 +12,21 @@ class MapsController < ApplicationController
     @graveyards = @county.graveyards.includes(:main_photo).includes(:county)
 
     respond_to do |fmt|
+      @visits=UserVisitsCollection.new(current_user)
+      @visits.add_graveyards(@graveyards)
       fmt.json do
         render :json => {
-          :status=>:success,
-          :locations => @graveyards.sort_by(&:name).map(&:map_data)
+          status: :success,
+          locations:  @graveyards.sort_by(&:name).map(&:map_data).map { |g|
+            if v = @visits.visit_for(g[:id])
+              g[:visit] = v.as_json(:only=> [
+                  :id, :status, :visited_on,
+                  :expedition_id, :ordinal, :quality
+              ])
+            end
+            g
+          },
+          # visits: @visits
         }
       end
       fmt.html { render :action=>:index }

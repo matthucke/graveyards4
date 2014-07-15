@@ -21,7 +21,8 @@ class UserVisitsCollection
   end
 
   def visit_for(graveyard)
-    visits[graveyard.id]
+    id = graveyard.is_a?(Fixnum) ? graveyard : graveyard.id
+    visits[id]
   end
 
   def map_visits visit_list
@@ -37,6 +38,17 @@ class UserVisitsCollection
     user.visits.where(
         :graveyard_id => @graveyard_ids
     )
+  end
+
+  def as_json(*args)
+    find_visits.inject({}) do |h, v|
+      h[v.graveyard_id] = v.as_json(:only=> [
+          :id, :status, :visited_on,
+          :expedition_id, :ordinal, :quality
+      ])
+      # h[v.graveyard_id] = v.as_json
+      h
+    end
   end
 
 end

@@ -8,6 +8,7 @@ root.GraveyardLocationSelectorItem = class GraveyardLocationSelectorItem
 
   buildElement: ->
     $li = $('<li>')
+
     if @location.toLatLng()
       $li.addClass('located')
     else
@@ -16,6 +17,12 @@ root.GraveyardLocationSelectorItem = class GraveyardLocationSelectorItem
     @link = $('<a>').attr('href', @location.url).attr('id', "link-" + @location.id).text(
       @location.name
     )
+
+    if @location.visit
+      @link.addClass('flag-visits-' + @location.visit.status)
+    else
+      @link.addClass('flag-visits-none')
+
     $li.append(@link)
     $li
 

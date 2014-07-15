@@ -52,11 +52,6 @@
   color: $VISITED_COLOUR;
 }
 
-/* used in symbol key and in the popup form */
-li.visits-visited, .flag-visits-visited { color: $VISITED_COLOUR; }
-li.visits-todo, .flag-visits-todo { color: $TODO_COLOUR; }
-li.visits-none, .flag-visits-none { color: $NO_VISITED_COLOUR; }
-
 #symbol-key {
   ul {
     margin: 4px; padding: 0;
