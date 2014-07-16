@@ -1,3 +1,11 @@
 // Place all the styles related to the county_cemetery_lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.graveyard-list-table {
+  .notes {
+    padding-left: 30px;
+    font-size: 14px;
+  }
+  // td.lat, td.lng { text-align: right; }
+}

@@ -4,7 +4,7 @@
 = render :partial => "counties/county_header", :locals => { :overhead => 'List of Cemeteries in', :active=>'list'}
 
 .container
-    %table.table
+    %table.table.graveyard-list-table.tablesorter
         %thead
             %tr.headrow
                 %th Cemetery Name
@@ -21,6 +21,14 @@
                         %a.visit-details{href: '#', title: visit ? visit.caption : nil}
                             %span.glyphicon.glyphicon-flag
                         %a{href: g.to_url}=g.name
-                    %td= g.lat_or_unknown
-                    %td= g.lng_or_unknown
+                        - unless !visit || visit.notes.blank?
+                            .notes=visit.notes
+                    %td.lat
+                        %span.lat= g.lat_or_unknown
+                    %td.lng
+                        %span.lng= g.lng_or_unknown
                     %td= g.usgs_map
+
+:coffeescript
+    $ ->
+        $('.graveyard-list-table').tablesorter()

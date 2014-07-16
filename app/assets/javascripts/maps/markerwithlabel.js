@@ -80,7 +80,8 @@ $(document).ready(function() {
       // Get the DIV for the "X" to be displayed when the marker is raised.
       this.crossDiv_ = MarkerLabel_.getSharedCross(crossURL);
     }
-    inherits(MarkerLabel_, google.maps.OverlayView);
+    if (window.google)
+      inherits(MarkerLabel_, google.maps.OverlayView);
 
     /**
      * Returns the DIV for the cross used when dragging a marker when the
@@ -562,7 +563,9 @@ $(document).ready(function() {
       // that the marker label listens for in order to react to state changes.
       google.maps.Marker.apply(this, arguments);
     }
-    inherits(MarkerWithLabel, google.maps.Marker);
+
+    if (window.google)
+      inherits(MarkerWithLabel, google.maps.Marker);
 
     /**
      * Overrides the standard Marker setMap function.
