@@ -5,6 +5,7 @@ graveyards4
 ### 4.0.5 (2014-07-15)
 
 - Labels on maps, using MarkerWithLabel
+- Tablesorter on county_cemetery_lists
 
 ### 4.0.4 (2014-07-13)
 
