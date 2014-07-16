@@ -28,6 +28,7 @@ ul.location-selector {
 }
 
 #map {
+    position: relative;
     height: 400px;
     background: #ffc;
 }
@@ -38,6 +39,25 @@ ul.location-selector {
     // background: #333;
 }
 
+
+.labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     min-width: 20px;
+     border: 1px solid #fff;
+
+     // white-space: nowrap;
+    width: 60px;
+
+     z-index: 400;
+     opacity: 0.7;
+     border-radius: 4px;
+     padding: 2px 4px;
+   }
 
 #selector-wrapper {
     position: absolute;

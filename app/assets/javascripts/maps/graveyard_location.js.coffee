@@ -10,6 +10,9 @@ root.GraveyardLocation = class GraveyardLocation
   isLocated: ->
     if this.toLatLng() then true else false
 
+  shortName: ->
+    (""+this.name).replace(" Cemetery", "")
+
   toLatLng: ->
     unless @_ll
       return null if isNaN(@lat) || isNaN(@lng)

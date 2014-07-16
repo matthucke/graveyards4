@@ -16,7 +16,6 @@ root.BoundaryLine = class BoundaryLine
 
   createPolyLine: (encoded) ->
     decoded_path = google.maps.geometry.encoding.decodePath(encoded)
-    console.dir(decoded_path)
 
     path_options = {
       path: decoded_path,

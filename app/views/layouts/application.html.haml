@@ -3,6 +3,8 @@
     :ruby
         @page_title ||= "graveyards.com"
         @body_id ||= controller.controller_name + "-" + controller.action_name
+        @body_classes ||= []
+        @body_classes.push "body-#{Rails.env}"
 
     %head
         %meta{:charset => 'utf-8'}
@@ -55,7 +57,7 @@
                  ref.parentNode.insertBefore(js, ref);
             }(document, /*debug*/ false));
             //]]>
-    %body{id: @body_id, data: { spy: "scroll", offset: 0, target: "#navbar-main"} }
+    %body{id: @body_id, data: { spy: "scroll", offset: 0, target: "#navbar-main"}, class: @body_classes }
         #wrap
             #top-padding
             #fb-root

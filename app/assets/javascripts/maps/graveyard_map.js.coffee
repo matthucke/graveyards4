@@ -6,6 +6,7 @@ root.GraveyardMap = class GraveyardMap
     @$map = $('#' + @options.mapId)
     this.resizer = new GraveyardMapSizer(@$map)
 
+
   addLocations: (locations) ->
     @locations=locations
 

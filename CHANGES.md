@@ -2,6 +2,10 @@
 graveyards4
 ===========
 
+### 4.0.5 (2014-07-15)
+
+- Labels on maps, using MarkerWithLabel
+
 ### 4.0.4 (2014-07-13)
 
 - added /blog, and Article object to provide its content

@@ -11,13 +11,28 @@ root.GraveyardDisplay = class GraveyardDisplay
     this.bindMarkerClick()
 
   makemarker: ->
-    m = new google.maps.Marker
+    gmap = @map.googleMap()
+
+    # This only works if the entire markerwithlabel declaration is done on ready(),
+    # wrapped in a function, with window.MarkerWithLabel = MarkerWithLabel; at the end.
+    # Otherwise it can't inherit properly and fails silently.
+    # m = new google.maps.Marker
+    sn = @location.shortName()
+    m = new MarkerWithLabel
       position: @location.toLatLng()
-      map: @map.googleMap()
+      # map: gmap
       title: @location.name
       icon: this.iconForLocation()
       visible: true
       clickable: true
+      # draggable: true
+      labelContent: @location.shortName()
+      # labelAnchor: new google.maps.Point( (sn.length * 6) / 2, 0)
+      labelAnchor: new google.maps.Point( 30, 0)
+      labelClass: 'labels'
+      labelStyle: {  }
+
+    m.setMap(gmap)
     m
 
   iconForLocation: ->
@@ -38,6 +53,5 @@ root.GraveyardDisplay = class GraveyardDisplay
       @infowindow.open(@map.googleMap(), @marker)
 
   initTemplate: ->
-    console.log("init template")
     text = $('#info-window-template').html()
     window.graveyardDisplayTemplate = Handlebars.compile(text)
