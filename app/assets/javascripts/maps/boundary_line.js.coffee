@@ -19,9 +19,9 @@ root.BoundaryLine = class BoundaryLine
 
     path_options = {
       path: decoded_path,
-      strokeColor: "#800000",
+      strokeColor: "#000000",
       strokeOpacity: 0.5,
-      strokeWeight: 2
+      strokeWeight: 4
     }
     return new google.maps.Polyline(path_options)
 
