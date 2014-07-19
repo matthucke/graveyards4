@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719180247) do
+ActiveRecord::Schema.define(version: 20140719184959) do
 
   create_table "articles", force: true do |t|
     t.integer  "status",       default: 0
@@ -188,33 +188,35 @@ ActiveRecord::Schema.define(version: 20140719180247) do
   end
 
   create_table "photos", force: true do |t|
-    t.integer  "status",                      default: 0
+    t.integer  "status",                          default: 0
     t.integer  "user_id"
     t.integer  "approver_id"
-    t.integer  "score",                       default: 0
-    t.integer  "votes",                       default: 0
+    t.integer  "score",                           default: 0
+    t.integer  "votes",                           default: 0
     t.integer  "graveyard_id"
     t.integer  "plot_id"
     t.integer  "person_id"
     t.integer  "story_id"
     t.integer  "width"
     t.integer  "height"
-    t.string   "flags",           limit: 10,  default: ""
-    t.string   "title",           limit: 100, default: ""
-    t.string   "location",        limit: 100, default: ""
+    t.string   "flags",               limit: 10,  default: ""
+    t.string   "title",               limit: 100, default: ""
+    t.string   "location",            limit: 100, default: ""
     t.text     "caption"
-    t.string   "format",          limit: 3,   default: "jpg"
+    t.string   "format",              limit: 3,   default: "jpg"
     t.string   "upload"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "md5sum",          limit: 32
+    t.string   "md5sum",              limit: 32
     t.text     "migration_notes"
     t.integer  "migration_id"
     t.text     "old_path"
-    t.integer  "image_upload_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.string   "upload_fingerprint"
   end
-
-  add_index "photos", ["image_upload_id"], name: "index_photos_on_image_upload_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "state_code",   limit: 20
