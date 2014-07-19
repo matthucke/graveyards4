@@ -4,6 +4,8 @@
 # require 'file_utils'
 
 class Photo < ActiveRecord::Base
+  include Uploadable
+
 
   DOC_ROOT = '/www/graveyards4/htdocs'
 
@@ -14,9 +16,13 @@ class Photo < ActiveRecord::Base
   belongs_to :user #, :counter_cache=>true
   belongs_to :graveyard #, :counter_cache=>true
   belongs_to :county #, :counter_cache=>true
-  
   # belongs_to :plot
   # has_and_belongs_to_many :people
+
+  validates :graveyard_id, presence: true
+  validates :user_id, presence: true
+
+  configure_upload :upload, "#{Rails.root}/config/photo_uploads.yml"
 
   def path
     @path ||= ImagePath.new(id, image_dir, :format=>self.format)
@@ -33,15 +39,5 @@ class Photo < ActiveRecord::Base
     words.join('/')
   end
 
-  def calculate_checksum
-    Digest::MD5.file(path.physical).hexdigest
-  end
 
-  def file_contents
-    contents=nil
-    File.open(self.path.physical, "rb") do |fh|
-      contents=fh.read
-    end
-    contents
-  end
 end
