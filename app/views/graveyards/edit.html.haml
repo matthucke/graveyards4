@@ -1,7 +1,9 @@
-%h1 Editing graveyard
+%h1
+    .overhead Editing
+    = @graveyard.name
+
+%p.toolbar
+    %a{href: new_image_upload_path(:graveyard_id=>@graveyard.id)} Add Photos
 
 = render 'form'
 
-= link_to 'Show', @graveyard
-\|
-= link_to 'Back', graveyards_path

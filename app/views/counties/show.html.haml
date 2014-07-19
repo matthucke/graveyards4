@@ -11,6 +11,7 @@
 //
 :ruby
     county_name = @county.fancy_name_with_state
+    can_edit = !!admin_user
 
 = render :partial => "counties/county_header", :locals => { :overhead => 'Cemeteries and Graveyards in'}
 
@@ -63,6 +64,11 @@
                             - else
                                 %a.visit-details{href: '#', title: "Not visited - click to add to your lists."}
                                     %span.glyphicon.glyphicon-flag
+
+                            - if can_edit
+                                %a.edit-link{href: edit_graveyard_path(g)}
+                                    %span.glyphicon.glyphicon-pencil
+
         .clear
     .clear
 

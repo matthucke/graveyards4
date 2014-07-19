@@ -9,10 +9,10 @@ module BuildsPath
     '/'+url
   end
 
-  # for urls to make
-  def to_param
-    self.full_path
-  end
+  # Removed 2014-07 as it messes up edit/update paths.
+  # def to_param
+  #  self.full_path
+  # end
 
   module ClassMethods
     # Produce a clean name suitable for URLs

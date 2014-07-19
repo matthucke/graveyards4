@@ -22,9 +22,8 @@ Rails.application.routes.draw do
   get "graveyards/:path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
   get 'graveyard' => 'legacy#show'
 
-
-  get "graveyards" => "graveyards#index"
-  # resources :graveyards, :only => [ :index ]
+  # get "graveyards" => "graveyards#index"
+  resources :graveyards
 
   resources :coordinates
 

@@ -1,4 +1,5 @@
 class GraveyardsController < ApplicationController
+  before_action :require_admin, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_graveyard, only: [:edit, :update, :destroy]
 
   MAIN_STATE_ID = SiteConfig.fetch('main_state_id', nil)
@@ -22,7 +23,13 @@ class GraveyardsController < ApplicationController
   # GET /graveyards/1
   # GET /graveyards/1.json
   def show
-    @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
+    if params[:county].blank? && params[:id]
+      @graveyard = Graveyard.find(params[:id])
+      return redirect_to @graveyard.to_url, :status=>301
+    else
+      @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
+    end
+
     raise ActiveRecord::RecordNotFound unless @graveyard
 
     @graveyard=@graveyard.decorate
@@ -45,18 +52,17 @@ class GraveyardsController < ApplicationController
 
   # GET /graveyards/new
   def new
-    raise "not yet"
     @graveyard = Graveyard.new
   end
 
   # GET /graveyards/1/edit
   def edit
+
   end
 
   # POST /graveyards
   # POST /graveyards.json
   def create
-    raise "not yet"
     @graveyard = Graveyard.new(graveyard_params)
 
     respond_to do |format|
@@ -73,7 +79,6 @@ class GraveyardsController < ApplicationController
   # PATCH/PUT /graveyards/1
   # PATCH/PUT /graveyards/1.json
   def update
-    raise "not yet"
     respond_to do |format|
       if @graveyard.update(graveyard_params)
         format.html { redirect_to @graveyard, notice: 'Graveyard was successfully updated.' }
@@ -88,7 +93,8 @@ class GraveyardsController < ApplicationController
   # DELETE /graveyards/1
   # DELETE /graveyards/1.json
   def destroy
-    raise "not yet"
+    raise "Destroy not implemented"
+    
     @graveyard.destroy
     respond_to do |format|
       format.html { redirect_to graveyards_url }

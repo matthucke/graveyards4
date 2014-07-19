@@ -3,8 +3,13 @@ module ApplicationHelper
   def current_user
     @current_user
   end
+
   def current_identity
     @identity
+  end
+
+  def admin_user
+    current_user && current_user.admin?
   end
 
   # used for anything that implements to_url - a County or Graveyard generally

@@ -37,6 +37,11 @@
   background:  #ffa;
   .cell-bottom  { color: $TODO_COLOUR;  }
 }
+
+.cell-tools {
+  .glyphicon {  margin: 2px 6px;  }
+  a { color: $NO_VISITED_COLOUR ; }
+}
 .graveyard.visits-none {
 }
 
