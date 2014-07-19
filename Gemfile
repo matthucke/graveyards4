@@ -70,5 +70,8 @@ gem 'settingslogic'
 
 gem 'polylines'   # for encoding of boundaries
 gem 'draper'      # decorators
-gem 'tinymce-rails'
+gem 'tinymce-rails' # blog content editor
 
+# for photo uploads
+gem 'paperclip'
+gem 'rmagick'

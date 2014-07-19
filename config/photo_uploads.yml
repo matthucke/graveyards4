@@ -1,0 +1,31 @@
+
+default: &default
+  :path: "/www/graveyards4/htdocs/uploads/:id-:fingerprint-:style.:extension"
+  :url: "/uploads/:id-:fingerprint-:style.:extension"
+  :styles:
+    :mid:
+      :geometry: 780x780>
+      :processors:
+        - :thumbnail
+      #- :watermark
+      #:watermark_path: "/www/graveyards4/htdocs/images/watermark/watermark-mid.png"
+      #:watermark_position: SouthWest
+    :large:
+      :geometry: 1200x1200>
+      :processors:
+        - :thumbnail
+      #- :watermark
+      #:watermark_path: "/www/graveyards4/htdocs/images/watermark/watermark-large.png"
+      #:watermark_position: SouthWest
+    :thumb:
+      :geometry: 120x120>
+      :format: :png
+
+development: &development
+  <<: *default
+
+test:
+  <<: *development
+
+production:
+  <<: *default
