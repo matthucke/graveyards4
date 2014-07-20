@@ -2,6 +2,9 @@
 graveyards4
 ===========
 
+### 4.0.6 (2014-07-19)
+- photo upload via Paperclick and Jquery-Fileupload
+
 ### 4.0.5 (2014-07-15)
 
 - Labels on maps, using MarkerWithLabel
