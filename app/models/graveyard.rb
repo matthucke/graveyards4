@@ -34,7 +34,7 @@ class Graveyard < ActiveRecord::Base
   end
 
   def active_photos
-    photos.where(:status =>  Photo::STATUS_APPROVED)
+    photos.where(:status =>  Photo::STATUS_APPROVED).order('sort_order, id')
   end
 
   def located?

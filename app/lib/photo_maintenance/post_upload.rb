@@ -13,6 +13,9 @@ module PhotoMaintenance
       # jpg png etc.
       set_format_from_upload
 
+      # sort order, put at end
+      set_sort_order
+
       # photos from admin users are auto-approved
       auto_approve
 
@@ -33,6 +36,11 @@ module PhotoMaintenance
         photo.approver_id=user.id
         photo.status = Photo::STATUS_APPROVED
       end
+    end
+
+    def set_sort_order
+      g=photo.graveyard or return false
+      photo.sort_order ||= 100 * (1 + g.photos.count)
     end
 
     # content_type to extension
