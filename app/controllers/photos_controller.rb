@@ -8,6 +8,15 @@ class PhotosController < ApplicationController
     redirect_to '/'
   end
 
+  def debug
+    path = params[:county].to_s.split('/')
+    if path.empty?
+      raise "usage: ?county=Illinois/Cook"
+    end
+    @county = County.find_by_path_elements(*path) or raise "county not found"
+    @graveyards = @county.graveyards.includes(:visits, :photos => :user)
+  end
+
   # GET /photos/1
   # GET /photos/1.json
   def show

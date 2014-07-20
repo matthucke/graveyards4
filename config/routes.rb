@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :photos
+  resources :photos do
+    collection { get :debug }
+  end
 
   resources :expeditions
 
@@ -31,7 +33,6 @@ Rails.application.routes.draw do
 
   resources :counties
 
-  get 'photos/debug', to: 'photos#debug'
 
   #get 'photos', to: 'photos#index'
 
