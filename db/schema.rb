@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719184959) do
+ActiveRecord::Schema.define(version: 20140720125126) do
 
   create_table "articles", force: true do |t|
     t.integer  "status",       default: 0
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 20140719184959) do
     t.integer  "upload_file_size"
     t.datetime "upload_updated_at"
     t.string   "upload_fingerprint"
+    t.integer  "sort_order"
   end
 
   create_table "states", force: true do |t|
