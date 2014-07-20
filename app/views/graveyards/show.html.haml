@@ -2,7 +2,7 @@
     main_images = @graveyard.general_photos
     image_data = GalleryPresenter.new(main_images)
     owners = main_images.map(&:user).compact.uniq
-    owners << User.find(1) if owners.empty?
+    owners << User.find(1) if owners.empty? && !main_images.empty?
 
 %article#graveyard-main-content{itemscope: :itemscope, itemtype: 'http://schema.org/Place'}
     .container-fluid
@@ -15,6 +15,10 @@
                         %span{:itemprop=>'longitude'}="%05f" % @graveyard.lng
             - else
                 Location unknown.
+        .pull-right
+            #share-area
+                .fb=@page_meta.fb_like_button
+                .tw=@page_meta.tweet_button
 
         %h1{itemprop: :name}=@graveyard.name
 
@@ -56,8 +60,7 @@
 
                         %p
                             Do not upload elsewhere without permission.
-                #share-area
-                    %p= @page_meta.fb_like_button
+
 
     - if user_can_upload?
         .container
@@ -65,9 +68,9 @@
             %p
                 %b=mine.length
                 of the
-                = @graveyard.photos.length
+                %b= @graveyard.photos.length
                 photos for this cemetery belong to you,
-                = current_user.full_name
+                %b= current_user.full_name
 
             = render partial: 'photos/upload', locals: { photo: @graveyard.photos.new }
 

@@ -143,3 +143,12 @@ footer {
   border: 1px solid #888;
   background: #eee;
 }
+
+/* found on several pages including county, graveyard... */
+#share-area {
+  > div {
+      float: left; margin-right: 8px; width: 100px; height: 32px;
+  }
+  .fb { padding-bottom: 4px;  }
+  .tw { padding-top: 4px; }
+}

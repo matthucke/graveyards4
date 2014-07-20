@@ -44,6 +44,14 @@ class PageMeta
     put_if_nonblank :description, page.description
   end
 
+  def tweet_button(opts={})
+    (%q|<a href="https://twitter.com/share" class="twitter-share-button" data-related="graveyards_com">Tweet</a>| +
+      %q|<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';| +
+      %q|if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';| +
+      %q|fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>|
+    ).html_safe
+  end
+
   def fb_like_button(opts={})
     opts = {
       :layout=>:button_count,

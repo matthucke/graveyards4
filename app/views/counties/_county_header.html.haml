@@ -31,4 +31,6 @@
 
         //  %a{href: @county.to_url + ".kml"} Google Earth
         .col-md-2
-            %p= @page_meta.fb_like_button
+            #share-area
+                .fb=@page_meta.fb_like_button
+                .tw=@page_meta.tweet_button
