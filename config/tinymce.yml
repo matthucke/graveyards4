@@ -12,3 +12,5 @@ default:
   toolbar2: "styleselect | print preview media | forecolor backcolor"
   image_advtab: true
   # templates:
+  content_css: '/assets/tinymce.css'
+
