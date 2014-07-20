@@ -9,6 +9,8 @@
   h1 {
     margin-bottom: 12px;
   }
+  #thumbs { max-height: 800px; overflow-y: scroll;}
+  
   .thumb {
     border-radius: 8px;
     display: block;

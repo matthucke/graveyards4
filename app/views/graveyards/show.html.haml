@@ -16,7 +16,7 @@
             - else
                 Location unknown.
         .pull-right
-            #share-area
+            .share-area
                 .fb=@page_meta.fb_like_button
                 .tw=@page_meta.tweet_button
 
@@ -50,7 +50,7 @@
                         - title = @graveyard.name.to_s
                         - title += photo.caption.blank? ? "" : ": #{photo.caption}"
                         %a.thumb{itemprop: :photo, id: "th#{photo.id}", href: photo.path, style: "background: url(#{photo.thumbnail_path}) 50% 50% no-repeat #ccc", title:title }
-
+                    .clear
                 - unless main_images.empty?
                     #photo-info.clear
                         Photos by
