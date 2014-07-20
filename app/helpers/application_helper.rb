@@ -8,7 +8,11 @@ module ApplicationHelper
     @identity
   end
 
-  def admin_user
+  def admin_user?
+    current_user && current_user.admin?
+  end
+
+  def user_can_upload?
     current_user && current_user.admin?
   end
 

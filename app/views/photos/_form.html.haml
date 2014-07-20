@@ -1,9 +1,12 @@
-= form_for @photo, :html=> { multipart: true } do |f|
-    - if @photo.errors.any?
+:ruby
+    photo ||= @photo ||= @graveyard.photos.new
+
+= form_for photo, :html=> { multipart: true } do |f|
+    - if photo.errors.any?
         #error_explanation
-            %h2= "#{pluralize(@photo.errors.count, "error")} prohibited this photo from being saved:"
+            %h2= "#{pluralize(photo.errors.count, "error")} prohibited this photo from being saved:"
             %ul
-                - @photo.errors.full_messages.each do |msg|
+                - photo.errors.full_messages.each do |msg|
                     %li= msg
 
     = f.hidden_field :graveyard_id
@@ -12,8 +15,9 @@
     = f.hidden_field :story_id
 
     .field
-        = f.file_field :upload
+        = f.label :upload
+        = f.file_field :upload, multiple: true, name: 'photo[upload]'
 
     .actions
         = f.submit 'Save'
-        = @photo.inspect
+        = photo.inspect

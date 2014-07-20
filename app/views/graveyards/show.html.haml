@@ -59,7 +59,9 @@
                 #share-area
                     %p= @page_meta.fb_like_button
 
-
+    - if user_can_upload?
+        .container
+            = render partial: 'photos/upload', locals: { photo: @graveyard.photos.new }
 
 
 

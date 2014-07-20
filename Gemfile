@@ -75,3 +75,5 @@ gem 'tinymce-rails' # blog content editor
 # for photo uploads
 gem 'paperclip'
 gem 'rmagick'
+gem 'jquery-fileupload-rails'
+

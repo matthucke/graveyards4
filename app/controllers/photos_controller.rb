@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    redirect_to '/'
   end
 
   # GET /photos/1
@@ -33,9 +33,12 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
         PhotoMaintenance::PostUpload.new(@photo).run
-
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render :show, status: :created, location: @photo }
+        format.json {
+          render status: :created, json: {
+              files: [ @photo.as_file_upload ]
+          }
+        }
       else
         format.html { render :new }
         format.json { render json: @photo.errors, status: :unprocessable_entity }

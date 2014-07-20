@@ -22,6 +22,8 @@ module PhotoMaintenance
 
       # set as main photo
       offer_as_main_photo
+
+      photo.save if photo.changed?
     end
 
     # Photos uploaded by admin users are approved immediately.

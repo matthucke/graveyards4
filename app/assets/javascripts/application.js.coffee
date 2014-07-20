@@ -16,6 +16,7 @@
 #= require jquery.ui.effect.all
 #= require jquery.ui.dialog
 #= require jquery.ui.datepicker
+#= require jquery-fileupload
 #= require bootstrap/affix
 #= require bootstrap/alert
 #= require bootstrap/button

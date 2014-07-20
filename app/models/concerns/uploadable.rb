@@ -22,7 +22,7 @@ module Uploadable
 
       validates_attachment field_name, content_type: {
           content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-      }
+      }, presence: true
     end
     
   end

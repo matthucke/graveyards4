@@ -39,5 +39,15 @@ class Photo < ActiveRecord::Base
     words.join('/')
   end
 
-
+  # Response format as desired by https://github.com/blueimp/jQuery-File-Upload
+  def as_file_upload
+    as_json(:only=>[:id, :graveyard_id, :user_id, :caption]).merge({
+        name: upload_file_name,
+        size: upload_file_size,
+        url: path.virtual,
+        thumbnailUrl: thumbnail_path.virtual,
+        deleteType: 'DELETE',
+        deleteUrl: "/photos/#{id}"
+    })
+  end
 end

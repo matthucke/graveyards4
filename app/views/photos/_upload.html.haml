@@ -1,0 +1,58 @@
+:ruby
+    photo ||= @photo || @graveyard.photos.new
+
+= form_for photo, :html=> { multipart: true } do |f|
+    %h2 Upload Photos
+
+    - if photo.errors.any?
+        #error_explanation
+            %h2= "#{pluralize(photo.errors.count, "error")} prohibited this photo from being saved:"
+            %ul
+                - photo.errors.full_messages.each do |msg|
+                    %li= msg
+
+    = f.hidden_field :graveyard_id
+    = f.hidden_field :plot_id
+    = f.hidden_field :person_id
+    = f.hidden_field :story_id
+
+    .row
+        .col-md-6
+            .field
+                .fileinput-button
+                    %span.glyphicon.glyphicon-plus
+                    Drop photos here
+                    = f.file_field :upload, multiple: true, name: 'photo[upload]'
+            .field
+                = f.text_area :caption, placeholder: 'Caption (optional)'
+
+        .col-md-6
+            / %button.btn.btn-primary.start{type: 'submit'} Start
+            #upload-display
+
+
+%script#template-upload{type: 'text/x-tmpl'}
+    .uploading
+        .name {%=o.name%}
+        .progress
+            .bar{style: 'width: 0%'}
+
+%script#template-download{type: 'text/x-tmpl'}
+    :plain
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <div class="uploaded">
+                <img class="thumb" src="{%= file.thumbnailUrl %}" alt="" />
+                <ul>
+                <li><b>{%= file.name %}</b> (id: {%= file.id %})</li>
+                <li class='url'>{%= file.url %}</li>
+                <li class='smaller'>{%= file.caption %}</li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        {% } %}
+
+
+
+:coffeescript
+    $ ->
+        window.uploader = new PhotoUploader $('#new_photo')

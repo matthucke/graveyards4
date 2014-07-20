@@ -11,7 +11,7 @@
 //
 :ruby
     county_name = @county.fancy_name_with_state
-    can_edit = !!admin_user
+    can_edit = !!admin_user?
 
 = render :partial => "counties/county_header", :locals => { :overhead => 'Cemeteries and Graveyards in'}
 
