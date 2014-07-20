@@ -6,19 +6,14 @@ root = (exports ? this)
 
 root.PhotoUploader = class PhotoUploader
   constructor: (@$form)->
-    console.log("building...")
 
     @$form.fileupload
       dataType: 'json'
       add: (e, data) ->
-        console.log("this is ADD, fl= " + data.files.length)
-        window.FZERO = data.files[0]
-
         file = data.files[0]
-        console.dir(file)
 
         data.context = $(tmpl('template-upload', file))
-        $('#upload-display').append(data.context)
+        $('#upload-display').prepend(data.context)
         data.submit()
 
       progress: (e, data) ->
@@ -27,4 +22,4 @@ root.PhotoUploader = class PhotoUploader
             progress = parseInt(data.loaded / data.total * 100, 10)
             data.context.find('.bar').css('width', ''+progress + '%')
 
-    console.dir("CONS DONE")
+
