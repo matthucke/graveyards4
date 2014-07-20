@@ -21,7 +21,7 @@
             .field
                 .fileinput-button
                     %span.glyphicon.glyphicon-plus
-                    Drop photos here
+                    %label Drop photos here
                     = f.file_field :upload, multiple: true, name: 'photo[upload]'
             .field
                 = f.text_area :caption, placeholder: 'Caption (optional)'

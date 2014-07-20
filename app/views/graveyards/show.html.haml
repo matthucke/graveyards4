@@ -43,7 +43,7 @@
                             %i graveyards.com
                             is an unaffiliated fan-operated site.
 
-                #thumbs
+                #thumbs{:class=>(main_images.length > 20) ? 'thumbs-many' : 'thumbs-few' }
                     - if main_images.empty?
                         %p No photos available.
                     - main_images.each do |photo|
