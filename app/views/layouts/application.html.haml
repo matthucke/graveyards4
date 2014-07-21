@@ -62,6 +62,9 @@
             #top-padding
             #fb-root
             = render :partial => 'navbar_main'
+            #top-share-area
+                .fb=@page_meta.fb_like_button
+                .tw=@page_meta.tweet_button
             - if @breadcrumbs && !@breadcrumbs.hidden?
                 .container
                     %nav#breadcrumbs

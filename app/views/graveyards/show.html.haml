@@ -1,26 +1,47 @@
 :ruby
     main_images = @graveyard.general_photos
     image_data = GalleryPresenter.new(main_images)
-    owners = main_images.map(&:user).compact.uniq
-    owners << User.find(1) if owners.empty? && !main_images.empty?
+
+    owners=[]
+    unless main_images.empty?
+      owners = main_images.map(&:user).compact.uniq
+      owners << User.find(1) if owners.empty? && !main_images.empty?
+    end
 
 %article#graveyard-main-content{itemscope: :itemscope, itemtype: 'http://schema.org/Place'}
-    .container-fluid
-        .pull-right
-            - if @graveyard.located?
-                %div{itemprop: :geo, itemscope: :itemscope, itemtype: 'http://schema.org/GeoCoordinates' }
-                    %a.google-maps-link{target: '_blank', href:  google_maps_url(@graveyard.lat, @graveyard.lng)}
-                        %span{:itemprop=>'latitude'}="%05f" % @graveyard.lat
-                        ,
-                        %span{:itemprop=>'longitude'}="%05f" % @graveyard.lng
-            - else
-                Location unknown.
-        .pull-right
-            .share-area
-                .fb=@page_meta.fb_like_button
-                .tw=@page_meta.tweet_button
+    #graveyard-header.container-fluid
+        .col-md-6
+            %h1{itemprop: :name}=@graveyard.name
+        .col-md-6
+            .pull-right
+                - if @graveyard.located?
+                    %div{itemprop: :geo, itemscope: :itemscope, itemtype: 'http://schema.org/GeoCoordinates' }
+                        %a.google-maps-link{target: '_blank', href:  google_maps_url(@graveyard.lat, @graveyard.lng)}
+                            %span{:itemprop=>'latitude'}="%05f" % @graveyard.lat
+                            %br
+                            %span{:itemprop=>'longitude'}="%05f" % @graveyard.lng
+                - else
+                    .red Location unknown.
+            %nav
+                %ul.nav.nav-pills
+                    - if @graveyard.located?
+                        %li
+                            %a.btn.btn-default{target: '_blank', href:  google_maps_url(@graveyard.lat, @graveyard.lng)}
+                                .glyphicon.glyphicon-map-marker
+                                .caption map
+                        %li
+                            %a.btn.btn-default{}
+                                .glyphicon.glyphicon-globe
+                                .caption
+                                    google
+                                    %br
+                                    earth
+                    - if admin_user?
+                        %li
+                            %a.btn.btn-default{href: url_for(action: :edit, id: @graveyard.id) }
+                                .glyphicon.glyphicon-pencil
+                                .caption edit
 
-        %h1{itemprop: :name}=@graveyard.name
 
     .container-fluid
         .row

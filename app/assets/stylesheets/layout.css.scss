@@ -7,7 +7,9 @@ body  {
 
 }
 
-
+#main-content {
+  clear: both;
+}
 #wrap {
   min-height: 100%;
   // height: auto !important;
@@ -27,7 +29,7 @@ body  {
 
 .inverse {
   color: white;
-  // background: url(/images/backgrounds/dkmarble.jpg);
+  background: url(/images/backgrounds/dkmarble.jpg);
 }
 
 .navbar .caret {
@@ -144,8 +146,12 @@ footer {
   background: #eee;
 }
 
-/* found on several pages including county, graveyard... */
-.share-area {
+/* top of every page */
+#top-share-area {
+  margin: -12px 0 -4px;
+  float: right;
+  width: auto;
+
   > div {
       float: left; margin-right: 8px; width: 100px; height: 32px;
   }

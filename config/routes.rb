@@ -23,11 +23,16 @@ Rails.application.routes.draw do
 
   get 'featured' => 'featured_sites#index'
 
-  get "graveyards/:path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
-  get 'graveyard' => 'legacy#show'
 
   # get "graveyards" => "graveyards#index"
-  resources :graveyards
+  resources :graveyards do
+    collection do
+      get ":path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
+    end
+  end
+
+  # get "graveyards/:path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
+  get 'graveyard' => 'legacy#show'
 
   resources :coordinates
 
