@@ -2,7 +2,16 @@
 graveyards4
 ===========
 
+### 4.1.0 (2014-07-20)
+
+- graveyard editor
+- numerous photo upload fixes
+- standardized facebook/twitter buttons
+- redirects to canonical name
+- fix textarea font in blog articles editor
+
 ### 4.0.6 (2014-07-19)
+
 - photo upload via Paperclick and Jquery-Fileupload
 
 ### 4.0.5 (2014-07-15)
