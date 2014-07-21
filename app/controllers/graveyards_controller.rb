@@ -30,7 +30,16 @@ class GraveyardsController < ApplicationController
       @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
     end
 
-    raise ActiveRecord::RecordNotFound unless @graveyard
+    unless @graveyard
+      if @graveyard = Graveyard.find_by_alternate_path("%s/%s/%s" % [
+          params[:state], params[:county], params[:graveyard] ]
+      )
+        return redirect_to @graveyard.to_url, :status=>301
+      end
+
+      raise ActiveRecord::RecordNotFound
+    end
+
 
     @graveyard=@graveyard.decorate
 
