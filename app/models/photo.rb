@@ -24,6 +24,8 @@ class Photo < ActiveRecord::Base
 
   configure_upload :upload, "#{Rails.root}/config/photo_uploads.yml"
 
+  before_destroy :prepare_for_death
+
   def path
     @path ||= ImagePath.new(id, image_dir, :format=>self.format)
   end
@@ -49,5 +51,22 @@ class Photo < ActiveRecord::Base
         deleteType: 'DELETE',
         deleteUrl: "/photos/#{id}"
     })
+  end
+
+  # invoked by before_destroy callback.
+  def prepare_for_death
+    path.destroy!
+    thumbnail_path.destroy!
+
+    if g=self.graveyard
+      if g.main_photo_id == self.id
+        puts "* removing as main photo for #{g.name}"
+        g.main_photo=nil
+        g.main_photo_id=nil
+        g.save
+      end
+    end
+
+    true
   end
 end

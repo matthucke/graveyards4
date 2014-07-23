@@ -43,4 +43,12 @@ class ImagePath
     @format.blank? ? 'jpg' : @format
   end
 
+  def destroy!
+    if exists?
+      puts "[#{self.class}] deleting #{physical}"
+      File.unlink(physical)
+    else
+      puts "[#{self.class}] skip deleting #{physical} - does not exist"
+    end
+  end
 end
