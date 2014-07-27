@@ -4,7 +4,7 @@
     .row
         - provider_config.each_pair do |symbol, config|
             - img = "/images/icons/512/#{config[:icon_name] || symbol}.png"
-            .col-md-6.login-option
+            .col-xs-6.login-option
                 %a{href: config[:url] || "/auth/#{symbol}"}
                     %img.icon{src: img, alt: "Log in with #{config[:name]}"}
                 %br

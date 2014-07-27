@@ -9,7 +9,10 @@ class SessionsController < ApplicationController
       session[:identity_id] = identity.id
       session[:user_id] = identity.user_id
       flash[:message] = "You are now logged in."
-      redirect_to root_url
+
+      # Redirect to return_to, which should be URL (path part only) that the customer came from.
+      return_to = session.delete(:return_to)
+      redirect_to return_to.blank? ? root_url : return_to
     else
       raise "login failed"
     end
