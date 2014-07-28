@@ -42,7 +42,7 @@ class Photo < ActiveRecord::Base
 
   # Response format as desirphoted by https://github.com/blueimp/jQuery-File-Upload
   def as_file_upload
-    as_json(:only=>[:id, :graveyard_id, :user_id, :caption]).merge({
+    as_json(:only=>[:id, :graveyard_id, :user_id, :caption, :sort_order]).merge({
         name: upload_file_name,
         size: upload_file_size,
         url: path.virtual,
