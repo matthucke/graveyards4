@@ -2,6 +2,12 @@
 graveyards4
 ===========
 
+### 4.1.1 (2014-07-27)
+- have javascript set sort_order before upload begins
+- add photos_count to graveyards
+- delete files on photo.destroy
+- layout tweaks
+
 ### 4.1.0 (2014-07-20)
 
 - graveyard editor
