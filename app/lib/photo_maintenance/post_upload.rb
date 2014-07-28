@@ -20,8 +20,10 @@ module PhotoMaintenance
       auto_approve
 
       # copy the files
-      copy_main_image
-      copy_thumbnail
+      unless upload.blank?
+        copy_main_image
+        copy_thumbnail
+      end
 
       # set as main photo
       offer_as_main_photo
@@ -62,7 +64,6 @@ module PhotoMaintenance
     end
 
     def copy_image_file src, dest
-      puts "WANT COPY #{src} #{dest}"
       FileUtils.cp(src, dest)
       raise "Failed to create #{dest}" unless File.exists?(dest)
       return :created

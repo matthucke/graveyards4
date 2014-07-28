@@ -18,4 +18,11 @@ class GraveyardDecorator < Draper::Decorator
   def full_url
     BASE_URL + graveyard.to_url.to_s
   end
+
+  # For the NEW PHOTO form
+  def new_photo(attrs={})
+    graveyard.photos.new(attrs).tap do |p|
+      p.sort_order = p.default_sort_order
+    end
+  end
 end

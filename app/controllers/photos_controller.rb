@@ -23,6 +23,7 @@ class PhotosController < ApplicationController
   end
 
   # GET /photos/new
+  # This is not really used because photo uploads are done from graveyard#show
   def new
     graveyard = Graveyard.find(params.require(:graveyard_id))
     @photo = Photo.new(

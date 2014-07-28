@@ -93,7 +93,7 @@
                 photos for this cemetery belong to you,
                 %b= current_user.full_name
 
-            = render partial: 'photos/upload', locals: { photo: @graveyard.photos.new }
+            = render partial: 'photos/upload', locals: { photo: @graveyard.new_photo }
 
 
 

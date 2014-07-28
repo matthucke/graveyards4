@@ -6,7 +6,6 @@
 class Photo < ActiveRecord::Base
   include Uploadable
 
-
   DOC_ROOT = '/www/graveyards4/htdocs'
 
   STATUS_NEW = 0
@@ -21,8 +20,8 @@ class Photo < ActiveRecord::Base
 
   validates :graveyard_id, presence: true
   validates :user_id, presence: true
-
   configure_upload :upload, "#{Rails.root}/config/photo_uploads.yml"
+  validates :upload, presence: true, on: :create
 
   before_destroy :prepare_for_death
 
@@ -55,7 +54,7 @@ class Photo < ActiveRecord::Base
 
   def default_sort_order
     if g=self.graveyard
-      return 100 + (g.photos.count * 100)
+      return  100 * (1 + g.photos.count)
     end
     nil
   end
