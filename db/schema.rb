@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720125126) do
+ActiveRecord::Schema.define(version: 20140728011530) do
 
   create_table "articles", force: true do |t|
     t.integer  "status",       default: 0
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20140720125126) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "main_photo_id"
+    t.string   "temp_notes"
+    t.integer  "photos_count",                           default: 0
   end
 
   add_index "graveyards", ["county_id"], name: "index_graveyards_on_county_id", using: :btree
@@ -197,6 +199,7 @@ ActiveRecord::Schema.define(version: 20140720125126) do
     t.integer  "plot_id"
     t.integer  "person_id"
     t.integer  "story_id"
+    t.integer  "sort_order"
     t.integer  "width"
     t.integer  "height"
     t.string   "flags",               limit: 10,  default: ""
@@ -216,7 +219,6 @@ ActiveRecord::Schema.define(version: 20140720125126) do
     t.integer  "upload_file_size"
     t.datetime "upload_updated_at"
     t.string   "upload_fingerprint"
-    t.integer  "sort_order"
   end
 
   create_table "states", force: true do |t|
@@ -231,8 +233,6 @@ ActiveRecord::Schema.define(version: 20140720125126) do
 
   create_table "users", force: true do |t|
     t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "full_name"
     t.integer  "security_level", default: 0
     t.datetime "created_at"

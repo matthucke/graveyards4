@@ -14,7 +14,7 @@ class Photo < ActiveRecord::Base
   STATUS_APPROVED=100
 
   belongs_to :user #, :counter_cache=>true
-  belongs_to :graveyard #, :counter_cache=>true
+  belongs_to :graveyard, :counter_cache=>true
   belongs_to :county #, :counter_cache=>true
   # belongs_to :plot
   # has_and_belongs_to_many :people
@@ -41,7 +41,7 @@ class Photo < ActiveRecord::Base
     words.join('/')
   end
 
-  # Response format as desired by https://github.com/blueimp/jQuery-File-Upload
+  # Response format as desirphoted by https://github.com/blueimp/jQuery-File-Upload
   def as_file_upload
     as_json(:only=>[:id, :graveyard_id, :user_id, :caption]).merge({
         name: upload_file_name,
@@ -51,6 +51,13 @@ class Photo < ActiveRecord::Base
         deleteType: 'DELETE',
         deleteUrl: "/photos/#{id}"
     })
+  end
+
+  def default_sort_order
+    if g=self.graveyard
+      return 100 + (g.photos.count * 100)
+    end
+    nil
   end
 
   # invoked by before_destroy callback.

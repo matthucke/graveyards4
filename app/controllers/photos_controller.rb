@@ -24,9 +24,11 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
+    graveyard = Graveyard.find(params.require(:graveyard_id))
     @photo = Photo.new(
-        graveyard: Graveyard.find(params.require(:graveyard_id))
+        graveyard: graveyard
     )
+    @photo.sort_order=@photo.default_sort_order
   end
 
   # GET /photos/1/edit
@@ -89,7 +91,7 @@ class PhotosController < ApplicationController
     def photo_params
       params.require(:photo).permit(
           :upload, :graveyard_id, :plot_id, :person_id, :story_id,
-          :caption
+          :caption, :sort_order
       )
     end
 end
