@@ -12,7 +12,7 @@ class root.PhotoUploader
 
   bindForm: ->
     @$form.on 'submit', ->
-      alert("no")
+      alert("Regular submit disabled.")
       return false
 
   enableUpload: ->
