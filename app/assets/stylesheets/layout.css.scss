@@ -148,9 +148,6 @@ footer {
 
 /* top of every page */
 #top-share-area {
-  margin: -12px 0 -4px;
-  float: right;
-  width: auto;
 
   > div {
       float: left; margin-right: 8px; width: 100px; height: 32px;
@@ -159,3 +156,8 @@ footer {
   .tw { padding-top: 4px; }
 }
 
+@media #{$MEDIA_MD_TO_LG} {
+  #top-share-area {
+    margin: -12px 0 -4px;
+  }
+}

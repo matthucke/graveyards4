@@ -62,18 +62,22 @@
             #top-padding
             #fb-root
             = render :partial => 'navbar_main'
-            #top-share-area
-                .fb=@page_meta.fb_like_button
-                .tw=@page_meta.tweet_button
-            - if @breadcrumbs && !@breadcrumbs.hidden?
-                .container
-                    %nav#breadcrumbs
-                        - @breadcrumbs.parents.each do |b|
-                            %a{href: b.url }=b.title
-                            %span.separator=' > '.html_safe
-                        - @breadcrumbs.here.tap do |b|
-                            %strong= b.title ? b.title : @page_title
-                            %span.separator=': '.html_safe
+            .container
+                .row
+                    .col-md-6
+                        - if @breadcrumbs && !@breadcrumbs.hidden?
+                            .container
+                                %nav#breadcrumbs
+                                    - @breadcrumbs.parents.each do |b|
+                                        %a{href: b.url }=b.title
+                                        %span.separator=' > '.html_safe
+                                    - @breadcrumbs.here.tap do |b|
+                                        %strong= b.title ? b.title : @page_title
+                                        %span.separator=': '.html_safe
+                    .col-md-6
+                        #top-share-area
+                            .fb=@page_meta.fb_like_button
+                            .tw=@page_meta.tweet_button
             #status-messages.container
                 - flash.each do |name, msg|
                     %div{:class=>name}=msg
