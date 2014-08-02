@@ -3,6 +3,7 @@ graveyards4
 ===========
 
 ### 4.1.1 (2014-07-27)
+
 - have javascript set sort_order before upload begins
 - add photos_count to graveyards
 - delete files on photo.destroy
@@ -18,7 +19,7 @@ graveyards4
 
 ### 4.0.6 (2014-07-19)
 
-- photo upload via Paperclick and Jquery-Fileupload
+- photo upload via Paperclip and Jquery-Fileupload
 
 ### 4.0.5 (2014-07-15)
 
@@ -55,7 +56,7 @@ graveyards4
 
 Complete rewrite of graveyards.com web app as Rails 4.1 project.
 
-- Rails app now at root level of namespace
+- Rails app now at root level of URLs, no more prefix.
 - Legacy pages accessed via Apache aliases to bypass Rails
 - Image management moved into database, rather than based on filenames.
 - Twitter Bootstrap used for CSS.
