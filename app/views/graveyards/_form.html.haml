@@ -1,43 +1,58 @@
 = form_for @graveyard do |f|
-  - if @graveyard.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@graveyard.errors.count, "error")} prohibited this graveyard from being saved:"
-      %ul
-        - @graveyard.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :feature_type
-    = f.number_field :feature_type
-  .field
-    = f.label :county_id
-    = f.text_field :county_id
-  .field
-    = f.label :status
-    = f.number_field :status
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :path
-    = f.text_field :path
-  .field
-    = f.label :lat
-    = f.text_field :lat
-  .field
-    = f.label :lng
-    = f.text_field :lng
-  .field
-    = f.label :year_started
-    = f.number_field :year_started
-  .field
-    = f.label :usgs_id
-    = f.number_field :usgs_id
-  .field
-    = f.label :usgs_map
-    = f.text_field :usgs_map
-  .field
-    = f.label :homepage
-    = f.text_field :homepage
-  .actions
-    = f.submit 'Save'
+    - if @graveyard.errors.any?
+        #error_explanation
+            %h2= "#{pluralize(@graveyard.errors.count, "error")} prohibited this graveyard from being saved:"
+            %ul
+                - @graveyard.errors.full_messages.each do |msg|
+                    %li= msg
+    %table.editor-table.table
+        %tr
+            %td= f.label :feature_type
+            %td
+                .form-group= f.number_field :feature_type, class: 'form-control'
+        %tr
+            %td= f.label :county_id
+            %td
+                .form-group= f.text_field :county_id, class: 'form-control'
+        %tr
+            %td= f.label :status
+            %td
+                .form-group= f.number_field :status, class: 'form-control'
+        %tr
+            %td= f.label :name
+            %td
+                .form-group= f.text_field :name, class: 'form-control'
+        %tr
+            %td= f.label :path
+            %td
+                .form-group= f.text_field :path, class: 'form-control'
+        %tr
+            %td= f.label :full_path
+            %td
+                .form-group= f.text_field :full_path, class: 'form-control'
+        %tr
+            %td= f.label :lat
+            %td
+                .form-group= f.text_field :lat, class: 'form-control'
+        %tr
+            %td= f.label :lng
+            %td
+                .form-group= f.text_field :lng, class: 'form-control'
+        %tr
+            %td= f.label :year_started
+            %td
+                .form-group= f.number_field :year_started, class: 'form-control'
+        %tr
+            %td= f.label :usgs_id
+            %td
+                .form-group= f.number_field :usgs_id, class: 'form-control'
+        %tr
+            %td= f.label :usgs_map
+            %td
+                .form-group= f.text_field :usgs_map, class: 'form-control'
+        %tr
+            %td= f.label :homepage
+            %td
+                .form-group= f.text_field :homepage, class: 'form-control'
+    .actions
+        = f.submit 'Save', class: 'btn btn-primary'

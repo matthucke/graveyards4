@@ -121,6 +121,6 @@ class GraveyardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def graveyard_params
-      params.require(:graveyard).permit(:feature_type, :county_id, :status, :name, :path, :lat, :lng, :year_started, :usgs_id, :usgs_map, :homepage)
+      params.require(:graveyard).permit(:feature_type, :county_id, :status, :name, :path, :lat, :lng, :year_started, :usgs_id, :usgs_map, :homepage, :full_path)
     end
 end
