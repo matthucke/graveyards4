@@ -12,9 +12,18 @@
 :ruby
     county_name = @county.fancy_name_with_state
     can_edit = !!admin_user?
+    urls = @county.graveyards.inject({}) { |h, g| (h[g.full_path] ||= []).push(g); h }
+    names = @county.graveyards.inject({}) { |h, g| (h[g.name] ||= []).push(g); h }
 
 = render :partial => "counties/county_header", :locals => { :overhead => 'Cemeteries and Graveyards in'}
 
+- if can_edit
+    - urls.each_pair do |url, list|
+        - next unless list.length > 1
+        .error
+            Warning: url #{url} associated with multiple sites
+            - list.each do |g|
+                %a{href: edit_graveyard_path(g)}=g.id
 
 / THE COLUMNS.
 / This doesn't use bootstrap, but rather html5 columns, with the number dynamically
@@ -41,6 +50,8 @@
             - visit = @visits.visit_for(g)
             - status = visit ? visit.status : nil
             - klasses.push(visit ? "visits-#{status}" : 'visits-none') if current_user
+            - name_collisions = (names[g.name] || []).count - 1
+
             %div{class: klasses, data: { location_id: g.id }, id: "g#{g.id}" }
                 - if pic
                     .cell-top
@@ -50,6 +61,9 @@
                 .cell-bottom
                     .cell-main
                         %a{:href=>g.to_url}=g.name
+                        - if name_collisions > 0
+                            .usgs-cell
+                                %i="(#{g.usgs_map})"
                     - if !pic
                         .no-pix-msg
                             photos not available
