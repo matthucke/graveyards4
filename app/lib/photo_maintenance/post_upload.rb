@@ -1,3 +1,4 @@
+
 module PhotoMaintenance
   class PostUpload
     attr_accessor :photo, :upload
@@ -28,6 +29,9 @@ module PhotoMaintenance
       # set as main photo
       offer_as_main_photo
 
+      # read size of file - do this after installing it physically of course!
+      PhotoMaintenance::Sizer.new.handle_photo(photo)
+
       photo.save if photo.changed?
     end
 
@@ -55,7 +59,7 @@ module PhotoMaintenance
 
     def copy_main_image(force=false)
       return :exists unless force or ! photo.path.exists?
-      copy_image_file(upload.path(:mid), photo.path.physical)
+      copy_image_file(upload.path(:big), photo.path.physical)
     end
 
     def copy_thumbnail(force=false)
@@ -84,5 +88,6 @@ module PhotoMaintenance
       g.main_photo_id = photo.id
       g.save
     end
+
   end
 end

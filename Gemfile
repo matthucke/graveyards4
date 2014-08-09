@@ -76,4 +76,7 @@ gem 'tinymce-rails' # blog content editor
 gem 'paperclip'
 gem 'rmagick'
 gem 'jquery-fileupload-rails'
+# gem 'imagesize'
+gem 'fastimage'
+
 

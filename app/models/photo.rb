@@ -29,6 +29,10 @@ class Photo < ActiveRecord::Base
     @path ||= ImagePath.new(id, image_dir, :format=>self.format)
   end
 
+  def read_file
+    File.read(path.physical, mode: 'rb')
+  end
+
   def thumbnail_path
     @thumbnail_path ||= ThumbPath.new(id, image_dir)
   end

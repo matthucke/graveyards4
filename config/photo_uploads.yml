@@ -3,6 +3,13 @@ default: &default
   :path: "/www/graveyards4/htdocs/uploads/:id-:fingerprint-:style.:extension"
   :url: "/uploads/:id-:fingerprint-:style.:extension"
   :styles:
+    :big:
+      :geometry: 1200x1200>
+      :processors:
+        - :thumbnail
+        - :watermark
+      :watermark_path: "/www/graveyards4/htdocs/images/watermark/watermark-big.png"
+      :watermark_position: SouthWest
     :mid:
       :geometry: 780x780>
       :processors:
