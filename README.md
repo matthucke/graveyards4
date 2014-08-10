@@ -14,5 +14,6 @@ Source: https://github.com/matthucke/graveyards4
 - v3.0 - 2010/08 - migrated to Rails 3
 - v3.5 - 2013/09 - for book release, added rails 4 app (coexisting with Rails 3 via URL rewrites)
 - v4.0 - 2014/05 - complete rewrite using Rails 4.1, 
-  image management now based on database rather than filesystem
+                   image storage now based on database rather than filesystem
+- v4.1 - 2014/07 - in-browser photo upload via paperclip. Added photos for the first time in years.
 
