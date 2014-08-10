@@ -2,6 +2,12 @@
 graveyards4
 ===========
 
+### 4.1.2 (2014-08-09)
+
+- simple edit-graveyard form
+- photo promoter, manually put new photos in front
+- embiggen standard image size from 790 to 1200px
+
 ### 4.1.1 (2014-07-27)
 
 - have javascript set sort_order before upload begins
