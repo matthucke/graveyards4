@@ -47,6 +47,7 @@ class Graveyard < ActiveRecord::Base
       name: self.name,
       url: self.to_url,
       # photo_count: self.photos_count
+      pic: main_photo ? main_photo.path.virtual : nil
     }
 
     if located?

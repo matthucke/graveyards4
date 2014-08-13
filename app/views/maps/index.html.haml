@@ -35,6 +35,13 @@
 
 
 %script#info-window-template{type: "text/x-handlebars-template"}
-    .graveyard-info-window
+    .popup-info-window
         %h2='{{name}}'
-        %a{href: "{{url}}", target: '_blank'} More information...
+        .popup-content
+            {{#if pic}}
+            .photo-box
+                %a{href: "{{url}}", target: '_blank'}
+                    %img.main-photo{src: "{{pic}}", alt: "{{name}}"}
+            {{/if}}
+            .clear
+            %a.show-link{href: "{{url}}", target: '_blank'} More information...

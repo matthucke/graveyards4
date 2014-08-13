@@ -81,3 +81,28 @@ ul.location-selector {
     }
     .instructions { padding: 2px 4px; font-size: 10pt; } 
 }
+
+/*
+.gm-style-iw {
+  color: white;
+  background: url(/images/backgrounds/dkmarble.jpg) #333;
+  * { color: white; }
+  a { color: white; }
+}
+*/
+
+.popup-info-window {
+  h2 { font-size: 14pt; }
+  .popup-content {
+    text-align: center;
+  }
+  .photo-box {
+    width: 400px;
+    min-height: 276px;
+  }
+
+  .main-photo {
+    width: 100%;
+  }
+
+}
