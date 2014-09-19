@@ -63,4 +63,8 @@ class Visit < ActiveRecord::Base
   def self.visited_with_quality
     where(:status=> 'visited').where("quality >= 8")
   end
+
+  def self.for_user(u)
+    where(user_id: u.id).includes(graveyard: :county)
+  end
 end

@@ -5,9 +5,7 @@ class VisitsController < ApplicationController
   # GET /visits.json
   def index
     if current_user
-      all_visits = Visit.where(user_id: current_user.id)
-        .includes(graveyard: :county).select(&:county)
-
+      all_visits = Visit.for_user(current_User)
       @visits = all_visits.reject(&:todo?)
       @todos = all_visits.select(&:todo?)
 
