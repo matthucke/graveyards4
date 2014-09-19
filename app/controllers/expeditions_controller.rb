@@ -1,5 +1,6 @@
 class ExpeditionsController < ApplicationController
   before_action :set_expedition, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   # GET /expeditions
   # GET /expeditions.json
@@ -25,16 +26,8 @@ class ExpeditionsController < ApplicationController
   # POST /expeditions.json
   def create
     @expedition = Expedition.new(expedition_params)
-
-    respond_to do |format|
-      if @expedition.save
-        format.html { redirect_to @expedition, notice: 'Expedition was successfully created.' }
-        format.json { render :show, status: :created, location: @expedition }
-      else
-        format.html { render :new }
-        format.json { render json: @expedition.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Expedition was successfully created.' if @expedition.save
+    respond_with(@expedition)
   end
 
   # PATCH/PUT /expeditions/1
