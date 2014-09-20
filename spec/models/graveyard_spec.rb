@@ -22,7 +22,13 @@ describe Graveyard do
     subject(:g) { Graveyard.new(:county=>@county, :name=>"St. John's Cemetery")}
 
     it "constructs path" do
-      expect(g.default_path).to be == "St-Johns"
+      expect(g.default_path).to be == "St-Johns-Cemetery"
+    end
+
+    it "sets full path" do
+      g.path = g.default_path
+      expect(g.full_path).to be == g.default_full_path
+      expect(g.full_path).to match /Klendathu/
     end
   end
 

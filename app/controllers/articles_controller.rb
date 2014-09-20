@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1
   # GET /articles/1.json
+  # Only show articles with section name 'blog'
   def show
     redirect_to '/' unless @article && @article.section_blog?
   end
@@ -33,29 +34,14 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.author = current_user!
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with(@article)
   end
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    @article.update(article_params) and flash[:notice]='Article was successfully updated.'
+    respond_with(@article)
   end
 
   # DELETE /articles/1

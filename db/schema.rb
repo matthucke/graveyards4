@@ -116,25 +116,6 @@ ActiveRecord::Schema.define(version: 20140728011530) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "image_uploads", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "graveyard_id"
-    t.integer  "photo_id"
-    t.integer  "status",             default: 0
-    t.text     "caption"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "image_fingerprint"
-  end
-
-  add_index "image_uploads", ["graveyard_id"], name: "index_image_uploads_on_graveyard_id", using: :btree
-  add_index "image_uploads", ["photo_id"], name: "index_image_uploads_on_photo_id", using: :btree
-  add_index "image_uploads", ["user_id"], name: "index_image_uploads_on_user_id", using: :btree
-
   create_table "og1", id: false, force: true do |t|
     t.integer "id",                                                    default: 0,    null: false
     t.string  "name",              limit: 80,                                         null: false
@@ -241,13 +222,6 @@ ActiveRecord::Schema.define(version: 20140728011530) do
     t.string   "username"
   end
 
-  create_table "visit_migrations", id: false, force: true do |t|
-    t.integer "id",                      default: 0, null: false
-    t.integer "graveyard_id",            default: 0, null: false
-    t.integer "visited",                 default: 0
-    t.string  "visitdate",    limit: 12
-  end
-
   create_table "visits", force: true do |t|
     t.integer  "user_id"
     t.integer  "graveyard_id"
@@ -258,6 +232,8 @@ ActiveRecord::Schema.define(version: 20140728011530) do
     t.datetime "updated_at"
     t.string   "status",        limit: 10, default: "visited"
     t.integer  "visibility",               default: 1000
+    t.integer  "temp_flag"
+    t.string   "temp_date",     limit: 20
     t.integer  "ordinal"
     t.integer  "expedition_id"
   end
