@@ -1,4 +1,6 @@
 class GraveyardsController < ApplicationController
+  respond_to :html, :json
+
   before_action :require_admin, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_graveyard, only: [:edit, :update, :destroy]
 
@@ -32,7 +34,7 @@ class GraveyardsController < ApplicationController
     end
 
     set_breadcrumbs_for_show
-
+    respond_with(@graveyard)
   end
 
   # GET /graveyards/new
@@ -49,37 +51,20 @@ class GraveyardsController < ApplicationController
   # POST /graveyards.json
   def create
     @graveyard = Graveyard.new(graveyard_params)
-
-    respond_to do |format|
-      if @graveyard.save
-        format.html { redirect_to @graveyard, notice: 'Graveyard was successfully created.' }
-        format.json { render :show, status: :created, location: @graveyard }
-      else
-        format.html { render :new }
-        format.json { render json: @graveyard.errors, status: :unprocessable_entity }
-      end
-    end
+    @graveyard.save and flash[:notice] = 'Graveyard was successfully created.'
+    respond_with(@graveyard)
   end
 
   # PATCH/PUT /graveyards/1
   # PATCH/PUT /graveyards/1.json
   def update
-    respond_to do |format|
-      if @graveyard.update(graveyard_params)
-        format.html { redirect_to @graveyard, notice: 'Graveyard was successfully updated.' }
-        format.json { render :show, status: :ok, location: @graveyard }
-      else
-        format.html { render :edit }
-        format.json { render json: @graveyard.errors, status: :unprocessable_entity }
-      end
-    end
+    @graveyard.update(graveyard_params) and flash[:notice] = 'Graveyard was successfully updated.'
+    respond_with(@graveyard)
   end
 
   # DELETE /graveyards/1
   # DELETE /graveyards/1.json
   def destroy
-    raise "Destroy not implemented"
-    
     @graveyard.destroy
     respond_to do |format|
       format.html { redirect_to graveyards_url }
@@ -87,7 +72,7 @@ class GraveyardsController < ApplicationController
     end
   end
 
-  private
+private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_graveyard
@@ -96,7 +81,9 @@ class GraveyardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def graveyard_params
-    params.require(:graveyard).permit(:feature_type, :county_id, :status, :name, :path, :lat, :lng, :year_started, :usgs_id, :usgs_map, :homepage, :full_path)
+    params.require(:graveyard).permit(
+        :feature_type, :county_id, :status, :name, :path, :lat, :lng,
+        :year_started, :usgs_id, :usgs_map, :homepage, :full_path)
   end
 
   def set_breadcrumbs_for_show
