@@ -12,7 +12,7 @@ class CountyPathIndex
     contents.size
   end
 
-  def self.find_id(path)
+  def self.county_id(path)
     contents[path]
   end
 

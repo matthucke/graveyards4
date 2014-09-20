@@ -23,6 +23,9 @@ class GraveyardsController < ApplicationController
   # GET /graveyards/1
   # GET /graveyards/1.json
   def show
+    result = ShowGraveyard.call(params: params, meta: page_meta, controller: self)
+    @graveyard = result.graveyard
+
     unless (params[:county].blank? && params[:id].to_i > 0)
       # Preferred path.
       @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])

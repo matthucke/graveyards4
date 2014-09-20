@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   get ':state/:county', to: 'counties#show'
 
   # /Illinois/Cook/Graceland => Graveyards / show /
-  get ':state/:county/:graveyard/map', to: 'maps#show'
-  get ':state/:county/:graveyard', to: 'graveyards#show'
+  get ':state_path/:county_path/:graveyard_path/map', to: 'maps#show'
+  get ':state_path/:county_path/:graveyard_path', to: 'graveyards#show'
 
 end

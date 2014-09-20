@@ -21,7 +21,7 @@ describe CountyPathIndex do
     subject { CountyPathIndex }
 
     it "does lookup" do
-      expect( subject.find_id("Illinois/Klendathu") ).to be == @klendathu.id
+      expect( subject.county_id("Illinois/Klendathu") ).to be == @klendathu.id
     end
   end
 
