@@ -53,6 +53,7 @@ group :development, :test do
   gem 'faker'
 end
 
+gem 'interactor-rails'
 
 gem 'haversine' # for distance between coordinates
 # gem 'geo_location'
@@ -79,4 +80,5 @@ gem 'jquery-fileupload-rails'
 # gem 'imagesize'
 gem 'fastimage'
 
+gem 'rack-mini-profiler', require: false
 

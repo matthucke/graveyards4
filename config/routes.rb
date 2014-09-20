@@ -24,15 +24,30 @@ Rails.application.routes.draw do
   get 'featured' => 'featured_sites#index'
 
 
+  # The "/graveyards/" url prefix is deprecated for everything but the Index.
+  #
+  # /graveyards => graveyards#index
+  # /graveyards/IL/Cook/rosehill etc. goes to LegacyController which will redirect
+  #
   # get "graveyards" => "graveyards#index"
   resources :graveyards do
     collection do
-      get ":path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
+      # An exception - this url goes to a different controller.
+      # /graveyards/IL/Cook/rosehill
+      # v3.0 (2012-2014) - /graveyards/MO/St._Louis_City/Bellefontaine.kml
+      get ":path" => "legacy#show", constraints: { path: /[A-Z].*/ }
     end
   end
 
+  ## LEGACY PATHS.
+  # v2.0 (2003-2007) - /list.php [?county=Cook ], /show.php?id=290
+  # v2.5 (2007-2012) - /bin/grave?id=111
   # get "graveyards/:path" => "legacy#show", constraints: { :path => /[A-Z].*/ }
+  # v3.0 (2012-2014) - /graveyards/MO/St._Louis_City/Bellefontaine.kml
   get 'graveyard' => 'legacy#show'
+  get 'bin/grave' => 'legacy#show'
+  get 'show.php' => 'legacy#show', defaults: { format: 'html' }
+  get 'list.php' => 'legacy#show', defaults: { format: 'html' }
 
   resources :coordinates
 

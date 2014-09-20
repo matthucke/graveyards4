@@ -1,6 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+
   factory :illinois, :class=>'State' do
     state_code "IL"
     country_code "US"

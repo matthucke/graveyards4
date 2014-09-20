@@ -1,10 +1,25 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
+require 'faker'
+
 FactoryGirl.define do
-  factory :klendathu, :class=>County do
+  factory :county do
+    # Faker doesn't do county names, so let's just take one word from a city name.
+    name Faker::Address.city.split(/ /).last
+
+    state { create(:illinois) }
+    type_name 'County'
+  end
+
+  factory :valid_county, parent: :county do
+    initialize_with {
+      County.new(attributes).tap { |c| c.valid? }
+    }
+  end
+
+  factory :klendathu, class: County, parent: :county do
     # state
     name "Klendathu"
-    type_name 'County'
     path "Klendathu"
     full_path "Illinois/Klendathu"
     state { create(:illinois) }
@@ -14,7 +29,7 @@ FactoryGirl.define do
     }
   end
 
-  factory :pangaea, :class=>County do
+  factory :pangaea, parent: :county do
     # state
     name "Pangaea"
     type_name 'County'

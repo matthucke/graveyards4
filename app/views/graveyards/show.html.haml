@@ -1,5 +1,7 @@
 :ruby
-    main_images = @graveyard.general_photos
+    graveyard_photos=@graveyard.photos.includes(:user).to_a
+
+    main_images = graveyard_photos.reject(&:plot_id).reject(&:story_id)
     image_data = GalleryPresenter.new(main_images)
 
     owners=[]
@@ -85,11 +87,11 @@
 
     - if user_can_upload?
         .container
-            - mine =  @graveyard.photos.select { |p| p.user_id == current_user.id }
+            - mine =  graveyard_photos.select { |p| p.user_id == current_user.id }
             %p
                 %b=mine.length
                 of the
-                %b= @graveyard.photos.length
+                %b= graveyard_photos.length
                 photos for this cemetery belong to you,
                 %b= current_user.full_name
 

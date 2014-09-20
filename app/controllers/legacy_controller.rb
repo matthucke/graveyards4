@@ -2,6 +2,7 @@ class LegacyController < ApplicationController
   # Handles old URLs like:
   # http://dev.graveyards.com/graveyards/MO/St._Louis_City/Bellefontaine.kml
   def show
+    # First look for id=NNN; if we find it it's a simple graveyard path.
     if id=params[:id]
       if id.to_i > 0
         if @graveyard = Graveyard.find(id) rescue nil
@@ -10,8 +11,14 @@ class LegacyController < ApplicationController
       end
     end
 
-    (state_path, county_path, grave_path) = params[:path].to_s.split('/', 3)
-#    raise "ST=#{state_path} C=#{county_path} GN=#{grave_path}"
+    # Handle the Rails 3 app's paths like /graveyard/IL/Cook/Calvary
+    (state_path, county_path, grave_path, extras) = params[:path].to_s.split('/', 4)
+
+    # also try to fill the 2003 PHP app's paths like /show.php?county=Cook
+    if county_path.blank?
+      county_path=params[:county]
+      state_path=(params[:state] || 'IL') if state_path.blank?
+    end
 
     (grave_path, fmt) = grave_path.to_s.split('.', 2)
 
