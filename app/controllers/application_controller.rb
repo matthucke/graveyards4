@@ -59,9 +59,21 @@ protected
     unless @current_user
       if ident=identity
         @current_user = ident.user
+        if @current_user
+          enable_profiling if @current_user.admin?
+        end
       end
     end
+
     @current_user
+  end
+
+  def enable_profiling
+    if defined(Rack::MiniProfiler)
+      Rack::MiniProfiler.authorize_request
+    end
+  rescue Exception => ex
+    
   end
 
   def current_user!(msg=nil)

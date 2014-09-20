@@ -80,5 +80,5 @@ gem 'jquery-fileupload-rails'
 # gem 'imagesize'
 gem 'fastimage'
 
-gem 'rack-mini-profiler', require: false
+gem 'rack-mini-profiler'
 
