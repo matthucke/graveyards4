@@ -41,6 +41,11 @@ class Graveyard < ActiveRecord::Base
     (lat && lat.abs > 0.001) || (lng && lng.abs > 0.001)
   end
 
+  def path=(path)
+    write_attribute(:path, path)
+    self.full_path = default_full_path
+  end
+
   def map_data
     out = {
       id: self.id,
