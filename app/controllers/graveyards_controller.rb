@@ -1,5 +1,5 @@
 class GraveyardsController < ApplicationController
-  respond_to :html, :json
+  respond_to :html, :json, :kml
 
   before_action :require_admin, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_graveyard, only: [:edit, :update, :destroy]
