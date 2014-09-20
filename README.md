@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/matthucke/graveyards4/badges/gpa.svg)](https://codeclimate.com/github/matthucke/graveyards4)
+
 graveyards4
 ===========
 

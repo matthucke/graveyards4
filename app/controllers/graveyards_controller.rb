@@ -24,36 +24,15 @@ class GraveyardsController < ApplicationController
   # GET /graveyards/1.json
   def show
     result = ShowGraveyard.call(params: params, meta: page_meta, controller: self)
-    @graveyard = result.graveyard
-    #return redirect_to @graveyard.to_url, :status=>301
 
-    unless @graveyard
-      # Look for legacy paths like /IL/Cook/Rosehill, or with/without -Cemetery suffix...
-      #if @graveyard = Graveyard.find_by_alternate_path("%s/%s/%s" % [
-      #    params[:state], params[:county], params[:graveyard] ]
-      #)
-      #  return redirect_to @graveyard.to_url, :status=>301
-      #end
-
-      raise ActiveRecord::RecordNotFound
+    @graveyard = result.graveyard or raise ActiveRecord::RecordNotFound
+    # If accessed via a legacy path, redirect
+    if result.redirect?
+      return redirect_to @graveyard.to_url, :status=>301
     end
 
-    @graveyard=@graveyard.decorate
+    set_breadcrumbs_for_show
 
-    if county = @graveyard.county
-      if s=county.state
-        @breadcrumbs.add(url: s.to_url, title: s.name)
-      end
-      cn = county.fancy_name_with_state
-      self.page_title="#{@graveyard.name} - #{cn}"
-
-      @breadcrumbs.add(url: county.to_url, title: cn)
-      @breadcrumbs.here.title=@graveyard.name
-    end
-
-    if @main_image = @graveyard.main_photo || @graveyard.general_photos.first
-      @page_meta.main_image = @main_image.path.to_s
-    end
   end
 
   # GET /graveyards/new
@@ -109,13 +88,34 @@ class GraveyardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_graveyard
-      @graveyard = Graveyard.find(params[:id])
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_graveyard
+    @graveyard = Graveyard.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def graveyard_params
+    params.require(:graveyard).permit(:feature_type, :county_id, :status, :name, :path, :lat, :lng, :year_started, :usgs_id, :usgs_map, :homepage, :full_path)
+  end
+
+  def set_breadcrumbs_for_show
+    if county = @graveyard.county
+      if s=county.state
+        @breadcrumbs.add(url: s.to_url, title: s.name)
+      end
+      cn = county.fancy_name_with_state
+
+      # FIXME, not appropriate here.
+      self.page_title="#{@graveyard.name} - #{cn}"
+
+      @breadcrumbs.add(url: county.to_url, title: cn)
+      @breadcrumbs.here.title=@graveyard.name
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def graveyard_params
-      params.require(:graveyard).permit(:feature_type, :county_id, :status, :name, :path, :lat, :lng, :year_started, :usgs_id, :usgs_map, :homepage, :full_path)
+    if @main_image = @graveyard.main_photo || @graveyard.general_photos.first
+      @page_meta.main_image = @main_image.path.to_s
     end
+  end
+
 end

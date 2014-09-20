@@ -2,7 +2,9 @@ class ShowGraveyard
   include Interactor
 
   def call
-    context.graveyard=self.graveyard
+    if g=self.graveyard
+      context.graveyard=g.decorate
+    end
     fail unless context.graveyard
   end
 
@@ -12,12 +14,12 @@ class ShowGraveyard
 
   def graveyard
     g = finder.graveyard
-    unless g
-      # Found using a sloppy path match?
-      if g = alternate_finder.graveyard
-        # YES, happy, but we must redirect
-        context.redirect = true
-      end
+    return g if g
+
+    # Found using a sloppy path match?
+    if g = alternate_finder.graveyard
+      # YES, happy, but we must redirect
+      context.redirect = true
     end
     g
   end
@@ -26,7 +28,7 @@ class ShowGraveyard
     @finder ||= GraveyardPathResolver.new(context.params)
   end
 
-  def finder
+  def alternate_finder
     @alternate_finder ||= GraveyardAlternatePathResolver.new(context.params)
   end
 

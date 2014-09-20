@@ -2,6 +2,10 @@
 graveyards4
 ===========
 
+### 4.1.3 (2014-09-20)
+- code cleanup as suggested by CodeClimate
+- faster lookup of graveyards path by caching county paths
+
 ### 4.1.2 (2014-08-09)
 
 - simple edit-graveyard form
