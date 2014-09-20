@@ -25,23 +25,15 @@ class GraveyardsController < ApplicationController
   def show
     result = ShowGraveyard.call(params: params, meta: page_meta, controller: self)
     @graveyard = result.graveyard
-
-    unless (params[:county].blank? && params[:id].to_i > 0)
-      # Preferred path.
-      @graveyard = Graveyard.find_by_path_elements(params[:state], params[:county], params[:graveyard])
-    else
-      # Handle numeric IDs, redirecting to true path.
-      @graveyard = Graveyard.find(params[:id])
-      return redirect_to @graveyard.to_url, :status=>301
-    end
+    #return redirect_to @graveyard.to_url, :status=>301
 
     unless @graveyard
       # Look for legacy paths like /IL/Cook/Rosehill, or with/without -Cemetery suffix...
-      if @graveyard = Graveyard.find_by_alternate_path("%s/%s/%s" % [
-          params[:state], params[:county], params[:graveyard] ]
-      )
-        return redirect_to @graveyard.to_url, :status=>301
-      end
+      #if @graveyard = Graveyard.find_by_alternate_path("%s/%s/%s" % [
+      #    params[:state], params[:county], params[:graveyard] ]
+      #)
+      #  return redirect_to @graveyard.to_url, :status=>301
+      #end
 
       raise ActiveRecord::RecordNotFound
     end

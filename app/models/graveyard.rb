@@ -64,35 +64,4 @@ class Graveyard < ActiveRecord::Base
     out
   end
 
-  # Search for deprecated paths...
-  def self.find_by_alternate_path path
-    path = path.to_s.gsub(%r{^/}, '').strip
-    return nil if path.blank?
-
-    # Trim -Cemetery$ if any, we'll replace it later.
-    path = path.gsub(/-Cemetery$/i, '')
-
-    # Map IL/Cook/foo to Illinois/Cook/foo
-    if path =~ %r{^([A-Z][A-Z])/(.*)}
-      state_code=$1
-      rest=$2
-      if state = State.where(state_code: state_code).first
-        path = "#{state.name}/#{rest}"
-      end
-    end
-
-    candidates = [
-        path,
-        "#{path}-Cemetery",
-        "#{path}-Mausoleum"
-    ]
-
-    candidates.each do |alt|
-      g = Graveyard.where(full_path: alt).first
-      return g if g
-    end
-
-    # I give up.
-    nil
-  end
 end

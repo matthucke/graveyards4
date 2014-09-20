@@ -1,9 +1,13 @@
 # Used by ShowGraveyard interactor, this looks up a graveyard from parsed path parameters.
 class GraveyardPathResolver
-  include ActiveModel::Model
+  include HasAttributes
 
   PATH_PARAMS = [ :state_path, :county_path, :graveyard_path, :extra_path ]
   attr_accessor *PATH_PARAMS
+
+  def initialize(attrs={})
+    self.set_attributes(attrs, only: PATH_PARAMS)
+  end
 
   def graveyard
     @graveyard ||= find_from_path
@@ -38,6 +42,10 @@ class GraveyardPathResolver
   end
 
   def self.from_path(path)
-    self.new(params_from_full_path(path))
+    new(params_from_full_path(path))
+  end
+
+  def self.from(thing)
+    from_path(thing.full_path)
   end
 end

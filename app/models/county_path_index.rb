@@ -28,7 +28,7 @@ class CountyPathIndex
 private
 
   def self.read_from_cache
-    Rails.cache.fetch(CACHE_KEY) { read_from_database }
+    Rails.cache.fetch(CACHE_KEY, expires_in: 1.hour) { read_from_database }
   end
 
   def self.read_from_database
