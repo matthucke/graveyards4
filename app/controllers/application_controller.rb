@@ -56,24 +56,24 @@ protected
   end
 
   def current_user
-    unless @current_user
-      if ident=identity
-        @current_user = ident.user
-        if @current_user
-          enable_profiling if @current_user.admin?
-        end
-      end
-    end
-
-    @current_user
+    @current_user ||= load_current_user
   end
 
+  def load_current_user
+    ident = identity or return nil
+
+    ident.user.tap do |u|
+      return nil unless u
+      enable_profiling if u.admin?
+    end
+  end
+
+
   def enable_profiling
-    if defined(Rack::MiniProfiler)
+    if defined?(Rack::MiniProfiler)
       Rack::MiniProfiler.authorize_request
     end
   rescue Exception => ex
-    
   end
 
   def current_user!(msg=nil)
