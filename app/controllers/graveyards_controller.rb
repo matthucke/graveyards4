@@ -29,7 +29,7 @@ class GraveyardsController < ApplicationController
 
     @graveyard = result.graveyard or raise ActiveRecord::RecordNotFound
     # If accessed via a legacy path, redirect
-    if result.redirect?
+    if result.redirect
       return redirect_to @graveyard.to_url, :status=>301
     end
 
