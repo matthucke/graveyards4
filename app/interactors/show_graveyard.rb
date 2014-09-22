@@ -5,7 +5,8 @@ class ShowGraveyard
     if g=self.graveyard
       context.graveyard=g.decorate
     end
-    fail unless context.graveyard
+    context.fail! unless context.graveyard
+    context
   end
 
   def redirect?
@@ -13,6 +14,14 @@ class ShowGraveyard
   end
 
   def graveyard
+    # Numeric graveyard Id>
+    id = context.params[:id]
+    if id.to_i > 0
+      context.redirect=true
+      return Graveyard.find(id)
+    end
+
+    # else, handle ordinary path...
     g = finder.graveyard
     return g if g
 
