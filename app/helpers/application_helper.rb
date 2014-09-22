@@ -1,20 +1,6 @@
 module ApplicationHelper
-
-  def current_user
-    @current_user
-  end
-
-  def current_identity
-    @identity
-  end
-
-  def admin_user?
-    current_user && current_user.admin?
-  end
-
-  def user_can_upload?
-    current_user && current_user.admin?
-  end
+  # current_user, admin_user? etc
+  include KnowsCurrentUser
 
   # used for anything that implements to_url - a County or Graveyard generally
   # /Illinois/map

@@ -27,7 +27,9 @@ class ExpeditionsController < ApplicationController
   # POST /expeditions
   # POST /expeditions.json
   def create
-    @expedition = Expedition.new(expedition_params)
+    @expedition = Expedition.new(expedition_params.merge({
+      user: current_user
+    }))
     flash[:notice] = 'Expedition was successfully created.' if @expedition.save
     respond_with(@expedition)
   end
@@ -60,6 +62,6 @@ class ExpeditionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expedition_params
-      params.require(:expedition).permit(:user_id, :name, :started_on, :ended_on, :notes)
+      params.require(:expedition).permit(:name, :started_on, :ended_on, :notes)
     end
 end

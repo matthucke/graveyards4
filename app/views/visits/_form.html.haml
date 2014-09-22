@@ -1,6 +1,7 @@
 :ruby
     @recent_dates ||= []
     @recent_dates.push 'clear date'
+    expeditions = current_user.expeditions.order(:started_on).reverse
 
 = form_for @visit do |f|
     %input{name: 'layout', value: params[:layout], type: 'hidden'}
@@ -19,6 +20,15 @@
     = f.hidden_field :quality, value: 30
 
     .form-contents
+        - unless expeditions.empty?
+            .field
+                .pull-left
+                    .p1
+                        = f.label :expedition_id, "Expedition:"
+                        %i (optional)
+                .pull-left
+                    = f.select :expedition_id, expeditions.map { |e| [ "#{e.started_on.to_s(:sql) rescue nil}: #{e.name}", e.id ] }, { prompt: "Select Expedition (optional)", selected: @visit.persisted? ? @visit.expedition_id : session[:last_expedition_id]}
+                .clear
         .field
             .pull-left
                 .p1

@@ -1,4 +1,5 @@
 class VisitsController < ApplicationController
+  respond_to :html, :json
   before_action :set_visit, only: [:show, :update, :destroy]
 
   # GET /visits
@@ -51,16 +52,11 @@ class VisitsController < ApplicationController
   # POST /visits.json
   def create
     @visit = Visit.new(visit_params)
-
-    respond_to do |format|
-      if @visit.save
-        format.html { redirect_to @visit, notice: 'Visit was successfully created.' }
-        format.json { render :show, status: :created, location: @visit }
-      else
-        format.html { new }
-        format.json { render json: @visit.errors, status: :unprocessable_entity }
-      end
+    @visit.save and flash[:notice] ='Visit was successfully created.'
+    if eid=@visit.expedition_id
+      session[:last_expedition_id] = eid
     end
+    respond_with(@visit)
   rescue Exception => ex
     render json: { error: ex.message }, status: :unprocessable_entity
   end
@@ -110,7 +106,7 @@ private
   # Never trust parameters from the scary internet, only allow the white list through.
   def visit_params
     params.require(:visit).permit(
-        :graveyard_id, :visited_on, :status, :notes, :quality, :visibility
+        :graveyard_id, :visited_on, :status, :notes, :quality, :visibility, :expedition_id
     ).tap do |p|
       p[:user_id] = current_user!.id
     end
