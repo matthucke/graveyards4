@@ -1,20 +1,29 @@
-%p#notice= notice
+:ruby
+    visits = @expedition.visits.includes(:graveyard => [ :main_photo, :county]).order(:visited_on, :ordinal)
 
-%p
-  %b User:
-  = @expedition.user
-%p
-  %b Name:
-  = @expedition.name
-%p
-  %b Started on:
-  = @expedition.started_on
-%p
-  %b Ended on:
-  = @expedition.ended_on
-%p
-  %b Notes:
-  = @expedition.notes
+.container
+    .row
+        %h1= @expedition.name
+
+    .row
+        %table.table.sortable-table
+            %thead
+                %tr.headrow
+                    %th Visited On
+                    %td County
+                    %td Graveyard
+            %tbody
+                - visits.each do |v|
+                    - graveyard=v.graveyard
+                    %tr
+                        %td=v.visited_on
+                        %td=graveyard.county.fancy_name rescue "no county"
+                        %td
+                            %a{href: url_for(graveyard)}=graveyard.name
+                        %td
+                            - if graveyard.main_photo
+                                %img.pull-left{src: graveyard.main_photo.thumbnail_path}
+
 
 = link_to 'Edit', edit_expedition_path(@expedition)
 \|

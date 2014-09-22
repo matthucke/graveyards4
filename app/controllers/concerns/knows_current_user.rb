@@ -20,19 +20,17 @@ module KnowsCurrentUser
     @current_user ||= load_current_user
   end
 
-  def identity
-    unless @identity
+  def current_identity
+    unless @current_identity
       if iid = session[:identity_id]
-        @identity = Identity.find(iid) rescue nil
+        @current_identity = Identity.find(iid) rescue nil
       end
     end
-    @identity
+    @current_identity
   end
 
-
-
   def load_current_user
-    ident = identity or return nil
+    ident = current_identity or return nil
 
     ident.user.tap do |u|
       return nil unless u
@@ -40,10 +38,8 @@ module KnowsCurrentUser
     end
   end
 
-
-
   # Require that the user owns the object in question
-  def require_owner_of(object, user: nil, message: nil)
+  def require_owner_of!(object, user: nil, message: nil)
     user ||= current_user
     if object.respond_to?(:user_id)
       return true if object.user_id == user.id
@@ -59,7 +55,7 @@ module KnowsCurrentUser
     false
   end
 
-  def require_admin
+  def require_admin!
     current_user.tap do |u|
       unless u && u.admin?
         flash[:error] = "This action is restricted to admin users only."

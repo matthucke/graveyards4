@@ -7,6 +7,7 @@
             %th Name
             %th Started on
             %th Ended on
+            %th Counties
             %th Graveyard Count
             %th Notes
     %tbody
@@ -14,8 +15,15 @@
             %tr
                 %td
                     %a{href: url_for(expedition)}= expedition.name.present? ? expedition.name : expedition.id
-                %td= expedition.started_on.strftime("%Y-%m-%d %a") rescue 'Unknown.'
-                %td= expedition.ended_on.strftime("%Y-%m-%d %a") rescue 'Unknown.'
+                %td.nobr= expedition.started_on.strftime("%Y-%m-%d %a") rescue 'Unknown.'
+                %td.nobr= expedition.ended_on.strftime("%Y-%m-%d %a") rescue 'Unknown.'
+                %td{style: "max-width: 250px"}
+                    - county_list = expedition.visits.map(&:graveyard).map(&:county).uniq
+                    - county_list.each do |county|
+                        - comma = (county == county_list.last) ? nil : ", "
+                        = succeed comma do
+                            %a.nobr{href: url_for(county)}= county.name
+                %td= expedition.visits_count
                 %td= expedition.notes
                 / %td= link_to 'Destroy', expedition, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

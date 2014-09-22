@@ -7,7 +7,7 @@ class ExpeditionsController < ApplicationController
   # GET /expeditions
   # GET /expeditions.json
   def index
-    @expeditions = current_user.expeditions
+    @expeditions = current_user.expeditions.includes(:visits => { graveyard: :county} )
   end
 
   # GET /expeditions/1
@@ -35,15 +35,8 @@ class ExpeditionsController < ApplicationController
   # PATCH/PUT /expeditions/1
   # PATCH/PUT /expeditions/1.json
   def update
-    respond_to do |format|
-      if @expedition.update(expedition_params)
-        format.html { redirect_to @expedition, notice: 'Expedition was successfully updated.' }
-        format.json { render :show, status: :ok, location: @expedition }
-      else
-        format.html { render :edit }
-        format.json { render json: @expedition.errors, status: :unprocessable_entity }
-      end
-    end
+    @expedition.update(expedition_params) and flash[:notice] =  'Expedition was successfully updated.'
+    respond_with(@expedition)
   end
 
   # DELETE /expeditions/1
@@ -60,7 +53,7 @@ class ExpeditionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_expedition
       @expedition = Expedition.find(params[:id]).tap do |e|
-        require_owner_of(e)
+        require_owner_of!(e)
       end
     end
 

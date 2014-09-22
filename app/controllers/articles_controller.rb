@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :require_admin, only: [ :new, :edit, :create, :update, :destroy ]
+  before_action :require_admin!, only: [ :new, :edit, :create, :update, :destroy ]
   before_action {
     breadcrumbs.add(url: '/blog', title: 'Blog')
   }

@@ -1,5 +1,5 @@
 class StatesController < ApplicationController
-  before_action :require_admin, only: [  :edit, :update, :destroy]
+  before_action :require_admin!, only: [  :edit, :update, :destroy]
 
   before_action :set_state, only: [:edit, :update, :destroy]
 
