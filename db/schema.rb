@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728011530) do
+ActiveRecord::Schema.define(version: 20140922010952) do
 
   create_table "articles", force: true do |t|
     t.integer  "status",       default: 0
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140728011530) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visits_count", default: 0
   end
 
   add_index "expeditions", ["user_id"], name: "index_expeditions_on_user_id", using: :btree

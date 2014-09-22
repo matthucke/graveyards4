@@ -1,5 +1,6 @@
 class Visit < ActiveRecord::Base
   belongs_to :user
+  belongs_to :expedition, :counter_cache=>true
   belongs_to :graveyard
 
   delegate :county, :county_id, :name, :state_id, :state, to: :graveyard

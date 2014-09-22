@@ -1,11 +1,13 @@
 class ExpeditionsController < ApplicationController
+  before_action :current_user!
+
   before_action :set_expedition, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
 
   # GET /expeditions
   # GET /expeditions.json
   def index
-    @expeditions = Expedition.all
+    @expeditions = current_user.expeditions
   end
 
   # GET /expeditions/1
@@ -57,8 +59,11 @@ class ExpeditionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_expedition
-      @expedition = Expedition.find(params[:id])
+      @expedition = Expedition.find(params[:id]).tap do |e|
+        require_owner_of(e)
+      end
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expedition_params

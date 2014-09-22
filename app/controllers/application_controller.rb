@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+   include KnowsCurrentUser
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -42,30 +44,9 @@ protected
     @breadcrumbs.here.title=t
   end
 
-  def require_admin
-    current_user.tap do |u|
-      unless u && u.admin?
-        flash[:error] = "This action is restricted to admin users only."
-        redirect_to root_path
-      end
-    end
-  end
 
   def not_found
     raise ActionController::RoutingError.new('Not Found')
-  end
-
-  def current_user
-    @current_user ||= load_current_user
-  end
-
-  def load_current_user
-    ident = identity or return nil
-
-    ident.user.tap do |u|
-      return nil unless u
-      enable_profiling if u.admin?
-    end
   end
 
 
@@ -74,20 +55,6 @@ protected
       Rack::MiniProfiler.authorize_request
     end
   rescue Exception => ex
-  end
-
-  def current_user!(msg=nil)
-    msg ||= "You must be logged in to use this feature."
-    current_user or raise msg
-  end
-
-  def identity
-    unless @identity
-      if iid = session[:identity_id]
-        @identity = Identity.find(iid) rescue nil
-      end
-    end
-    @identity
   end
 
   def page_meta
