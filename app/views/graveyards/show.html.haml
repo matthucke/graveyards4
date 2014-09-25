@@ -1,5 +1,5 @@
 :ruby
-    graveyard_photos=@graveyard.photos.includes(:user).to_a
+    graveyard_photos=@graveyard.photos.includes(:user).sort_by(&:sort_order)
 
     main_images = graveyard_photos.reject(&:plot_id).reject(&:story_id)
     image_data = GalleryPresenter.new(main_images)
