@@ -1,0 +1,27 @@
+:ruby
+    full_text ||= false
+
+%article.blog-article{:id=>article.id}
+    .row.article-headline
+        %h2.headline=article.headline
+    .row
+        .col-md-3.article-author
+            - if author=article.author
+                - if pic=author.avatar
+                    %img.author-avatar{src: pic, alt: author.full_name}
+                .name=author.full_name
+                .date=article.published_at.strftime("%d %B %Y")
+
+        .col-md-9.article-text
+            .article-teaser=raw article.teaser
+            .tools
+                - unless full_text
+                    %a{href: url_for(article)} Read More...
+                - if article.editable_by?(current_user)
+                    |
+                    %a{href: url_for(action: :edit, id: article.id)} edit
+            - if full_text
+                - unless article.teaser.blank?
+                    .the-fold
+                        %hr
+                .article-body=raw article.body

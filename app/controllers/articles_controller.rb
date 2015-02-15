@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+
+  respond_to :html, :json
+
+
   before_action :require_admin!, only: [ :new, :edit, :create, :update, :destroy ]
   before_action {
     breadcrumbs.add(url: '/blog', title: 'Blog')
@@ -15,7 +19,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   # Only show articles with section name 'blog'
   def show
-    redirect_to '/' unless @article && @article.section_blog?
+    redirect_to '/' unless @article
+    self.page_title = @article.headline
   end
 
   # GET /articles/new
@@ -33,8 +38,12 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.author = current_user!
+    if @article.save
+      redirect_to url_for(@article)
+    else
+      render action: :new
+    end
 
-    respond_with(@article)
   end
 
   # PATCH/PUT /articles/1
@@ -57,7 +66,14 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      id=params[:id].to_s
+      @article = Article.where(path: id.strip).first
+      unless @article
+        if id.to_i > 0
+          @article = Article.find(id)
+        end
+      end
+      @article
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

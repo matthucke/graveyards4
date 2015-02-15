@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   end
 
+  # Special blog shortcut route.
+  get 'about' => 'articles#show', id: 'about'
+
   resources :login, :only => [ :index ]
 
   resources :visits
@@ -18,11 +21,11 @@ Rails.application.routes.draw do
 
   resource :profile
 
+
   get 'book/:id' => 'book#show'
   get 'book' => 'book#index'
 
   get 'featured' => 'featured_sites#index'
-
 
   # The "/graveyards/" url prefix is deprecated for everything but the Index.
   #

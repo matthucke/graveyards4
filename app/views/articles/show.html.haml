@@ -1,33 +1,7 @@
-%p#notice= notice
 
-%p
-  %b Status:
-  = @article.status
-%p
-  %b Section:
-  = @article.section
-%p
-  %b Graveyard:
-  = @article.graveyard
-%p
-  %b Author:
-  = @article.author
-%p
-  %b Headline:
-  = @article.headline
-%p
-  %b Path:
-  = @article.path
-%p
-  %b Published at:
-  = @article.published_at
-%p
-  %b Teaser:
-  = @article.teaser
-%p
-  %b Body:
-  = @article.body
+.container
+    %h1=@article.headline
 
-= link_to 'Edit', edit_article_path(@article)
-\|
-= link_to 'Back', articles_path
+.container
+    = render partial: "article", locals: { article: @article, full_text: true }
+
