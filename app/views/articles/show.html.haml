@@ -1,7 +1,8 @@
 
 .container
-    %h1=@article.headline
-
+    %h1.text-right=@article.headline
+    %p
+        
 .container
     = render partial: "article", locals: { article: @article, full_text: true }
 

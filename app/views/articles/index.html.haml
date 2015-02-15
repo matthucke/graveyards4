@@ -4,6 +4,6 @@
 
 .container
     - @articles.each do |article|
-        = render partial: "article", locals: { article: article, full_text: false }
+        = render partial: "article", locals: { article: article, full_text: false, headline: true }
 
 

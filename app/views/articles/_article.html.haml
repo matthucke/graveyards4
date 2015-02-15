@@ -1,9 +1,11 @@
 :ruby
     full_text ||= false
+    headline ||= false
 
 %article.blog-article{:id=>article.id}
-    .row.article-headline
-        %h2.headline=article.headline
+    - if headline
+        .row.article-headline
+            %h2.headline=article.headline
     .row
         .col-md-3.article-author
             - if author=article.author
